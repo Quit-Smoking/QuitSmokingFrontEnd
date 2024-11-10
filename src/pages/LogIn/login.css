@@ -1,0 +1,97 @@
+button {
+  border: none;
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+.login-page-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.off-login-container {
+  /* border: 1px solid blue; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.off-login-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.off-login-forms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  /* border: 1px solid red; */
+  margin: 3vh 0 3vh 0;
+}
+
+.off-login-input {
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  height: 5vh;
+  margin: 0.5vh;
+  width: 70vw;
+
+  font-size: 18px;
+  padding: 4px 0 1px 10px;
+}
+
+.off-login-input::placeholder {
+  color: #bcbcbc;
+  font-size: 18px;
+  padding: 0 0 3px 0;
+}
+
+.off-login-input:focus {
+  outline: none;
+}
+
+.off-login-button {
+  background-color: #008285;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+
+  width: 73vw;
+  height: 50px;
+  margin-top: 1.5vh;
+}
+
+.off-login-selects {
+  width: 80vw;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option-button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #5a5a5a;
+  font-size: 15px;
+
+  padding: 0 12px;
+}
