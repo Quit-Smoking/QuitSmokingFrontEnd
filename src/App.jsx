@@ -1,13 +1,13 @@
 import './App.css'
-import Login from './pages/LogIn/Login';
+import Result from './pages/Result/Result';
 
 function App() {
 
   return (
     <>
-      <Login />
+      <Result />
     </>
   )
 }
 
-export default App
+export default App;

@@ -1,0 +1,63 @@
+.survey-result-container {
+  /* border: 1px solid blue; */
+  box-sizing: border-box;
+
+  background-color: white;
+  border-radius: 10px;
+
+  width: 90%;
+  height: 75%;
+
+  position: relative;
+
+  margin-top: 1.5vh;
+}
+
+.survey-result-header {
+  background-color: #404B4B;
+  color: white;
+  border-radius: 10px 10px 0 0;
+  height: 6.5em;
+  width: 100%;
+
+  position: absolute;
+  top: 0;
+}
+
+.survey-result-p {
+  margin: 3vh 0 0 0;
+  font-size: 0.8rem;
+}
+
+.survey-result-relyStat {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.survey-result-section {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-35%);
+}
+
+.survey-result-image {
+  width: 57%;
+  height: 57%;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+}
+
+/* .survey-result-text {
+  border: 1px solid green;
+} */
+
+.survey-result-title {
+  margin: 1.5vh;
+  font-size: 2.5vh;
+}
+
+.survey-result-desc {
+  margin: 0;
+  padding: 0 3vh 2vh 3vh;
+  font-size: 2vh;
+}

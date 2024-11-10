@@ -1,0 +1,45 @@
+.result-container {
+  height: 100vh;
+  width: 100vw;
+
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.result-header {
+  background-color: #85BCBD;
+  position: relative;
+
+  height: 15%;
+  width: 100%;
+}
+
+.result-logo {
+  position: absolute;
+  left: 5%;
+  bottom: 15%;
+
+  height: 8vh;
+}
+
+.result-button {
+  background-color: #008285;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+
+  width: 73vw;
+  height: 50px;
+  margin-top: 1.5vh;
+  margin-bottom:1.5vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
