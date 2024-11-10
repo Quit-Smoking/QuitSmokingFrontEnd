@@ -1,5 +1,5 @@
 import './login.css'
-import logo from '../../../public/logo.svg';
+import logo from '../../../public/circle_logo.svg';
 import { useState } from 'react';
 
 function Login() {
