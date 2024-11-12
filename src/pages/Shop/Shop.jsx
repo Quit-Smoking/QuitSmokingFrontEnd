@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./Shop.css";
 import ShopExplain from "../../assets/Shop.svg";
+import CloseIcon from "../../assets/close.svg";
+import CheckIcon from "../../assets/check.svg";
 import ItemExplain from "./ItemExplain";
 
 function Shop() {
   const [isExplainOpen, setIsExplainOpen] = useState(false);
+  const [isSortModalOpen, setIsSortModalOpen] = useState(false);
+  const [sortOption, setSortOption] = useState("인기순");
 
   const sampleProducts = [
     {
@@ -44,6 +48,14 @@ function Shop() {
   const openExplainModal = () => setIsExplainOpen(true);
   const closeExplainModal = () => setIsExplainOpen(false);
 
+  const openSortModal = () => setIsSortModalOpen(true);
+  const closeSortModal = () => setIsSortModalOpen(false);
+
+  const handleSortOptionClick = (option) => {
+    setSortOption(option);
+    closeSortModal();
+  };
+
   return (
     <div className="shop-container">
       <header className="shop-header">
@@ -67,7 +79,9 @@ function Shop() {
       </div>
       <div className="itemtotal">
         <div>총 100개</div>
-        <div>인기순 ▼</div>
+        <div onClick={openSortModal} className="sort-option">
+          {sortOption} ▼
+        </div>
       </div>
       <div className="product-grid">
         {sampleProducts.map((product) => (
@@ -87,6 +101,47 @@ function Shop() {
         ))}
       </div>
       {isExplainOpen && <ItemExplain onClose={closeExplainModal} />}
+      {isSortModalOpen && (
+        <div className="sort-modal">
+          <div className="sortTitle">
+            <h3>정렬</h3>
+            <button onClick={closeSortModal} className="sort-modal-close">
+              <img src={CloseIcon} alt="close" />
+            </button>
+          </div>
+
+          <div className="sortlist">
+            <div
+              className={`list ${sortOption === "인기순" ? "selected" : ""}`}
+              onClick={() => handleSortOptionClick("인기순")}
+            >
+              인기순{" "}
+              {sortOption === "인기순" && <img src={CheckIcon} alt="check" />}
+            </div>
+            <div
+              className={`list ${sortOption === "판매량순" ? "selected" : ""}`}
+              onClick={() => handleSortOptionClick("판매량순")}
+            >
+              판매량순{" "}
+              {sortOption === "판매량순" && <img src={CheckIcon} alt="check" />}
+            </div>
+            <div
+              className={`list ${sortOption === "최신순" ? "selected" : ""}`}
+              onClick={() => handleSortOptionClick("최신순")}
+            >
+              최신순{" "}
+              {sortOption === "최신순" && <img src={CheckIcon} alt="check" />}
+            </div>
+            <div
+              className={`list ${sortOption === "평점순" ? "selected" : ""}`}
+              onClick={() => handleSortOptionClick("평점순")}
+            >
+              평점순{" "}
+              {sortOption === "평점순" && <img src={CheckIcon} alt="check" />}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

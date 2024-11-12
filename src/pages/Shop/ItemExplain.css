@@ -13,28 +13,49 @@
   z-index: 1000;
 }
 
+.borderbottom {
+  border-bottom: 1px solid #c7c7c7;
+}
+
 .modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   width: 80%;
-  max-width: 400px;
+  max-width: 300px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .modal-content h2 {
   margin-top: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 28px;
+}
+
+.modal-content p {
+  font-size: 12px;
 }
 
 .explanation-section {
   margin-top: 15px;
+  text-align: left;
+}
+
+.explanation-section h3 {
+  color: #008285;
+  font-size: 16px;
+}
+
+.color-text {
+  color: #008285;
+  font-size: 12px;
 }
 
 .close-button {
-  background-color: #00796b;
-  color: white;
+  background-color: #008285;
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
