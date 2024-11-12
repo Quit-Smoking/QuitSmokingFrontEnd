@@ -1,7 +1,11 @@
+import { useState } from "react";
 import "./Shop.css";
 import ShopExplain from "../../assets/Shop.svg";
+import ItemExplain from "./ItemExplain";
 
 function Shop() {
+  const [isExplainOpen, setIsExplainOpen] = useState(false);
+
   const sampleProducts = [
     {
       id: 1,
@@ -37,13 +41,21 @@ function Shop() {
     },
   ];
 
+  const openExplainModal = () => setIsExplainOpen(true);
+  const closeExplainModal = () => setIsExplainOpen(false);
+
   return (
     <div className="shop-container">
       <header className="shop-header">
         <h1>금연보조제</h1>
         <div className="shop-explain">
           <p>어떤 금연보조제가 도움이 될까요? </p>
-          <img src={ShopExplain} alt="image" className="explainImg" />
+          <img
+            src={ShopExplain}
+            alt="image"
+            className="explainImg"
+            onClick={openExplainModal}
+          />
         </div>
       </header>
       <div className="bottomline"></div>
@@ -74,6 +86,7 @@ function Shop() {
           </div>
         ))}
       </div>
+      {isExplainOpen && <ItemExplain onClose={closeExplainModal} />}
     </div>
   );
 }
