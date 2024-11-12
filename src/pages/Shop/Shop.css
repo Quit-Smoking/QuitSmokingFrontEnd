@@ -1,0 +1,109 @@
+.shop-container {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shop-header {
+  text-align: left;
+  color: #333;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 30px;
+  margin-bottom: 10px;
+}
+
+.shop-explain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.explainImg {
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.shop-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.shop-header p {
+  font-size: 11px;
+  color: #777;
+}
+
+.bottomline {
+  border-bottom: 1px solid #85bcbd;
+}
+
+.itemtype {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.itemtype p {
+  font-size: 16px;
+  color: #888888;
+}
+
+.itemtotal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 3px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  padding: 0 11px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 두 개의 열로 설정 */
+  gap: 10px; /* 카드 사이의 간격 */
+}
+
+.product-card {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1px;
+}
+
+.product-description {
+  font-size: 13px;
+  color: #353535;
+  margin: 1px 0;
+}
+
+.product-price {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  color: black;
+  font-weight: bold;
+}
+
+.product-rating {
+  font-size: 16px;
+  color: #85bcbd;
+  margin-top: 1px;
+}
