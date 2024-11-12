@@ -1,4 +1,5 @@
 import "./Shop.css";
+import ShopExplain from "../../assets/Shop.svg";
 
 function Shop() {
   const sampleProducts = [
@@ -40,10 +41,22 @@ function Shop() {
     <div className="shop-container">
       <header className="shop-header">
         <h1>금연보조제</h1>
-        <p>
-          어떤 금연보조제가 도움이 될까요? <span className="help-icon">?</span>
-        </p>
+        <div className="shop-explain">
+          <p>어떤 금연보조제가 도움이 될까요? </p>
+          <img src={ShopExplain} alt="image" className="explainImg" />
+        </div>
       </header>
+      <div className="bottomline"></div>
+      <div className="itemtype">
+        <p>전체</p>
+        <p>니코틴 패치</p>
+        <p>니코틴 껌·사탕</p>
+        <p>니코틴필름</p>
+      </div>
+      <div className="itemtotal">
+        <div>총 100개</div>
+        <div>인기순 ▼</div>
+      </div>
       <div className="product-grid">
         {sampleProducts.map((product) => (
           <div key={product.id} className="product-card">
