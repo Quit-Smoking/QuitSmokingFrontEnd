@@ -97,3 +97,31 @@ button:focus {
 
   padding: 0 12px;
 }
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+  border: 1px solid black;
+  width: 65vw;
+  height: 1%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content p {
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.wrong-login {
+  white-space: pre-line;
+  margin: 0;
+  margin-top: 1.5vh;
+  font-size: 14px;
+  color: red;
+}

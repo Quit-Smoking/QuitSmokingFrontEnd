@@ -5,27 +5,42 @@ import { useState } from 'react';
 function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [wrong, setWrong] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic (e.g., API call)
+    
+    if (!id || !password) {
+      setShowModal(true);
+      return;
+    }
+
+    // 서버로 아이디, 비번 보내기
+
+    // 아이디 비번 틀리면 setWrong(true)
+
     console.log('Id:', id);
     console.log('Password:', password);
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   const handleFindId = () => {
     console.log('Find ID clicked');
-    // Redirect or show a modal for finding ID
+    // 아이디 찾기로 이동
   };
 
   const handleFindPassword = () => {
     console.log('Find Password clicked');
-    // Redirect or show a modal for finding password
+    // 비번찾기로 이동
   };
 
   const handleSignup = () => {
     console.log('Sign Up clicked');
-    // Redirect to the sign-up page
+    // 회원가입으로 이동
   };
 
   return (
@@ -43,7 +58,6 @@ function Login() {
               value={id}
               onChange={(e) => setId(e.target.value)}
               placeholder='아이디'
-              required
               className="off-login-input"
             />
             <input
@@ -52,9 +66,9 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='비밀번호'
-              required
               className="off-login-input"
             />
+            {wrong && <p className="wrong-login">{`아이디 또는 비밀번호가 잘못 되었습니다.\n아이디와 비밀번호를 정확히 입력해 주세요`}</p>}
             <button type="submit" className="off-login-button">로그인</button>
           </form>
           <div className="off-login-selects">
@@ -79,6 +93,14 @@ function Login() {
           Google
         </button>
       </div>
+
+      {showModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <p>아이디와 비밀번호를 입력하세요</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
