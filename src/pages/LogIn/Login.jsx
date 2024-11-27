@@ -6,7 +6,7 @@ function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [wrong, setWrong] = useState(false);
+  const [wrong, setWrong] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
