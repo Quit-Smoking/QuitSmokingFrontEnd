@@ -5,6 +5,9 @@ import { useState, useRef, useEffect } from "react";
 
 function Survey() {
     const navigate = useNavigate();
+    const goHome = () => { navigate('/Home'); }
+
+
     const goStartpage = () => { navigate(-1); }
     const [page, setPage] = useState(0); //0page 부터 시작
     const pagePlus = () => { setPage(page + 1); }
@@ -58,7 +61,7 @@ function Survey() {
                 </div>
             </div>
         )
-    } 
+    }
     function Page2() {
         return (
             <div className="Survey-PageContainer">
@@ -159,7 +162,7 @@ function Survey() {
                                     (<div className={`box deactiveNextbtn ${activeNextbtn ? "activeNextbtn" : ""}`} onClick={() => pagePlus()}>다음</div>),
                                 2:
                                     (
-                                        <div className="box activeNextbtn">완료</div>
+                                        <div className="box activeNextbtn" onClick={goHome} >완료</div>
                                     )
                             }[page]
                         }
