@@ -1,0 +1,151 @@
+.new-mission-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: white;
+}
+
+.new-mission-carousel {
+  box-sizing: border-box;
+
+  height: 70vh;
+  width: 100vw;
+  margin-top: 5vh;
+  position: relative;
+
+}
+
+.custom-dot-list-style {
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 0;
+  z-index: 100;
+}
+
+.custom-dot-list-style li button {
+  border-color: #d9d9d9;
+}
+
+.react-multi-carousel-dot--active button {
+  background-color: #d9d9d9 !important;
+}
+
+.week-title {
+  font-size: 3vh;
+  font-size: bold;
+  margin-bottom: 0;
+}
+
+.week-desc {
+  font-size: 2vh;
+  font-size: 400;
+  margin: 0 0 6vh 0;
+}
+
+.new-mission-weeks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 2vh 0;
+}
+
+.new-mission-week {
+  border: 2px solid #B7E1E2;
+  background-color: transparent;
+  height: 10vh;
+  width: 40vw;
+  font-size: 2.8vh;
+  font-weight: 400;
+  outline: none;
+}
+
+.new-mission-week:active {
+  background-color: #85bcbd;
+  color: white;
+}
+
+.new-mission-week:hover {
+  background-color: #85bcbd;
+  color: white;
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* border: 1px solid; */
+  box-sizing: border-box;
+  width: 50vw;
+}
+
+.carousel-content {
+  width: 100vw;
+  margin-top: 12vh;
+}
+
+.weekdays {
+  margin: 0 2vh;
+}
+
+.weekday {
+  border: 2px solid #B7E1E2;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 2.5vh;
+  font-size: 400;
+  margin: 5px;
+}
+
+.weekday:hover, .weekday:active, .weekday.selected {
+  outline: none;
+  border: 2px solid #85BCBD;
+  background-color: #85BCBD;
+  color: white;
+}
+
+.new-mission-move {
+  position: absolute;
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.new-mission-move button {
+  font-size: 2.5vh;
+  width: 35vw;
+  outline: none;
+}
+
+.new-mission-next {
+  background-color: #008285;
+  color: white;
+}
+
+.new-mission-prev {
+  border: 2px solid #008285;
+  background-color: white;
+  color: black;
+  margin-right: 1vh;
+}
+
+button.new-mission-next:disabled {
+  background-color: #d9d9d9;
+  color: white;
+}

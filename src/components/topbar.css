@@ -1,0 +1,40 @@
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #404B4B;
+  color: white;
+  height: 10vh;
+  padding: 2vh 1vh;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+
+  position: absolute;
+  left: 2vh;
+  bottom: 2vh;
+}
+
+.back-button:hover {
+  outline: none;
+  border: none;
+}
+
+.top-bar-title {
+  font-size: 2.7vh;
+  font-weight: bold;
+  margin: 0;
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2vh;
+}
