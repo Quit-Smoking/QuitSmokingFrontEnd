@@ -25,7 +25,7 @@ function NewMission() {
       setStartX(null);
       return;
     }
-    
+
     const endX = e.changedTouches[0].clientX;
     const diff = startX - endX;
 
@@ -102,6 +102,8 @@ function NewMission() {
     },
   ];
 
+  // ! top bar title 가져오기!!
+
   return (
     <div className="new-mission-container">
       <TopBar title="중강도 운동하기" onBack={() => navigate(-1)} />
@@ -142,7 +144,8 @@ function NewMission() {
           className="new-mission-next"
           onClick={nextSlide}
           disabled={selectedWeek === null}
-          // 기간과 요일 선택하지 않으면 넘어가지 않는 로직 추가
+          //! 기간과 요일 선택하지 않으면 넘어가지 않는 로직 추가
+          //! 넘어갈때 요일과 기간 params로 보내기
         >
           다음
         </button>
