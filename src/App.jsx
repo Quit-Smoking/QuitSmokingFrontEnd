@@ -2,6 +2,9 @@
 import Login from "./pages/LogIn/Login";
 import StartPage from "./pages/Main/StartPage";
 import Survey from "./pages/Main/Survey";
+import Result from "./pages/Result/Result";
+import Shop from "./pages/Shop/Shop";
+import { Route, Router, Routes } from "react-router-dom";
 
 function App() {
   return (
