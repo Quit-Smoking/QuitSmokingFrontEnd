@@ -1,0 +1,94 @@
+.Start-Container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #B7E1E2;
+}
+
+.Start-Header {
+    background-color: #85BCBD;
+    position: relative;
+    height: 15%;
+    width: 100%;
+}
+/* header logo */
+.Header-logo{ 
+    position: absolute;
+    left: 5%;
+    bottom: 15%;
+    height: 8vh;    
+}
+
+/* Main */
+.Start-Main{
+    height: 77%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+.MainTime{
+    width: 100vw;;
+    flex-grow: 3;  
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 170%;
+    font-weight: 500;
+}
+
+/* img */
+.Start-Mainlogo{
+    flex-grow: 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: relative;
+}
+.circleimg{
+    position: absolute;
+    height: 160%;
+}
+.cloudimg{
+    position: absolute;
+    height: 120%;
+    transform: translate(-30%, 10%)
+}
+
+
+/* button */
+.Mainbutton{
+    flex-grow: 4;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    
+    gap: 2vh;
+}
+
+.Btn1, .Btn2{
+    height: 20%;
+    width: 75%;
+    color: white;
+    font-size: 1.4rem;
+    box-shadow: 0px 4px 4px grey;
+}
+.Btn1{
+background-color: #008285;
+}
+.Btn2{
+    background-color: #404B4B;
+    margin-bottom: 5vh;
+}
+
+/* Footer */
+.Start-Footer{
+    width: 100%;
+    height: 8%;
+    background-color: white;
+}

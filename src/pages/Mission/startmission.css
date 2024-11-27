@@ -1,0 +1,60 @@
+.start-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #B7E1E2;
+  position: relative;
+}
+
+.start-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.start-title {
+  margin: 2vh;
+  margin-top: 5vh;
+}
+
+.start-title p {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.mission-bubble {
+  background-size: contain;
+
+  width: 100vw;
+  height: 20vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  white-space: pre-line;
+
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 1vh;
+}
+
+.start-char {
+  width: 80vw;
+  margin-bottom: 5vh;
+  margin-top: 2vh;
+}
+
+.start-mission-button {
+  background-color: #008285;
+  width: 80vw;
+  height: 6.5vh;
+  font-size: 19px;
+  color: white;
+
+  position: absolute;
+  bottom: 5vh;
+}

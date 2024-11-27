@@ -1,0 +1,234 @@
+/* 전체 컨테이너*/
+.Home-Container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #B7E1E2;
+}
+
+.Home-Header {
+    background-color: #85BCBD;
+    position: relative;
+    height: 15%;
+    width: 100%;
+}
+
+/* header logo */
+.Header-logo {
+    position: absolute;
+    left: 5%;
+    bottom: 15%;
+    height: 8vh;
+}
+
+/* ------------------------------------- */
+
+/* 메인 컨텐츠 */
+.Start-Main {
+    height: 77%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Start-MainMotive {
+    width: 100vw;
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 5vw;
+    font-weight: 500;
+}
+
+.Home-Mainlogo {
+    flex-grow: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.circleimg {
+    position: absolute;
+    height: 100%;
+}
+
+.cloudimg {
+    position: absolute;
+    height: 100%;
+    transform: translate(-30%, 10%)
+}
+
+.Home-MainTime {
+    width: 100vw;
+    flex-grow: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 200%;
+    font-weight: 500;
+}
+
+.Home-MainTime div:nth-child(2) {
+    font-size: 50%;
+}
+
+.Home-MainReport {
+    flex-grow: 3;
+}
+
+.ReportContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.ReportBlackBg {
+    background-color: #404B4B;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.ReportWhitebg {
+    width: 80vw;
+    background-color: white;
+    height: 100%;
+    transform: translateY(-10%);
+    border-radius: 10px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.ReportText {
+    display: flex;
+    justify-content: center;
+}
+
+.ReportText>div {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    transform: translateY(-50%);
+    border-radius: 30px;
+    background-color: #73A7A8;
+    color: white;
+    height: 5vh;
+}
+
+.Report {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.Report>div {
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 2px grey;
+}
+
+.Reportbox {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.Reportbox>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.Reportbox>div:not(:nth-child(2)) {
+    flex-grow: 1;
+}
+
+.extendtimeimg,
+.savedmoneyimg {
+    flex-grow: 2;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.extendtimeimg {
+    background-image: url('../../../assets/extendtime.png');
+}
+
+.savedmoneyimg {
+    background-image: url('../../../assets/savedmoney.png');
+}
+
+
+.extendtime,
+.savedmoney {
+    width: 100%;
+    height: 100%;
+}
+
+.Home-Footer {
+    width: 100%;
+    height: 8%;
+    background-color: white;
+}
+
+/* ------------ Modal ------------- */
+
+/* 모달 오버레이 */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* 모달 */
+.modal {
+    background: white;
+    border-radius: 10px;
+    width: 70vw;
+    aspect-ratio: 1 / 1;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-15vh);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-image {
+    width: 80px;
+    height: 80px;
+}
+
+h2{
+    margin-bottom : 0;
+}   
