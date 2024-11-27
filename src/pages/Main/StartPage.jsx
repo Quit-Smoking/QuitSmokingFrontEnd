@@ -11,23 +11,23 @@ function StartPage() {
         navigate('/startpage/survey');
     }
 
-
-    
     return (
         <>
-            <div className="Container">
-                <div className="Header">
+            <div className="Start-Container">
+                <div className="Start-Header">
                     <img
                         src={logo} //logo import 해야됨
                         alt="숨쉴래 로고"
                         className="Header-logo"
                     />
                 </div>
-                <div className="Main">
+
+                <div className="Start-Main">
                     <div className="MainTime">
                         <div>0D 00:00:00</div>
                     </div>
-                    <div className="Mainlogo">
+                    <div className="Start-Mainlogo">
+
                             <img src={circleimg} alt="circleimg" className='circleimg' />
                             <img src={cloudimg} alt="cloudimg" className='cloudimg' />
                     </div>
@@ -36,10 +36,13 @@ function StartPage() {
                         <button className='Btn2'>니코틴 의존도 진단하기</button>
                     </div>
                 </div>
-                <div className="Footer">
+
+                <div className="Start-Footer">
                     <div className="Nav">
+
                     </div>
                 </div>
+
             </div>
         </>
     )
