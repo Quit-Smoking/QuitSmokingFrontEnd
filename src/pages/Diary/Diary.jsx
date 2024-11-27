@@ -1,124 +1,153 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import moment from "moment";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import "./Diary.css";
-import CalendarIcon from "../../assets/calendar_icon.svg"; // 달력 아이콘을 여기에 넣어주세요
-import CloudIcon from "../../assets/cloud_icon.svg"; // 구름 아이콘을 여기에 넣어주세요
+import CheckBox from "../../assets/CheckBox.svg";
+import notCheckBox from "../../assets/notCheckBox.svg";
+import Character from "../../assets/Character.svg";
+import DiaryIcon from "../../assets/DiaryIcon.svg";
 
 function Diary() {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [smokeFreeDays, setSmokeFreeDays] = useState([]); // 금연 날짜 저장
-  const [isSmoking, setIsSmoking] = useState(true); // 금연 상태 (true: 금연 중, false: 실패)
+  const [date, setDate] = useState(new Date());
+  const missions = [
+    {
+      date: "2024-11-25",
+      description: "하루에 물 2L 마시기",
+      progress: "누적 2일 성공 / 5일 진행 중",
+      completed: false,
+      image: "/icons/water.svg",
+    },
+    {
+      date: "2024-11-27",
+      description: "하루에 물 2L 마시기",
+      progress: "누적 2일 성공 / 5일 진행 중",
+      completed: false,
+      image: "/icons/water.svg",
+    },
+    {
+      date: "2024-11-27",
+      description: "매일 운동 30분 하기",
+      progress: "누적 4일 성공 / 5일 진행 중",
+      completed: true,
+      image: "/icons/exercise.svg",
+    },
+    {
+      date: "2024-11-29",
+      description: "매일 운동 30분 하기",
+      progress: "누적 4일 성공 / 5일 진행 중",
+      completed: true,
+      image: "/icons/exercise.svg",
+    },
+    {
+      date: "2025-11-27",
+      description: "매일 운동 30분 하기",
+      progress: "누적 4일 성공 / 5일 진행 중",
+      completed: true,
+      image: "/icons/exercise.svg",
+    },
+  ];
 
-  useEffect(() => {
-    if (isSmoking) {
-      // 금연 중이라면 날짜가 지남에 따라 구름 아이콘을 추가
-      const today = currentDate.toISOString().split("T")[0];
-      if (!smokeFreeDays.includes(today)) {
-        setSmokeFreeDays([...smokeFreeDays, today]);
+  const selectedMissions = missions.filter(
+    (mission) => mission.date === moment(date).format("YYYY-MM-DD")
+  );
+
+  const customTileContent = ({ date, view }) => {
+    if (view === "month") {
+      const today = new Date();
+      const isToday = date.toDateString() === today.toDateString();
+      const isPastDay = date < today;
+
+      if (isToday) {
+        return (
+          <div className="today-icon">
+            <img src={Character} alt="character" />
+          </div>
+        ); // 당일 구름 아이콘
+      }
+
+      if (isPastDay) {
+        return <div className="past-day-bar"></div>; // 지난 날 파란 줄
       }
     }
-  }, [currentDate, isSmoking]);
-
-  const handleFail = () => {
-    setSmokeFreeDays([]); // 금연 실패 시 모든 구름 아이콘 초기화
-    setIsSmoking(false);
-  };
-
-  const handleRestart = () => {
-    const today = currentDate.toISOString().split("T")[0];
-    setSmokeFreeDays([today]); // 금연 재시작 시 오늘부터 구름 아이콘 추가
-    setIsSmoking(true);
-  };
-
-  const daysInMonth = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1,
-    0
-  ).getDate();
-
-  const renderCalendar = () => {
-    const calendarDays = [];
-    for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        day
-      );
-      const dateString = date.toISOString().split("T")[0];
-      const isToday = date.toDateString() === new Date().toDateString();
-      const isSmokeFree = smokeFreeDays.includes(dateString);
-
-      calendarDays.push(
-        <div
-          key={day}
-          className={`calendar-day ${isToday ? "today" : ""} ${
-            date.getDay() === 6
-              ? "saturday"
-              : date.getDay() === 0
-              ? "sunday"
-              : ""
-          }`}
-        >
-          {day}
-          {isSmokeFree && (
-            <img src={CloudIcon} alt="cloud" className="cloud-icon" />
-          )}
-          {isSmokeFree && day !== 1 && day - 1 !== 0 && (
-            <div className="cloud-connector"></div>
-          )}
-        </div>
-      );
-    }
-    return calendarDays;
+    return null;
   };
 
   return (
     <div className="diary-container">
-      <header className="diary-header">
-        <h2>금연 캘린더</h2>
-        <div className="month-display">
-          <span>{currentDate.getMonth() + 1}월</span>
-          <img src={CalendarIcon} alt="calendar" className="calendar-icon" />
-        </div>
-        <p>
-          누적 금연일{" "}
-          <span className="smoke-free-days">총 {smokeFreeDays.length}일</span>
-        </p>
-      </header>
-
-      <div className="calendar">
-        <div className="weekdays">
-          <span className="sunday">S</span>
-          <span>M</span>
-          <span>T</span>
-          <span>W</span>
-          <span>T</span>
-          <span>F</span>
-          <span className="saturday">S</span>
-        </div>
-        <div className="calendar-days">{renderCalendar()}</div>
+      <div className="calendar-container">
+        <Calendar
+          formatDay={(locale, date) => moment(date).format("D")}
+          formatMonthYear={(locale, date) => moment(date).format("M")}
+          calendarType="gregory"
+          tileContent={customTileContent}
+          onChange={setDate}
+          value={date}
+          prev2Label={null}
+          next2Label={null}
+          prevLabel={null}
+          nextLabel={null}
+          navigationLabel={({ label }) => (
+            <div className="calendar-navigation-label">
+              <div className="Diary_title_left">
+                <div className="Diary_title_1">금연</div>
+                <div className="Diary_title_2">캘린더</div>
+              </div>
+              <div className="Diary_title_mid">
+                <span className="calendar-label-text">{label}</span>
+                <span className="calendar-icon">
+                  <img src={DiaryIcon} alt="" />
+                </span>
+              </div>
+              <div className="Diary_title_right">
+                <div className="Diary_title_1">누적금연일</div>
+                <div className="Diary_title_2">총6일</div>
+              </div>
+            </div>
+          )}
+        />
       </div>
 
-      <div className="today-record">
-        <h3>오늘의 기록</h3>
-        {/* 기록 예시 */}
-        <div className="record-item">
-          <span>하루에 물 2L 마시기</span>
-          <button>-</button>
+      <div className="record-section">
+        <h3>
+          {moment(date).isSame(new Date(), "day")
+            ? "오늘의 기록"
+            : `${moment(date).format("M월 D일")}의 기록`}
+        </h3>
+        <div className="missions">
+          {selectedMissions.length > 0 ? (
+            selectedMissions.map((mission, index) => (
+              <div key={index} className="mission">
+                <div className="mission_box">
+                  <img
+                    src={mission.image}
+                    alt="mission-icon"
+                    className="mission-icon"
+                  />
+                  <div className="mission_text">
+                    <div className="text_1">
+                      <p>{mission.description}</p>
+                    </div>
+                    <div className="text_2">
+                      <p>{mission.progress}</p>
+                    </div>
+                  </div>
+                </div>
+                {mission.completed ? (
+                  <img src={CheckBox} alt="완료" className="icon-completed" />
+                ) : (
+                  <img
+                    src={notCheckBox}
+                    alt="미완료"
+                    className="icon-pending"
+                  />
+                )}
+              </div>
+            ))
+          ) : (
+            <p>기록이 없습니다.</p>
+          )}
         </div>
-        <div className="record-item">
-          <span>매일 운동 30분씩 하기</span>
-          <button>✓</button>
-        </div>
-      </div>
-
-      {/* 금연 실패 및 재시작 버튼 */}
-      <div className="button-group">
-        <button onClick={handleFail} className="fail-button">
-          금연 실패
-        </button>
-        <button onClick={handleRestart} className="restart-button">
-          금연 재시작
-        </button>
       </div>
     </div>
   );
