@@ -1,0 +1,201 @@
+/* 전체 container */
+.Survey-Container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #B7E1E2;
+}
+
+/* 금연 시작하기, 화살표 */
+.Survey-Header {
+    background-color: #404B4B;
+    height: 15vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.Survey-Header>div {
+    height: 10vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow {
+    position: absolute;
+    /* 화살표 왼쪽 오른쪽 위치 조정 */
+    left: 8vw;
+    /* 화살표 위 아래 위치 조정 */
+    padding-top: 2%;
+}
+
+.Headertext {
+    /* 금연시작하기 글자 크기 */
+    font-size: 1.5rem;
+}
+
+/* Main */
+.Survey-Main {
+    height: 70vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*  --------------------------------
+    하루에 담배 몇개비 피우셨나요?
+    금연 동기가 무엇인가요?
+    금연 다짐을 해볼까요?
+    --------------------------------- */
+.Survey-Maintext {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.Survey-Maintext>div {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+
+/* -----------------grid styles --------------*/
+/* Maintext아래 부분들 Container */
+.Survey-GridContainer,
+.Survey-PageContainer,
+.Survey-HowManyContainer {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Grid-box,
+.Footer-Grid-box {
+    width: 70vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+}
+/* ---------------------------------------------*/
+
+/* 박스 스타일 */
+.box {
+    border: 2px solid #b2dfdb;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 100%;
+    font-weight: 500;
+    background-color: #ffffff;
+    color: #333;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* 동기부여 페이지*/
+.SelectMotive {
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 선택된 동기부여 박스 크기 */
+.SelectMotive-box {
+    width: 24vw;
+    height: 4vh;
+}
+
+
+/* -----------------입력창 스타일-----------------*/
+/* 입력 필드 스타일 */
+.editable-input {
+    font-size: 7vw;
+    outline: none;
+    text-align: center;
+    border: none;
+}
+
+/* 입력창 기본 텍스트 스타일 */
+.editable-text {
+    font-size: 7vw;
+    font-weight: 500;
+    color: grey;
+    outline: none;
+    border: none;
+    text-align: center;
+}
+/* ------------------------------------------*/
+
+
+/* --------------------Footer----------------*/
+/* 이전, 다음 버튼 */
+.Survey-Footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    background-color: white;
+    align-items: start;
+}
+
+/* 이전,다음버튼 font-weight */
+.previousbtn,
+.activeNextbtn {
+    font-weight: 700;
+}
+
+/* 이전버튼 */
+.previousbtn {
+    border-color: #008285;
+}
+
+/* 다음버튼 활성화 안됨 */
+.deactiveNextbtn {
+    color: white;
+    background-color: #C7C7C7;
+    border: 0;
+    pointer-events: none;
+}
+
+/* 다음버튼 활성화 */
+.activeNextbtn {
+    background-color: #008285;
+    pointer-events: auto;
+    color: white;
+    border: 0;
+}
+
+/* 박스가 클릭됐을때 붙는 class */
+.BoxSelected {
+    background-color: #B7E1E2;
+    box-shadow: 0px 2px 4px grey;
+}
+
+/* 첫 페이지 다음 버튼 */
+.firstNextbtn {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+/* page0, page2 가운데 부분 */
+.Survey-Page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 4vh;
+}
+
+.Page0InputCenter {
+    justify-content: center;
+}
