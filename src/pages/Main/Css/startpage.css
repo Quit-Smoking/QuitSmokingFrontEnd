@@ -1,10 +1,10 @@
-.Container {
+.Start-Container {
     height: 100vh;
     width: 100vw;
     background-color: #B7E1E2;
 }
 
-.Header {
+.Start-Header {
     background-color: #85BCBD;
     position: relative;
     height: 15%;
@@ -19,7 +19,7 @@
 }
 
 /* Main */
-.Main{
+.Start-Main{
     height: 77%;
     width: 100%;
 
@@ -39,7 +39,7 @@
 }
 
 /* img */
-.Mainlogo{
+.Start-Mainlogo{
     flex-grow: 3;
 
     display: flex;
@@ -87,7 +87,7 @@ background-color: #008285;
 }
 
 /* Footer */
-.Footer{
+.Start-Footer{
     width: 100%;
     height: 8%;
     background-color: white;
