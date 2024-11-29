@@ -1,0 +1,243 @@
+/* 캘린더 컨테이너 */
+.calendar-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.react-calendar__navigation__label {
+  padding: 18px 0;
+}
+
+.calendar-navigation-label {
+  display: flex;
+  gap: 8px; /* 아이콘과 텍스트 간 간격 */
+  justify-content: space-between;
+}
+
+.Diary_title_left {
+  font-size: 12px;
+  text-align: left;
+}
+
+.Diary_title_right {
+  text-align: right;
+}
+
+.Diary_title_right .Diary_title_1 {
+  font-size: 12px;
+}
+
+.Diary_title_right .Diary_title_2 {
+  font-size: 16px;
+  color: #ff6161;
+}
+
+/* 네비게이션 커스터마이징 */
+.calendar-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.calendar-navigation .left-section {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.calendar-navigation .right-section {
+  font-size: 1em;
+  color: #ff6f61;
+}
+
+/* React-Calendar 스타일링 */
+.react-calendar {
+  width: 100%;
+  border: none;
+  padding: 20px;
+}
+
+.react-calendar__navigation {
+  padding: 0;
+  font-size: 30px;
+}
+
+.react-calendar__month-view__weekdays {
+  padding-top: 10px;
+  border-top: 1px solid black;
+}
+
+.react-calendar__month-view__days {
+  margin-bottom: 58px;
+}
+
+/* 요일과 날짜 사이 간격 늘리기 */
+.react-calendar__month-view__weekdays {
+  border-bottom: 1px solid #ddd !important;
+  padding-bottom: 10px; /* 간격 늘리기 */
+  overflow: visible;
+}
+
+/* 한 주마다 border-bottom 적용 */
+.react-calendar__month-view__weekdays,
+.react-calendar__month-view__days {
+  /* border-bottom: 1px solid #ddd !important;  */
+  overflow: visible;
+}
+
+.react-calendar__tile {
+  position: relative;
+  padding: 20px; /* 위아래 간격 추가 */
+  font-size: 1em; /* 글자 크기 조정 */
+  padding: 10px 0; /* 높이 증가를 위한 padding 추가 */
+  height: 60px; /* 날짜 칸의 고정 높이 설정 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-spacing: 0;
+  border-radius: 0 !important;
+}
+
+/* 오늘 날짜 스타일 */
+.react-calendar__tile--now {
+  background-color: transparent;
+  color: inherit;
+}
+
+.react-calendar__tile--now > .today-icon {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.today-icon {
+  font-size: 2em;
+}
+
+.today-icon img {
+  width: 30px;
+}
+
+/* 지난 날짜 파란 줄 */
+.past-day-bar {
+  position: absolute;
+  margin-bottom: 9px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100px;
+  height: 15px;
+  background-color: #b7e1e2; /* 파란색 */
+  opacity: 0.8;
+  overflow: visible;
+}
+
+/* 요일 줄과 날짜 사이에 추가적인 구분선 */
+.react-calendar__month-view__weekdays {
+  /* border-bottom: 2px solid #ddd;  */
+  padding-bottom: 10px; /* 간격 */
+}
+
+/* 날짜 아래 선 추가 */
+.react-calendar__month-view__days__day {
+  border-bottom: 1px solid #ddd !important; /* 날짜 아래 선 */
+  border-collapse: separate;
+}
+
+/* 토요일과 일요일 스타일 */
+.react-calendar__month-view__days__day--saturday,
+.react-calendar__month-view__days__day--sunday {
+  color: #1e90ff; /* 파란색 */
+}
+
+/* 요일 줄 텍스트 장식 제거 */
+.react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
+}
+
+.react-calendar__month-view__weekdays {
+  /* border-bottom: 1px solid #ddd; */
+  padding-bottom: 15px; /* 요일과 날짜 간격 조정 */
+}
+
+/* 일요일 빨간색 */
+.react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
+  color: rgb(211, 26, 26);
+}
+
+.react-calendar__tile--active {
+  background-color: transparent !important; /* 배경 투명 */
+  color: inherit !important; /* 텍스트 색상 유지 */
+  box-shadow: none !important; /* 선택 효과 제거 */
+}
+
+/* 선택된 날짜 hover 효과 제거 */
+.react-calendar__tile--active:hover {
+  background-color: transparent !important; /* hover 배경 투명 */
+  color: inherit !important; /* hover 시 텍스트 색상 유지 */
+  box-shadow: none !important; /* hover 시 선택 효과 제거 */
+}
+
+.record-section {
+  padding: 20px;
+  background-color: #b7e1e2;
+}
+
+.record-section h3 {
+  text-align: left;
+  margin: 0;
+}
+
+.missions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.mission {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 14px;
+}
+
+.mission-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 13px;
+}
+
+.mission_box {
+  flex: 1;
+  display: flex;
+}
+
+.mission_text {
+  display: flex;
+  flex-direction: column;
+}
+
+.mission_text p {
+  margin: 0;
+}
+
+.text_1 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.text_2 {
+  font-size: 10px;
+}
+
+.icon-completed,
+.icon-pending {
+  width: 40px;
+  height: 40px;
+  margin: 10px 0;
+}
