@@ -13,7 +13,7 @@ function Shop() {
   const [products, setProducts] = useState([]); // 서버에서 가져온 데이터를 저장
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태 관리
   const [error, setError] = useState(null); // 에러 상태 관리
-  // const [page, setPage] = useState(1); // 현재 페이지 번호
+  const [page, setPage] = useState(1); // 현재 페이지 번호
 
   // API 호출 함수
   const fetchProducts = async (keyWordId) => {
@@ -21,19 +21,19 @@ function Shop() {
     setError(null);
     console.log("hi");
     try {
-      // const response = await axios.get(
-      //   "http://15.164.231.201:8080/store/show_products_by_keyword",
-      //   {
-      //     params: {
-      //       keyWordId: keyWordId,
-      //     },
-      //   }
-      // );
-      const response = await axios.get("/store/show_products_by_keyword", {
-        params: {
-          keyWordId: 0,
-        },
-      });
+      const response = await axios.get(
+        "http://15.164.231.201:8080/store/show_products_by_keyword",
+        {
+          params: {
+            keyWordId: 0,
+          },
+        }
+      );
+      // const response = await axios.get("/store/show_products_by_keyword", {
+      //   params: {
+      //     keyWordId: 0,
+      //   },
+      // });
       if (response.data && response.data.productData) {
         console.log("데이터 확인:", response.data.productData); // 받아온 데이터 출력
         setProducts(response.data.productData); // 서버에서 받은 데이터 저장
