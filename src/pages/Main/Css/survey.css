@@ -51,9 +51,11 @@
     --------------------------------- */
 .Survey-Maintext {
     height: 30vh;
+
     display: flex;
-    justify-content: center;
-    align-items: end;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
 }
 
 .Survey-Maintext>div {
