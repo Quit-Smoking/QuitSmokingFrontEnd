@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import "./Signup.css";
 
 function Signup() {
@@ -9,10 +10,35 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(null);
+
   const [nickname, setNickname] = useState("");
 
+  const handleRegister = async () => {
+    const requestData = {
+      email: email,
+      password: password,
+      nickname: nickname,
+    };
+
+    console.log("Sending data: ", requestData);
+
+    try {
+      const response = await axios.post("/user/register", requestData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log(response.data);
+      alert("회원가입이 성공적으로 완료되었습니다!");
+    } catch (error) {
+      console.error("Error: ", error.response || error.message);
+      alert("회원가입 중 오류가 발생했습니다.");
+    }
+  };
+
   const checkEmail = () => {
-    // 가짜 예제: 이메일 중복 체크
+    // 이메일 중복 체크 (가짜 예제)
     if (email === "kmu01@naver.com") {
       setEmailMessage("이미 존재하는 아이디입니다");
       setIsEmailValid(false);
@@ -97,7 +123,8 @@ function Signup() {
 
       <button
         className="signup-button"
-        disabled={!isEmailValid || !isPasswordValid}
+        onClick={handleRegister}
+        disabled={!isEmailValid || !isPasswordValid || !nickname}
       >
         회원가입
       </button>
