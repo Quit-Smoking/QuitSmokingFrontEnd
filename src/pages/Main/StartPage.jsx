@@ -24,7 +24,7 @@ function StartPage() {
 
                 <div className="Start-Main">
                     <div className="MainTime">
-                        <div>0D 00:00:00</div>
+                        <div></div>
                     </div>
                     <div className="Start-Mainlogo">
 
