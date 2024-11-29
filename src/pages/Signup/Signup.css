@@ -1,0 +1,142 @@
+.signup-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+} */
+
+.text {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.email_title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.email_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.email_input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .email_input input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #85bcbd;
+} */
+
+.email_box .email_button {
+  padding: 0;
+  width: 80px;
+  height: 35px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  background-color: #008285;
+}
+
+.password_title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.nickname_title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+  outline: none;
+
+  border: none;
+  border-bottom: 1px solid #85bcbd;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* input에 포커스가 생길 때 스타일 고정 */
+input:focus {
+  border-bottom: 1px solid #008285;
+  outline: none;
+}
+
+input::placeholder {
+  font-size: 20px;
+  padding: 0;
+}
+/* button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+} */
+
+button[disabled] {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.valid-message {
+  color: green;
+  font-size: 12px;
+}
+
+.invalid-message {
+  color: red;
+  font-size: 12px;
+}
+
+.signup-button {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.signup-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

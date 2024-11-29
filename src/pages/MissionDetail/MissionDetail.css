@@ -1,0 +1,186 @@
+/* 전체 컨테이너 */
+.Detail-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Header 스타일 */
+.Detail-header {
+    display: flex;
+    flex-direction: column;
+    padding: 8vw;
+    background-image: url('../../assets/water.png');
+    /* 배경 이미지 */
+    background-size: cover;
+    background-position: center;
+
+
+}
+
+.Detail-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3vh;
+    /* 화살표와 제목 간 간격 추가 */
+}
+
+.Detail-arrow-button,
+.Detail-menu-button {
+    background: none;
+    font-size: 5vw;
+    padding: 0;
+    color: white
+}
+
+.Detail-menu-container {
+    position: relative;
+}
+
+/* 가로 방향으로 표시되는 드롭다운 */
+.Detail-menu-dropdown {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* 점 3개 버튼 오른쪽에서 시작 */
+    display: flex;
+    /* 가로로 나열 */
+    background: white;
+    border-radius: 10px;
+    z-index: 10;
+    padding: 1vh 2vw;
+}
+
+.Detail-mission-cancel {
+    background: none;
+    border: none;
+    font-size: 3vw;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+    /* 텍스트가 줄바꿈되지 않도록 */
+}
+
+/* Header 제목 스타일 */
+.header-title {
+    font-size: 7vw;
+    font-weight: bold;
+    margin-top: 2vh;
+    /* 화살표와 제목 사이의 간격 */
+    color: White;
+}
+
+.header-subtitle {
+    font-size: 4vw;
+    color: #555;
+    margin-top: 1vh;
+    color: white;
+}
+
+/* Main 스타일 */
+.Detail-main {
+    flex: 1;
+    padding: 8vw;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.Detail-record-title {
+    font-size: 5vw;
+    font-weight: bold;
+    margin-bottom: 2vh;
+}
+
+/* 미션 완료 card list */
+.card-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+}
+
+/* Footer 스타일 */
+.Detail-footer {
+    height: 10vh;
+    background: #fff;
+    border-top: 0.2vh solid #ccc;
+}
+
+/* ------------------------------------------ */
+/* Modal Overlay */
+
+
+/* Modal Overlay */
+/* 모달 오버레이 */
+.Detail-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 모달 컨테이너 */
+.Detail-modal {
+    background: white;
+    
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 모달 헤더 */
+.Detail-modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.Detail-modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.Detail-modal-description {
+    font-size: 14px;
+    color: gray;
+}
+
+/* 모달 푸터 (버튼 영역) */
+.Detail-modal-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* 버튼 스타일 */
+.Detail-modal-button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.Detail-modal-button.cancel {
+    background: #f1f1f1;
+    color: #333;
+}
+
+.Detail-modal-button.confirm {
+    background: #4caf50;
+    color: white;
+}

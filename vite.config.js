@@ -10,10 +10,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/store": {
+      // "/store": {
+      //   target: "http://15.164.231.201:8080", // 백엔드 서버 주소
+      //   changeOrigin: true, // Origin 헤더 변경
+      //   // rewrite: (path) => path.replace(/^\/store/, "/store"),
+      // },
+      "/user": {
         target: "http://15.164.231.201:8080", // 백엔드 서버 주소
         changeOrigin: true, // Origin 헤더 변경
-        rewrite: (path) => path.replace(/^\/store/, "/store"), // 경로 재작성
       },
     },
   },

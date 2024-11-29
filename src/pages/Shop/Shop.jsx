@@ -21,19 +21,19 @@ function Shop() {
     setError(null);
     console.log("hi");
     try {
-      // const response = await axios.get(
-      //   "http://15.164.231.201:8080/store/show_products_by_keyword",
-      //   {
-      //     params: {
-      //       keyWordId: keyWordId,
-      //     },
-      //   }
-      // );
-      const response = await axios.get("/store/show_products_by_keyword", {
-        params: {
-          keyWordId: 0,
-        },
-      });
+      const response = await axios.get(
+        "http://15.164.231.201:8080/store/show_products_by_keyword",
+        {
+          params: {
+            keyWordId: 0,
+          },
+        }
+      );
+      // const response = await axios.get("/store/show_products_by_keyword", {
+      //   params: {
+      //     keyWordId: 0,
+      //   },
+      // });
       if (response.data && response.data.productData) {
         console.log("데이터 확인:", response.data.productData); // 받아온 데이터 출력
         setProducts(response.data.productData); // 서버에서 받은 데이터 저장
