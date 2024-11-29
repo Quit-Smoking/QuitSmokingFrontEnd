@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import './Css/survey.css'
 import arrow from '../../assets/Arrow.png'
 import { useState, useRef, useEffect } from "react";
+import axios from "axios";
+
 
 function Survey() {
     const navigate = useNavigate();
     const goHome = () => { navigate('/Home'); }
-
-
     const goStartpage = () => { navigate(-1); }
     const [page, setPage] = useState(0); //0page 부터 시작
     const pagePlus = () => { setPage(page + 1); }
