@@ -133,9 +133,9 @@
 /* 모달 컨테이너 */
 .Detail-modal {
     background: white;
-    
     border-radius: 10px;
-
+    width: 80vw;
+    height: 20vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -144,13 +144,15 @@
 /* 모달 헤더 */
 .Detail-modal-header {
     text-align: center;
-    margin-bottom: 20px;
+    border-bottom: 1px solid #85BCBD;
+    height: 70%;
 }
 
 .Detail-modal-title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
+    margin-top: 4vh;
 }
 
 .Detail-modal-description {
@@ -160,27 +162,26 @@
 
 /* 모달 푸터 (버튼 영역) */
 .Detail-modal-footer {
+    flex: 1;
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+
 }
 
 /* 버튼 스타일 */
 .Detail-modal-button {
     flex: 1;
-    padding: 10px;
-    border-radius: 5px;
     border: none;
-    font-size: 16px;
-    cursor: pointer;
+    font-size: 5vw;
+
 }
 
 .Detail-modal-button.cancel {
-    background: #f1f1f1;
-    color: #333;
+    border-right: solid 1px #85BCBD;
+    border-radius: 0 0 0 10px;
 }
 
 .Detail-modal-button.confirm {
-    background: #4caf50;
-    color: white;
+    color: #329496;
+    border-radius: 0 0 10px 0;
 }

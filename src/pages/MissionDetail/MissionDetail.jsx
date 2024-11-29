@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from "react-router-dom";
 import './MissionDetail.css';
 
 function MissionDetail() {
+    
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -53,8 +54,7 @@ function MissionDetail() {
                             <button
                                 className="Detail-modal-button confirm"
                                 onClick={handleConfirm}
-                            >
-                                중단하기
+                            > 중단하기
                             </button>
                         </div>
                     </div>

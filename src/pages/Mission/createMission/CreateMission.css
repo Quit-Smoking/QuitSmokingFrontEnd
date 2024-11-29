@@ -1,0 +1,215 @@
+/* 전체 컨테이너 스타일 */
+.create-mission-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh; /* 전체 높이 */
+    width: 100vw; /* 전체 너비 */
+    background-color: #f9f9f9;
+}
+
+/* Header */
+header {
+    flex: 0 0 auto;
+    height: 10vh; /* 헤더 높이 10% */
+}
+
+/* Main Section */
+.mission-main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5vw; /* 가로 여백 5% */
+}
+
+.mission-text-container {
+    text-align: center;
+    margin-bottom: 8vh; /* 텍스트 아래 여백 */
+}
+
+.mission-title {
+    font-size: 8vw; /* 가로 길이의 8% */
+    font-weight: bold;
+    color: #333;
+}
+
+.mission-subtitle {
+    font-size: 5vw; /* 가로 길이의 5% */
+    color: #888;
+}
+
+/* Input Field */
+.mission-input-container {
+    width: 80vw; /* 가로 길이의 80% */
+    border-bottom: 0.2vh solid #ccc; /* 세로 길이의 0.2% */
+}
+
+.mission-input {
+    width: 100%;
+    font-size: 5vw; /* 가로 길이의 5% */
+    padding: 1vh 0; /* 세로 길이의 1% */
+    border: none;
+    outline: none;
+    background: none;
+    color: #333;
+    text-align: center;
+}
+
+.mission-input::placeholder {
+    color: #aaa;
+}   
+
+/* Period Grid Container (Page 1) */
+.mission-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 두 개의 열 */
+    gap: 2vh; /* 박스 간의 간격 */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Period Box Styling (Page 1) */
+.mission-period-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35vw; /* 박스의 가로 크기 */
+    height: 7vh; /* 박스의 세로 크기 */
+    font-size: 4.5vw; /* 텍스트 크기 */
+    font-weight: bold;
+    color: #333;
+    border: 0.2vh solid #B7E1E2; /* 테두리 색 */
+    border-radius: 10px; /* 모서리 둥글기 */
+    background-color: #fff;
+}
+
+.mission-period-box.selected {
+    background-color: #85BCBD; /* 선택된 박스 배경 */
+    color: #fff; /* 선택된 박스 텍스트 색 */
+}
+
+/* 요일 선택 전체 컨테이너 (Page 2) */
+.mission-days-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* 월~금 컨테이너 (Page 2) */
+.mission-weekdays-container {
+    display: flex; /* flexbox를 사용하여 가로 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    gap: 2vw; /* 버튼 간 가로 간격 */
+    width: 100%; /* 컨테이너 전체 너비 */
+}
+
+/* 토~일 컨테이너 (Page 2) */
+.mission-weekend-container {
+    display: flex; /* flexbox를 사용하여 가로 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    gap: 2vw; /* 버튼 간 가로 간격 */
+    width: 50%; /* 좁은 너비로 중앙 정렬 */
+    margin-top: 2vh; /* 위쪽 여백 */
+}
+
+/* 요일 버튼 스타일 (Page 2) */
+.mission-day-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12vw; /* 요일 박스 크기 */
+    height: 12vw;
+    font-size: 4vw;
+    font-weight: bold;
+    color: #333;
+    border: 0.2vh solid #B7E1E2;
+    border-radius: 50%; /* 원형 버튼 */
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mission-day-box.selected {
+    background-color: #85BCBD;
+    color: #fff;
+}
+
+/* Footer Section */
+.mission-footer {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center;
+    padding: 0 5vw 13vh;
+}
+
+/* page0 단일 버튼 */
+.mission-next-btn-single {
+    width: 80vw;
+    height: 7vh;
+    font-size: 4.5vw;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+}
+
+.mission-next-btn-single.active {
+    background-color: #008285;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* page1 & page2 이전/다음 버튼 */
+.mission-btn-pair {
+    display: flex;
+    justify-content: center;
+    gap: 2vh; /* 버튼 간 간격 */
+    width: auto;
+}
+
+.mission-prev-btn,
+.mission-next-btn {
+    width: 35vw; /* grid 버튼과 동일한 너비 */
+    height: 7vh; /* grid 버튼과 동일한 높이 */
+    font-size: 4.5vw;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.mission-prev-btn {
+    border : 1.5px solid #008285;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.mission-prev-btn.active {
+    color: black;
+    cursor: pointer;
+}
+
+.mission-next-btn {
+    background-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.mission-next-btn.active {
+    background-color: #008285;
+    color: #fff;
+    cursor: pointer;
+}
