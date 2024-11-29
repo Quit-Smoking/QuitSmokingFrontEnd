@@ -4,7 +4,7 @@ import logo from '../../assets/logo_letters.svg';
 import cloudimg from "../../assets/캐릭터.png"
 import circleimg from "../../assets/circleImg.png"
 
-import sun from "../../assets/sun.png"
+import sun from "../../assets/Sun.png"
 
 import Modal from 'react-modal';
 import "./Css/Home.css";
