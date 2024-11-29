@@ -5,11 +5,13 @@ import { useState, useRef } from "react";
 
 function Survey() {
     const navigate = useNavigate();
+
     const goHome = () => navigate('/Home');
     const goStartpage = () => navigate(-1);
     const [page, setPage] = useState(0); // 현재 페이지 상태
     const pagePlus = () => setPage((prev) => Math.min(prev + 1, pages.length - 1));
     const pageMinus = () => setPage((prev) => Math.max(prev - 1, 0));
+
 
     const howManyref = useRef(null);
     const motiveref = useRef(null);
@@ -173,9 +175,11 @@ function Survey() {
                         </div>
                     )}
                 </div>
+
             </div>
         </div>
     );
+
 }
 
 export default Survey;
