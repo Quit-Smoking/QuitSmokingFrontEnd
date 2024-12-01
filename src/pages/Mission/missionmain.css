@@ -1,0 +1,179 @@
+.mission-main-container {
+  background: linear-gradient(#fff, #B7E1E2);
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission-main-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.mission-todo {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  background-color: #5A5A5A;
+  border-radius: 20px 20px 0 0;
+}
+
+.todo-title {
+  font-size: 22px;
+  color: white;
+  font-weight: 700;
+  margin: 2vh 0 2vh 3vh;
+}
+
+.todo-date {
+  font-size: 16px;
+  color: white;
+  margin-right: 3vh;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 90vw;
+  height: 22vh;
+
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.todo-item {
+  flex: 0 0 auto;
+  width: 80vw;
+  height: 20px;
+  padding: 10px;
+  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.todo-item.completed {
+  text-decoration: line-through;
+}
+
+.todo-item:active, .todo-item:hover {
+  background-color: transparent;
+}
+
+.todo-item span {
+  text-align: left;
+  border-bottom: 1px solid #85BCBD;
+  width: 100%;
+  margin: 0;
+}
+
+.todo-checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #85BCBD;
+}
+
+.main-ongoing {
+  /* border: 1px solid blue; */
+
+  width: 100vw;
+  height: 45vh;
+  margin-top: 2vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ongoing-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid red; */
+
+  width: 90vw;
+}
+
+.ongoing-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ongoing-add {
+  background-color: #008285;
+  border-radius: 12px;
+
+  font-size: 14px;
+  padding-bottom: 25px;
+  width: 90px;
+  height: 30px;
+  color: white;
+}
+
+.ongoing-content {
+  /* border: 1px solid red; */
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+  width: 90vw;
+  height: 35vh;
+}
+
+.ongoing-card {
+  background-color: #fff;
+  width: 50vw;
+  height: 200px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px gray;
+
+  margin-right: 1vh;
+  padding: 2vh;
+  text-align: left;
+
+  /* border: 1px solid blue; */
+}
+
+.ongoing-card-banner {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ongoing-card-title {
+  margin: 1vh 0;
+}
+
+.ongoing-button {
+  background-color: transparent;
+  outline: none;
+  width: 2px;
+}
+
+.ongoing-card-desc {
+  margin: 0;
+  font-size: 14px;
+}
