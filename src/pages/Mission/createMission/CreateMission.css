@@ -5,13 +5,13 @@
     justify-content: space-between;
     height: 100vh; /* 전체 높이 */
     width: 100vw; /* 전체 너비 */
-    background-color: #f9f9f9;
+    background-color: white;
 }
 
 /* Header */
 header {
     flex: 0 0 auto;
-    height: 10vh; /* 헤더 높이 10% */
+    height: 15vh; /* 헤더 높이 10% */
 }
 
 /* Main Section */
@@ -83,11 +83,12 @@ header {
     border: 0.2vh solid #B7E1E2; /* 테두리 색 */
     border-radius: 10px; /* 모서리 둥글기 */
     background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .mission-period-box.selected {
-    background-color: #85BCBD; /* 선택된 박스 배경 */
-    color: #fff; /* 선택된 박스 텍스트 색 */
+    background-color: #B7E1E2; /* 선택된 박스 배경 */
+
 }
 
 /* 요일 선택 전체 컨테이너 (Page 2) */
@@ -133,7 +134,7 @@ header {
 }
 
 .mission-day-box.selected {
-    background-color: #85BCBD;
+    background-color: #B7E1E2;
     color: #fff;
 }
 
@@ -193,13 +194,16 @@ header {
 
 .mission-prev-btn {
     border : 1.5px solid #008285;
-    color: #fff;
+
     cursor: not-allowed;
 }
 
 .mission-prev-btn.active {
+    background-color: #fff;
+    border: 0.2vh solid #008285;
     color: black;
     cursor: pointer;
+
 }
 
 .mission-next-btn {

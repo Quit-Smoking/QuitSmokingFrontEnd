@@ -15,10 +15,10 @@ export default defineConfig({
         changeOrigin: true, // Origin 헤더 변경
         rewrite: (path) => path.replace(/^\/store/, "/store"), // 경로 재작성
       },
-      "/store": {
+      "/UserStartRecord/": {
         target: "http://15.164.231.201:8080", // 백엔드 서버 주소
         changeOrigin: true, // Origin 헤더 변경
-        rewrite: (path) => path.replace(/^\/store/, "/store"), // 경로 재작성
+        rewrite: (path) => path.replace(/^\/UserStartRecord/, "/UserStartRecord"), // 경로 재작성
       },
     },
   },

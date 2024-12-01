@@ -3,6 +3,9 @@
     height: 100vh;
     width: 100vw;
     background-color: #B7E1E2;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .Home-Header {
@@ -24,7 +27,7 @@
 
 /* 메인 컨텐츠 */
 .Start-Main {
-    height: 77%;
+    flex: 1 1 auto;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -37,44 +40,49 @@
     justify-content: center;
     align-items: center;
 
+    margin-top: 3vh;
     font-size: 5vw;
     font-weight: 500;
 }
 
+
+
 .Home-Mainlogo {
     flex-grow: 3;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.circleimg {
-    position: absolute;
-    height: 100%;
+.shadow {
+    animation: shrinkShadow 3s infinite ease-in-out; /* 애니메이션 추가 */
+    scale: 0.8;
 }
 
-.cloudimg {
-    position: absolute;
-    height: 100%;
-    transform: translate(-30%, 10%)
+.homecloud {
+    padding-left: 2.5vw;
+    scale: 0.8;
+    animation: moveUp 3s infinite ease-in-out; 
 }
+
 
 .Home-MainTime {
     width: 100vw;
     flex-grow: 1;
-
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    font-size: 200%;
+    font-size: 8vw;
     font-weight: 500;
 }
 
 .Home-MainTime div:nth-child(2) {
-    font-size: 50%;
+    margin-top: 1vh;
+    font-size: 60%;
 }
 
 .Home-MainReport {
@@ -91,6 +99,7 @@
 .ReportBlackBg {
     background-color: #404B4B;
     height: 80%;
+    width: 100vw;
     display: flex;
     justify-content: center;
 
@@ -134,10 +143,11 @@
 }
 
 .Report>div {
-    width: 40%;
+    width: 15vh;
+    transform: translateY(-10%);
     aspect-ratio: 1 / 1;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px 2px grey;
+    box-shadow: 1px 1px 1px 1.5px grey;
 }
 
 .Reportbox {
@@ -182,7 +192,7 @@
 
 .Home-Footer {
     width: 100%;
-    height: 8%;
+
     background-color: white;
 }
 
@@ -225,10 +235,41 @@
 }
 
 .modal-image {
-    width: 80px;
-    height: 80px;
+    width: 25vw;
+    height: 25vw;
+    margin-top: 4vh;
 }
 
 h2{
     margin-bottom : 0;
-}   
+    font-size: 1.2rem;
+} 
+p{
+    font-size: 1.1rem;
+}  
+
+
+
+@keyframes moveUp {
+    0% ,100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-2vh);
+    }
+    
+}
+
+/* shadow 애니메이션 */
+@keyframes shrinkShadow {
+    0%,100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.7);
+        opacity: 0.7;
+    }
+    
+}

@@ -1,7 +1,7 @@
 import './login.css'
 import logo from '../../../public/circle_logo.svg'
 import { useState } from 'react';
-
+import axios from 'axios';
 function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -15,8 +15,6 @@ function Login() {
       setShowModal(true);
       return;
     }
-
-    // 서버로 아이디, 비번 보내기
 
     // 아이디 비번 틀리면 setWrong(true)
 
@@ -42,6 +40,32 @@ function Login() {
     console.log('Sign Up clicked');
     // 회원가입으로 이동
   };
+
+
+  // 서버로 아이디, 비번 보내기 -> 미안 해결하지 못했어... 부탁해...
+
+  const sendData = async () => {
+
+    const requestData = {
+      email: id,
+      password: password,
+    };
+
+    try {
+      await axios.post('/user/login', requestData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+
+
+
+    } catch (error) {
+      console.error('Error sending data:', error);
+      alert('데이터 전송에 실패했습니다.');
+    }
+  };
+
+
 
   return (
     <div className="login-page-container">
@@ -69,7 +93,7 @@ function Login() {
               className="off-login-input"
             />
             {wrong && <p className="wrong-login">{`아이디 또는 비밀번호가 잘못 되었습니다.\n아이디와 비밀번호를 정확히 입력해 주세요`}</p>}
-            <button type="submit" className="off-login-button">로그인</button>
+            <button type="submit" className="off-login-button" onClick={sendData}>로그인</button>
           </form>
           <div className="off-login-selects">
             <button type="button" onClick={handleFindId} className="option-button">
