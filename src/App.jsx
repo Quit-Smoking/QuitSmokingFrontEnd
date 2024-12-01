@@ -21,7 +21,7 @@ import MissionSelect from "./pages/Mission/createMission/MissionSelect";
 function App() {
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path="/Result" element={<Result />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/startpage" element={<StartPage />} />
@@ -34,7 +34,8 @@ function App() {
 
         <Route path="/Signup" element={<Signup />} />
 
-      </Routes>
+      </Routes> */}
+      <MissionSelect />
     </>
   );
 }
