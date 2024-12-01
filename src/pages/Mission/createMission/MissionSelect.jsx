@@ -13,7 +13,7 @@ function MissionSelect() {
 
   //! 진행중인 미션이 있는지 확인하기 -> 있으면 TopBar 존재해야, 그리고 진행중인 미션 색상과 미션 뱃지 추가 필요
 
-  const [currentMission, setCurrentMission] = useState(true); //! 진행중인 미션 확인
+  const [currentMission, setCurrentMission] = useState(false); //! 진행중인 미션 확인
 
   
   const slides = [
