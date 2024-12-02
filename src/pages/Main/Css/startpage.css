@@ -1,105 +1,137 @@
+/* 전체 컨테이너 */
 .Start-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100vh;
     width: 100vw;
     background-color: #B7E1E2;
 }
 
+/* Header */
 .Start-Header {
     background-color: #85BCBD;
-    position: relative;
     height: 15%;
     width: 100%;
-}
-
-/* header logo */
-.Header-logo {
-    position: absolute;
-    left: 5%;
-    bottom: 15%;
-    height: 8vh;
-}
-
-/* Main */
-
-.Start-Main {
-
-    height: 77%;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-}
-
-.MainTime {
-    width: 100vw;
-    ;
-    flex-grow: 3;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
 
-    font-size: 170%;
+.Header-logo {
+    height: 60%;
+}
+
+/* Main Section */
+.Start-Main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    position: relative;
+}
+
+/* Time Section */
+.MainTime {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
     font-weight: 500;
 }
 
-/* img */
-
+/* Logo Section */
 .Start-Mainlogo {
-
-    flex-grow: 3;
+    flex-grow: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.circleimg {
+/* 애니메이션 효과 추가 */
+.start-circleimg {
     position: absolute;
+    transform: scale(1.1);
+    animation: float-circle 2.5s infinite ease-in-out;
+    /* 애니메이션 추가 */
 }
 
-.cloudimg {
+.start-cloudimg {
     position: absolute;
-
-    transform: translate(-30%, 10%)
+    transform: scale(1.1) translate(-30%, 10%);
+    animation: float-cloud 2.5s infinite ease-in-out;
+    /* 애니메이션 추가 */
 }
 
-
-/* button */
+/* Button Section */
 .Mainbutton {
-    flex-grow: 4;
-
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: end;
-
-    gap: 2vh;
-}
-
-.Btn1,
-.Btn2 {
-    height: 20%;
-    width: 75%;
-    color: white;
-    font-size: 1.4rem;
-    box-shadow: 0px 4px 4px grey;
+    justify-content: center;
 }
 
 .Btn1 {
+    width: 75vw;
+    height: 8vh;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    box-shadow: 0px 4px 4px grey;
     background-color: #008285;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
 }
 
-.Btn2 {
-    background-color: #404B4B;
-    margin-bottom: 5vh;
+.Btn1:hover {
+    background-color: #005f5f;
+    transform: translateY(-2px);
 }
 
-/* Footer */
-
+/* Footer Section */
 .Start-Footer {
-
+    flex-shrink: 0;
     width: 100%;
-    height: 8%;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 애니메이션 키프레임 */
+@keyframes float-circle {
+
+    0%,
+    100% {
+        transform: scale(1.1) translateY(4%);
+    }
+
+    50% {
+        transform: scale(1.1) translateY(-5%);
+
+    }
+}
+
+@keyframes float-cloud {
+
+    0%,
+    100% {
+        transform: scale(1.1) translate(-30%, 10%);
+    }
+
+    50% {
+        transform: scale(1.1) translate(-30%, -10%);
+
+    }
 }

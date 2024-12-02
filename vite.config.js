@@ -15,6 +15,7 @@ export default defineConfig({
         changeOrigin: true, // Origin 헤더 변경
         rewrite: (path) => path.replace(/^\/store/, "/store"), // 경로 재작성
       },
+
     },
   },
 });
