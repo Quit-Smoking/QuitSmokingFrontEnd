@@ -16,14 +16,14 @@ import CreateMission from "./pages/Mission/createMission/CreateMission";
 
 import Signup from "./pages/Singup/Signup";
 
-
+import MissionMain from "./pages/Mission/MissionMain";
 
 function App() {
   return (
     <>
-
       <Routes>
         <Route path="/" element={<Login />} />
+
         <Route path="/Result" element={<Result />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/startpage" element={<StartPage />} />
@@ -35,9 +35,8 @@ function App() {
         <Route path="/createMission/startmission" element={<StartMission />} />
 
         <Route path="/Signup" element={<Signup />} />
-
       </Routes>
-
+      <MissionMain />
 
     </>
   );
