@@ -17,6 +17,8 @@ import CreateMission from "./pages/Mission/createMission/CreateMission";
 import Signup from "./pages/Singup/Signup";
 
 import MissionMain from "./pages/Mission/MissionMain";
+import MissionSelect from "./pages/Mission/createMission/MissionSelect";
+import NewMission from "./pages/Mission/NewMission";
 
 function App() {
   return (
@@ -32,12 +34,15 @@ function App() {
         <Route path="/missionDetail" element={<MissionDetail />} />
 
         <Route path="/createmission" element={<CreateMission />} />
-        <Route path="/createMission/startmission" element={<StartMission />} />
+        <Route path="/newMission" element={<NewMission />} />
+        <Route path="/startmission" element={<StartMission />} />
 
+        <Route path="/missionSelect" element={<MissionSelect />} />
+        <Route path="/missionMain" element={<MissionMain />} />
+        
         <Route path="/Signup" element={<Signup />} />
+        <Route path="/Login" element={<Login />} />
       </Routes>
-      <MissionMain />
-
     </>
   );
 }
