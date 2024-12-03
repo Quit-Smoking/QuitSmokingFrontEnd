@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './MissionDetail.css';
+import Nav from "../../components/nav";
 
 function MissionDetail() {
     
+
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -91,8 +93,7 @@ function MissionDetail() {
 
                 {/* Footer */}
                 <footer className="Detail-footer">
-                    {/* NavBar 추가 */}
-                    <div className="navbar"></div>
+                        <Nav></Nav>
                 </footer>
             </div>
         </>

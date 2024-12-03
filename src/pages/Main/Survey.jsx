@@ -1,185 +1,151 @@
 import { useNavigate } from "react-router-dom";
 import './Css/survey.css';
-import arrow from '../../assets/Arrow.png';
-import { useState, useRef } from "react";
+import { useState } from "react";
+import axios from 'axios';
+import TopBar from '../../components/TopBar';
 
 function Survey() {
     const navigate = useNavigate();
 
-    const goHome = () => navigate('/Home');
-    const goStartpage = () => navigate(-1);
     const [page, setPage] = useState(0); // 현재 페이지 상태
     const pagePlus = () => setPage((prev) => Math.min(prev + 1, pages.length - 1));
     const pageMinus = () => setPage((prev) => Math.max(prev - 1, 0));
 
-
-    const howManyref = useRef(null);
-    const motiveref = useRef(null);
     const [howMany, setHowMany] = useState("");
     const [motive, setMotive] = useState("건강한 나의 삶을 위해!");
-    const [isEditing, setIsEditing] = useState(false);
     const [activeNextbtn, setActiveNextbtn] = useState(false);
     const [selectedBox, setSelectedBox] = useState(null);
 
     const boxList = ["건강", "경제적 이유", "가족/연인", "주변의 권유", "사회적 시선", "기타"];
 
-    // Handlers
-    const handleFocus = () => setIsEditing(true);
-    const handleBlur = () => setIsEditing(false);
     const handleHowManyChange = (e) => setHowMany(e.target.value);
-    const handleMotiveChange = (e) => setMotive(e.target.value);
     const handleBoxClick = (index) => {
         setSelectedBox(index);
         setActiveNextbtn(true);
     };
 
-    // Pages List
+    const sendData = async () => {
+        const requestData = {
+            token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqa2cwNjkxQG5hdmVyLmNvbSIsImlhdCI6MTczMzAzMjA5NSwiZXhwIjoxNzMzMDY4MDk1fQ.vlHXvA09n-DwqUIyo7V4r3g6nLnUQ5n6KM4A83xwGyY",
+            resolution: boxList[selectedBox],
+            motive: motive,
+            startDate: new Date().toISOString().split('T')[0],
+            numbersSmoked: parseInt(howMany, 10) || 0,
+        };
+        try {
+            await axios.post('/UserStartRecord/add', requestData, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+            navigate('/Home');
+        } catch (error) {
+            console.error('Error sending data:', error);
+            alert('데이터 전송에 실패했습니다.');
+        }
+    };
+
     const pages = [
         // Page0
-        <div className="Survey-HowManyContainer" key="page0">
-            <div className="Survey-Page Page0InputCenter">
-                <div className="Input">
-                    {isEditing ? (
-                        <input
-                            ref={howManyref}
-                            className="editable-input"
-                            type="number"
-                            value={howMany}
-                            onChange={handleHowManyChange}
-                            onBlur={handleBlur}
-                            autoFocus
-                        />
-                    ) : (
-                        <div className="editable-text" onClick={handleFocus}>
-                            {howMany || "몇 개비 피우셨나요?"}
-                        </div>
-                    )}
+        <div className="Survey-Container" key="page0">
+            <header>
+                <TopBar title="금연 시작하기" onBack={() => navigate(-1)} />
+            </header>
+            <main className="Survey-Main">
+                <div className="Survey-TextContainer">
+                    <h1 className="Survey-Title"><div>하루에 담배를</div> <div>몇 개비 피우셨나요?</div></h1>
+                    <p className="Survey-Subtitle">흡연 개수를 입력해주세요</p>
                 </div>
-            </div>
+                <div className="Survey-InputContainer">
+                    <input
+                        className="Survey-Input"
+                        type="number"
+                        placeholder="숫자를 입력하세요"
+                        value={howMany}
+                        onChange={handleHowManyChange}
+                    />
+                </div>
+            </main>
+            <footer className="Survey-Footer">
+                <button
+                    className={`Survey-NextBtnSingle ${howMany ? "active" : ""}`}
+                    onClick={() => howMany && pagePlus()}
+                    disabled={!howMany}
+                >
+                    다음
+                </button>
+            </footer>
         </div>,
 
         // Page1
-        <div className="Survey-GridContainer" key="page1">
-            <div className="Grid-box">
-                {boxList.map((text, index) => (
-                    <div
-                        key={index}
-                        className={`box ${selectedBox === index ? "BoxSelected" : ""}`}
-                        onClick={() => handleBoxClick(index)}
+        <div className="Survey-Container" key="page1">
+            <header>
+                <TopBar title="금연 동기 설정" onBack={pageMinus} />
+            </header>
+            <main className="Survey-Main">
+                <div className="Survey-TextContainer">
+                    <h1 className="Survey-Title">금연 동기 설정</h1>
+                    <p className="Survey-Subtitle">원하는 항목을 선택해주세요</p>
+                </div>
+                <div className="Survey-GridContainer">
+                    {boxList.map((text, index) => (
+                        <div
+                            key={index}
+                            className={`Survey-GridBox ${selectedBox === index ? "selected" : ""}`}
+                            onClick={() => handleBoxClick(index)}
+                        >
+                            {text}
+                        </div>
+                    ))}
+                </div>
+            </main>
+            <footer className="Survey-Footer">
+                <div className="Survey-BtnPair">
+                    <button
+                        className="Survey-PrevBtn active"
+                        onClick={pageMinus}
                     >
-                        {text}
-                    </div>
-                ))}
-            </div>
+                        이전
+                    </button>
+                    <button
+                        className={`Survey-NextBtn ${selectedBox !== null ? "active" : ""}`}
+                        onClick={() => selectedBox !== null && pagePlus()}
+                        disabled={selectedBox === null}
+                    >
+                        다음
+                    </button>
+                </div>
+            </footer>
         </div>,
 
+
         // Page2
-        <div className="Survey-PageContainer" key="page2">
-            <div className="Survey-Page">
-                <div className="SelectMotive">
-                    <div className="SelectMotive-box box BoxSelected">
-                        {boxList[selectedBox]}
-                    </div>
+        <div className="Survey-Container" key="page2">
+            <header>
+                <TopBar title="금연 시작하기" onBack={pageMinus} />
+            </header>
+            <main className="Survey-Main">
+                <div className="Survey-TextContainer">
+                    <h1 className="Survey-Title">금연 다짐을 해볼까요?</h1>
+                    <p className="Survey-Subtitle">자신만의 금연 다짐을 입력하세요</p>
                 </div>
-                <div className="Input">
-                    {isEditing ? (
-                        <input
-                            ref={motiveref}
-                            className="editable-input"
-                            type="text"
-                            value={motive}
-                            onChange={handleMotiveChange}
-                            onBlur={handleBlur}
-                            autoFocus
-                        />
-                    ) : (
-                        <div className="editable-text" onClick={handleFocus}>
-                            {motive || "금연 다짐을 입력해주세요"}
-                        </div>
-                    )}
+                <div className="Survey-InputContainer">
+                    <input
+                        className="Survey-Input"
+                        type="text"
+                        placeholder="금연 다짐을 입력해주세요"
+                        value={motive}
+                        onChange={(e) => setMotive(e.target.value)}
+                    />
                 </div>
-            </div>
+            </main>
+            <footer className="Survey-Footer">
+                <button className="Survey-NextBtnSingle active" onClick={sendData}>
+                    완료
+                </button>
+            </footer>
         </div>,
     ];
 
-    return (
-        <div className="Survey-Container">
-            {/* Header */}
-            <div className="Survey-Header">
-                <div>
-                    <span className="arrow" onClick={goStartpage}>
-                        <img src={arrow} alt="" />
-                    </span>
-                    <div className="Headertext">금연 시작하기</div>
-                </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="Survey-Main">
-                <div className="Survey-Maintext">
-                    {page === 0 && (
-                        <>
-                            <div>하루에 담배를</div>
-                            <div>몇 개비 피우셨나요?</div>
-                        </>
-                    )}
-                    {page === 1 && (
-                        <>
-                            <div>금연 동기가</div>
-                            <div>무엇인가요?</div>
-                        </>
-                    )}
-                    {page === 2 && (
-                        <>
-                            <div>금연 다짐을</div>
-                            <div>해볼까요?</div>
-                        </>
-                    )}
-                </div>
-
-                {/* Render Current Page */}
-                {pages[page]}
-            </div>
-
-            {/* Footer */}
-            <div className="Survey-Footer">
-                <div className={`Footer-Grid-box ${page === 0 ? "firstNextbtn" : ""}`}>
-                    {page > 0 && (
-                        <div className="box previousbtn" onClick={pageMinus}>
-                            이전
-                        </div>
-                    )}
-                    {page === 0 && (
-                        <div
-                            className={`box deactiveNextbtn ${
-                                howMany ? "activeNextbtn" : ""
-                            }`}
-                            onClick={() => howMany && pagePlus()}
-                        >
-                            다음
-                        </div>
-                    )}
-                    {page === 1 && (
-                        <div
-                            className={`box deactiveNextbtn ${
-                                activeNextbtn ? "activeNextbtn" : ""
-                            }`}
-                            onClick={() => activeNextbtn && pagePlus()}
-                        >
-                            다음
-                        </div>
-                    )}
-                    {page === 2 && (
-                        <div className="box activeNextbtn" onClick={goHome}>
-                            완료
-                        </div>
-                    )}
-                </div>
-
-            </div>
-        </div>
-    );
-
+    return <>{pages[page]}</>;
 }
 
 export default Survey;
