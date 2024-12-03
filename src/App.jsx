@@ -36,7 +36,7 @@ function App() {
 
         <Route path="/Signup" element={<Signup />} />
       </Routes>
-      <MissionMain />
+      {/* <MissionMain /> */}
 
     </>
   );
