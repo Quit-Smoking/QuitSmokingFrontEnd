@@ -125,3 +125,17 @@ button:focus {
   font-size: 14px;
   color: red;
 }
+
+.easy-login-container {
+  text-align: center;
+  color: #353535;
+}
+
+.naver-button {
+  background-color: #03C75A;
+  color: white;
+  width: 60vw;
+  height: 6vh;
+  font-weight: 700;
+  font-size: 18px;
+}

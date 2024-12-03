@@ -14,14 +14,14 @@ import StartMission from "./pages/Mission/StartMission";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateMission from "./pages/Mission/createMission/CreateMission";
 
-import Signup from "./pages/Singup/Signup";
+import Signup from "./pages/Signup/Signup";
 
 import MissionMain from "./pages/Mission/MissionMain";
 
 function App() {
   return (
     <>
-      {/* <Routes>
+      <Routes>
         <Route path="/Result" element={<Result />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/startpage" element={<StartPage />} />
@@ -33,9 +33,9 @@ function App() {
         <Route path="/createMission/startmission" element={<StartMission />} />
 
         <Route path="/Signup" element={<Signup />} />
+        <Route path="/Login" element={<Login />} />
 
-      </Routes> */}
-      <MissionMain />
+      </Routes>
     </>
   );
 }

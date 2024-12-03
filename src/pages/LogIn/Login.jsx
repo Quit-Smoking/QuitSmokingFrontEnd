@@ -1,14 +1,18 @@
 import './login.css'
 import logo from '../../../public/circle_logo.svg'
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [wrong, setWrong] = useState(true);
+  const [wrong, setWrong] = useState(false);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!id || !password) {
@@ -17,8 +21,19 @@ function Login() {
     }
 
     // 서버로 아이디, 비번 보내기
-
-    // 아이디 비번 틀리면 setWrong(true)
+    try {
+      const response = await axios.post(`/user/login`, {
+        email: id,
+        password: password,
+      });
+      if (response.status === 200) {
+        console.log('로그인 성공', response.data);
+        navigate('/Home'); //! 홈으로 이동
+      }
+    } catch(error) {
+      console.log('로그인 실패', error);
+      setWrong(true); // 아이디 비번 틀리면 setWrong(true)
+    }
 
     console.log('Id:', id);
     console.log('Password:', password);
@@ -28,19 +43,14 @@ function Login() {
     setShowModal(false);
   };
 
-  const handleFindId = () => {
+  const handleFindIdPw = () => {
     console.log('Find ID clicked');
     // 아이디 찾기로 이동
   };
 
-  const handleFindPassword = () => {
-    console.log('Find Password clicked');
-    // 비번찾기로 이동
-  };
-
   const handleSignup = () => {
     console.log('Sign Up clicked');
-    // 회원가입으로 이동
+    navigate('/Signup'); // 회원가입으로 이동
   };
 
   return (
@@ -72,11 +82,8 @@ function Login() {
             <button type="submit" className="off-login-button">로그인</button>
           </form>
           <div className="off-login-selects">
-            <button type="button" onClick={handleFindId} className="option-button">
-              아이디 찾기
-            </button>
-            <button type="button" onClick={handleFindPassword} className="option-button">
-              비밀번호 찾기
+            <button type="button" onClick={handleFindIdPw} className="option-button">
+              아이디/비밀번호 찾기
             </button>
             <button type="button" onClick={handleSignup} className="option-button">
               회원가입
@@ -86,11 +93,8 @@ function Login() {
       </div>
       <div className="easy-login-container">
         <p className="easy-login-title">SNS 간편로그인</p>
-        <button type="button" className="easy-login-button kakao-button">
-          kakao
-        </button>
-        <button type="button" className="easy-login-button google-button">
-          Google
+        <button type="button" className="easy-login-button naver-button">
+          네이버 로그인
         </button>
       </div>
 
