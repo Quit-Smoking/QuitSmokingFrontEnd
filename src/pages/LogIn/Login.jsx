@@ -28,6 +28,7 @@ function Login() {
       });
       if (response.status === 200) {
         console.log('로그인 성공', response.data);
+        localStorage.setItem('userToken', response.data);
         navigate('/Home'); //! 홈으로 이동
       }
     } catch(error) {
