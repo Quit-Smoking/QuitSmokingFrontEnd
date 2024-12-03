@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
+import axios from "axios";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./Diary.css";
@@ -8,49 +9,97 @@ import notCheckBox from "../../assets/notCheckBox.svg";
 import Character from "../../assets/Character.svg";
 import DiaryIcon from "../../assets/DiaryIcon.svg";
 
+// const fetchMissions = async (selectedDate) => {
+//   const token = localStorage.getItem("userToken"); // 토큰 가져오기
+//   if (!token) {
+//     setError("로그인이 필요합니다.");
+//     setIsLoading(false);
+//     return;
+//   }
+
+//   setIsLoading(true); // 로딩 시작
+//   setError(null); // 에러 초기화
+
+//   try {
+//     const response = await axios.get(
+//       "/mission_record/fetchByDate", // API 엔드포인트
+//       {
+//         params: {
+//           token: token,
+//           date: moment(selectedDate).format("YYYY-MM-DD"), // 선택된 날짜
+//         },
+//       }
+//     );
+
+//     if (response.status === 200 && response.data) {
+//       // 받아온 데이터가 객체인 경우 배열로 변환
+//       const data = Array.isArray(response.data) ? response.data : [response.data];
+//       setMissions(data); // 받아온 미션 데이터 설정
+//     } else {
+//       setMissions([]); // 데이터가 없을 경우 빈 배열 설정
+//     }
+//   } catch (err) {
+//     console.error("Error fetching missions:", err);
+//     setError("미션 데이터를 불러오지 못했습니다.");
+//   } finally {
+//     setIsLoading(false); // 로딩 끝
+//   }
+// };
+
 function Diary() {
   const [date, setDate] = useState(new Date());
-  const missions = [
-    {
-      date: "2024-11-25",
-      description: "하루에 물 2L 마시기",
-      progress: "누적 2일 성공 / 5일 진행 중",
-      completed: false,
-      image: "/icons/water.svg",
-    },
-    {
-      date: "2024-11-27",
-      description: "하루에 물 2L 마시기",
-      progress: "누적 2일 성공 / 5일 진행 중",
-      completed: false,
-      image: "/icons/water.svg",
-    },
-    {
-      date: "2024-11-27",
-      description: "매일 운동 30분 하기",
-      progress: "누적 4일 성공 / 5일 진행 중",
-      completed: true,
-      image: "/icons/exercise.svg",
-    },
-    {
-      date: "2024-11-29",
-      description: "매일 운동 30분 하기",
-      progress: "누적 4일 성공 / 5일 진행 중",
-      completed: true,
-      image: "/icons/exercise.svg",
-    },
-    {
-      date: "2025-11-27",
-      description: "매일 운동 30분 하기",
-      progress: "누적 4일 성공 / 5일 진행 중",
-      completed: true,
-      image: "/icons/exercise.svg",
-    },
-  ];
+  const [missions, setMissions] = useState([]); // 미션 데이터 저장
+  const [error, setError] = useState(null); // 에러 상태
+  const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
-  const selectedMissions = missions.filter(
-    (mission) => mission.date === moment(date).format("YYYY-MM-DD")
-  );
+  const fetchMissions = async (selectedDate) => {
+    const token =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMjIxOTQ2LCJleHAiOjE3MzMyNTc5NDZ9.BmDtkVCh4olVvZb7COzuum4DQWR4Je4oeDfVKC9Ewec"; // 하드코딩된 토큰
+
+    setIsLoading(true); // 로딩 시작
+    setError(null); // 에러 초기화
+
+    try {
+      const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
+      console.log("API 요청에 사용된 날짜:", formattedDate);
+
+      const response = await axios.get(
+        "http://15.164.231.201:8080/mission_record/fetchByDate",
+        {
+          params: {
+            token: token,
+            date: formattedDate,
+          },
+        }
+      );
+
+      if (
+        response.status === 200 &&
+        response.data &&
+        response.data.length > 0
+      ) {
+        setMissions(response.data); // 받아온 미션 데이터 설정
+      } else {
+        console.warn("선택된 날짜에 데이터가 없습니다.");
+        setMissions([]); // 데이터가 없을 경우 빈 배열 설정
+      }
+    } catch (err) {
+      console.error("API 요청 실패:", err);
+      setError("미션 데이터를 불러오지 못했습니다.");
+    } finally {
+      setIsLoading(false); // 로딩 종료
+    }
+  };
+
+  const handleDateChange = async (selectedDate) => {
+    setDate(selectedDate);
+    await fetchMissions(selectedDate);
+  };
+
+  // 날짜 변경 시 API 호출
+  useEffect(() => {
+    fetchMissions(date);
+  }, [date]);
 
   const customTileContent = ({ date, view }) => {
     if (view === "month") {
@@ -81,7 +130,7 @@ function Diary() {
           formatMonthYear={(locale, date) => moment(date).format("M")}
           calendarType="gregory"
           tileContent={customTileContent}
-          onChange={setDate}
+          onChange={handleDateChange} // handleDateChange를 사용하도록 수정
           value={date}
           prev2Label={null}
           next2Label={null}
@@ -115,21 +164,22 @@ function Diary() {
             : `${moment(date).format("M월 D일")}의 기록`}
         </h3>
         <div className="missions">
-          {selectedMissions.length > 0 ? (
-            selectedMissions.map((mission, index) => (
+          {isLoading ? (
+            <p>로딩 중...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : missions.length > 0 ? (
+            missions.map((mission, index) => (
               <div key={index} className="mission">
                 <div className="mission_box">
                   <img
-                    src={mission.image}
+                    src={mission.image || "/icons/default.svg"} // 기본 아이콘 추가
                     alt="mission-icon"
                     className="mission-icon"
                   />
                   <div className="mission_text">
                     <div className="text_1">
-                      <p>{mission.description}</p>
-                    </div>
-                    <div className="text_2">
-                      <p>{mission.progress}</p>
+                      <p>{mission.mission}</p>
                     </div>
                   </div>
                 </div>
