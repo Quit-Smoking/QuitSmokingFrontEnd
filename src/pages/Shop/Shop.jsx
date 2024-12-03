@@ -133,7 +133,11 @@ function Shop() {
           <p>{error}</p>
         ) : (
           products.map((product, index) => (
-            <div key={index} className="product-card">
+            <div
+              key={index}
+              className="product-card"
+              onClick={() => window.open(product.productUrl, "_blank")}
+            >
               <img
                 src={
                   product.productImageUrl || "https://via.placeholder.com/150"
