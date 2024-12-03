@@ -3,6 +3,7 @@
   height: 100vh;
   margin: 0;
   background-color: white;
+  position: relative;
 }
 
 .new-mission-carousel {
@@ -69,42 +70,16 @@
   color: white;
 }
 
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-
-.carousel-wrapper {
-  display: flex;
-  transition: transform 0.5s ease;
-  width: 100%;
-}
-
-.carousel-slide {
-  flex: 0 0 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* border: 1px solid; */
-  box-sizing: border-box;
-  width: 50vw;
-}
-
-.carousel-content {
-  width: 100vw;
-  margin-top: 12vh;
-}
 
 .weekdays {
   margin: 0 2vh;
+  text-align: center;
 }
 
 .weekday {
   border: 2px solid #B7E1E2;
-  width: 75px;
-  height: 75px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   text-align: center;
   font-size: 2.5vh;
@@ -122,9 +97,8 @@
 .new-mission-move {
   position: absolute;
   bottom: 5vh;
-  left: 50%;
+  left: 50vw;
   transform: translateX(-50%);
-  width: 100%;
 }
 
 .new-mission-move button {
@@ -150,3 +124,12 @@ button.new-mission-next:disabled {
   color: white;
 }
 
+.content-container {
+  /* border: 1px solid red; */
+  height: 72vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
