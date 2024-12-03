@@ -104,7 +104,6 @@ function MissionMain() {
               />
               <div className="ongoing-card-banner">
                 <p className="ongoing-card-title">{mission.title}</p>
-                <button className="ongoing-button">{`>`}</button>
               </div>
               <p className="ongoing-card-desc">{mission.description}</p>
             </div>
