@@ -1,38 +1,92 @@
 import './startmission.css'
 import TopBar from '../../components/TopBar';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import bubble from "../../assets/talk.svg";
 import char from "../../assets/char.svg";
+import axios from 'axios';
 
 function StartMission() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { missionName, selectedDays, defaultMission } = location.state || {};
+  
+  const [userToken, setUserToken] = useState(null);
+  //! params로 요일 확인해서 가져오기
 
-  //! params로 요일과 기간 확인해서 가져오기
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem('userToken');
+      if (token) {
+        setUserToken(token);
+      } else {
+        console.log('토큰 세팅 불가');
+      }
+    } catch (error) {
+      console.log('토큰 가져오기 실패', error)
+    }
+  }, []);
+
+  const getFormattedDate = () => {
+    const today = new Date();
+  
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`; // "YYYY-MM-DD"
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!userToken) {
+      console.log('토큰이 없음');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://15.164.231.201:8080/mission/add', {
+        "token": {userToken},
+        "mission": {missionName},
+        "start_date": getFormattedDate(),
+        "is_deleted": false,
+        "is_default": {defaultMission},
+        "week_data": {selectedDays}
+      })
+      console.log('미션 성공적으로 전송:', response.data);
+      console.log('mission main 페이지로 이동')
+      navigate('/missionMain');
+    } catch (error) {
+      console.error('미션 서버로 보내는 중 에러 발생', error);
+    }
+  }
 
   return (
     <div className="start-container">
-      <TopBar title="중강도 운동하기" onBack={() => navigate(-1)} />
+      <TopBar title={missionName} onBack={() => navigate(-1)} />
       <div className="start-content">
         <div className="start-title">
           <p>Mission</p>
-          <p>중강도 운동하기</p>
-          {/* !!!!!!!!!타이틀 가져오기!!!!!!!!!! */}
+          <p>{missionName}</p>
         </div>
         <div
           style={{background: `no-repeat center url(${bubble})`}}
-          //! 가져온 요일과 기간 사용하기
           className="mission-bubble"
         >
-          {`2024년 12월 2일까지\n월요일마다 실천하겠습니다!`}
+          {`${selectedDays}요일마다 실천하겠습니다!`}
         </div>
         <img
           src={char}
           alt="숨쉴래 캐릭터"
           className="start-char"
         />
-        <button className="start-mission-button"
-        //! 여기서 서버로 보내기!!
-        >미션 시작하기</button>
+        <button
+          className="start-mission-button"
+          onClick={handleSubmit}
+        >
+          미션 시작하기
+        </button>
       </div>
     </div>
   );
