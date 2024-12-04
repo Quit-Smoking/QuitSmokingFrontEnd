@@ -33,7 +33,7 @@ function ResetPassword() {
     }
   };
 
-  // 비밀번호 재입력 처리 (입력 시 검증 없음)
+  // 비밀번호 재입력 처리
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     setConfirmPasswordMessage(""); // 입력 중에는 메시지 초기화
@@ -41,17 +41,44 @@ function ResetPassword() {
   };
 
   // 버튼 클릭 시 검증 및 제출
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // 비밀번호와 재입력 값이 다를 경우 메시지 표시
     if (password !== confirmPassword) {
       setConfirmPasswordMessage("⚠️비밀번호가 일치하지 않습니다");
       setIsConfirmPasswordValid(false);
       return; // 검증 실패 시 함수 종료
     }
+    const token =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMzA3MzY0LCJleHAiOjE3MzMzNDMzNjR9.M3agOzCMGRrPsOukqEe-MGTKH_1nx8hOulHQxipIfjU"; // 로컬 스토리지에서 토큰 가져오기
 
-    // 모든 조건이 충족되면 다음 단계 진행 (예: API 요청 또는 페이지 이동)
-    alert("비밀번호가 성공적으로 변경되었습니다!");
-    navigate("/home");
+    // API 요청 데이터 생성
+    const requestData = {
+      //   token: localStorage.getItem("token"), // 로컬 스토리지에서 토큰 가져오기
+      token: token,
+      rawPassword: password,
+    };
+
+    try {
+      // POST 요청
+      const response = await axios.post(
+        "http://15.164.231.201:8080/user/changePassword",
+        null,
+        {
+          params: requestData, // 쿼리 파라미터로 데이터 전송
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+
+      // 성공 시 홈 화면으로 이동
+      alert("비밀번호가 성공적으로 변경되었습니다!");
+      navigate("/home");
+    } catch (error) {
+      console.error("API 요청 실패:", error.response || error.message);
+      alert("비밀번호 변경 중 오류가 발생했습니다.");
+    }
   };
 
   const handleCancelClick = () => {
@@ -70,7 +97,7 @@ function ResetPassword() {
             onClick={handleCancelClick}
           />
         </div>
-        <div className="sub_text">현재 비밀번호를 입력해주세요</div>
+        <div className="sub_text">새로운 비밀번호를 입력해주세요</div>
         <div className="form-group">
           <div className="password_title" htmlFor="password">
             비밀번호
@@ -112,7 +139,7 @@ function ResetPassword() {
         onClick={handleSubmit} // 버튼 클릭 시 검증 및 처리
         disabled={!isPasswordValid} // 비밀번호 검증이 완료되지 않으면 버튼 비활성화
       >
-        회원가입
+        비밀번호 변경
       </button>
     </div>
   );
