@@ -1,4 +1,4 @@
-/* 전체 컨테이너*/
+/* 전체 컨테이너 */
 .Home-Container {
     height: 100vh;
     width: 100vw;
@@ -45,8 +45,6 @@
     font-weight: 500;
 }
 
-
-
 .Home-Mainlogo {
     flex-grow: 3;
     display: flex;
@@ -67,7 +65,6 @@
     animation: moveUp 3s infinite ease-in-out; 
 }
 
-
 .Home-MainTime {
     width: 100vw;
     flex-grow: 1;
@@ -75,7 +72,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    transform: translateY(-3vh);
     font-size: 8vw;
     font-weight: 500;
 }
@@ -102,7 +99,6 @@
     width: 100vw;
     display: flex;
     justify-content: center;
-
 }
 
 .ReportWhitebg {
@@ -139,7 +135,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-
 }
 
 .Report>div {
@@ -155,12 +150,11 @@
     flex-direction: column;
 }
 
-
 .Reportbox>div {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .Reportbox>div:not(:nth-child(2)) {
@@ -183,7 +177,6 @@
     background-image: url('../../../assets/savedmoney.png');
 }
 
-
 .extendtime,
 .savedmoney {
     width: 100%;
@@ -192,7 +185,6 @@
 
 .Home-Footer {
     width: 100%;
-
     background-color: white;
 }
 
@@ -240,36 +232,117 @@
     margin-top: 4vh;
 }
 
-h2{
-    margin-bottom : 0;
+h2 {
+    margin-bottom: 0;
     font-size: 1.2rem;
-} 
-p{
-    font-size: 1.1rem;
-}  
-
-
-
-@keyframes moveUp {
-    0% ,100%{
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(-2vh);
-    }
-    
 }
 
-/* shadow 애니메이션 */
-@keyframes shrinkShadow {
-    0%,100% {
-        transform: scale(1);
+p {
+    font-size: 1.1rem;
+}
+
+/* 기존 menu-icon 스타일 유지 */
+.menu-icon {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    width: 8vw;
+    height: 8vw;
+    cursor: pointer;
+}
+
+/* ------------ Menu Modal Overlay ------------- */
+.menu-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+.menu-modal {
+    background-color: white;
+    width: 70vw;
+    height: 100%;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    animation: slideIn 0.3s forwards;
+
+    overflow-y: auto;
+}
+
+.menu-header {
+    background-color: #85BCBD;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-section {
+    margin-top: 4vh ;
+    padding: 0 8vw 0 8vw;
+    border-radius: 8px;
+
+
+}
+
+.menu-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 1vh;
+    color: #333;
+    cursor: default;
+}
+
+.menu-item {
+    cursor: pointer;
+    color: #555;
+    font-size: 1rem;
+    padding: 0.5vh 0;
+
+}
+
+.menu-body hr {
+    margin: 2vw 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+/* 애니메이션: 모달 등장 */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* 페이드 인 애니메이션 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
         opacity: 1;
     }
-    50% {
-        transform: scale(0.7);
-        opacity: 0.7;
-    }
-    
 }
