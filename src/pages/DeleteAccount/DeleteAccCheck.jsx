@@ -37,7 +37,7 @@ function DeleteAccCheck() {
       if (response.data === true) {
         console.log(response.data);
         // 서버 응답이 true면 Home 페이지로 이동
-        navigate("/ResetPassword");
+        navigate("/DeleteAcc", { state: { password } });
       } else {
         // 서버 응답이 false면 에러 메시지 표시
         setPasswordMessage("⚠️비밀번호가 틀렸습니다");

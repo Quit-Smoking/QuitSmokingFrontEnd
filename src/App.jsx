@@ -23,6 +23,7 @@ import MissionSelect from "./pages/Mission/createMission/MissionSelect";
 import NewMission from "./pages/Mission/NewMission";
 
 import DeleteAccCheck from "./pages/DeleteAccount/DeleteAccCheck";
+import DeleteAcc from "./pages/DeleteAccount/DeleteAcc";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
 
         <Route path="/DeleteAccCheck" element={<DeleteAccCheck />} />
+        <Route path="/DeleteAcc" element={<DeleteAcc />} />
       </Routes>
     </>
   );
