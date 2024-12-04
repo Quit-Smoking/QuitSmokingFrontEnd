@@ -47,12 +47,14 @@ function StartMission() {
 
     try {
       const response = await axios.post('http://15.164.231.201:8080/mission/add', {
-        "token": {userToken},
-        "mission": {missionName},
-        "start_date": getFormattedDate(),
-        "is_deleted": false,
-        "is_default": {defaultMission},
-        "week_data": {selectedDays}
+        params: {
+          "token": {userToken},
+          "mission": {missionName},
+          "start_date": getFormattedDate(),
+          "is_deleted": false,
+          "is_default": {defaultMission},
+          "week_data": {selectedDays},
+        }
       })
       console.log('미션 성공적으로 전송:', response.data);
       console.log('mission main 페이지로 이동')
