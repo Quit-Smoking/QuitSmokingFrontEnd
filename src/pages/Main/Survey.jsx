@@ -26,16 +26,20 @@ function Survey() {
 
     const sendData = async () => {
         const requestData = {
-            token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqa2cwNjkxQG5hdmVyLmNvbSIsImlhdCI6MTczMzAzMjA5NSwiZXhwIjoxNzMzMDY4MDk1fQ.vlHXvA09n-DwqUIyo7V4r3g6nLnUQ5n6KM4A83xwGyY",
+            token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqa2cwNjkxQG5hdmVyLmNvbSIsImlhdCI6MTczMzIyNDI5OCwiZXhwIjoxNzMzMjYwMjk4fQ.XGB4e5VQT3qnhRk0I1AK_cleclTsz_kMTRDVqwQ8f6I",
             resolution: boxList[selectedBox],
             motive: motive,
             startDate: new Date().toISOString().split('T')[0],
             numbersSmoked: parseInt(howMany, 10) || 0,
         };
+
+        console.log(requestData);
         try {
-            await axios.post('/UserStartRecord/add', requestData, {
+            await axios.post('http://15.164.231.201:8080/UserStartRecord/add', requestData, {
                 headers: { 'Content-Type': 'application/json' },
             });
+            
+            localStorage.removeItem("isModalShown"); // 모달 재설정을 위해 로컬스토리지 초기화
             navigate('/Home');
         } catch (error) {
             console.error('Error sending data:', error);
@@ -44,7 +48,6 @@ function Survey() {
     };
 
     const pages = [
-        // Page0
         <div className="Survey-Container" key="page0">
             <header>
                 <TopBar title="금연 시작하기" onBack={() => navigate(-1)} />
