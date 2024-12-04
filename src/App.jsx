@@ -14,6 +14,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateMission from "./pages/Mission/createMission/CreateMission";
 
 import Signup from "./pages/Singup/Signup";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import ResetPassword from "./pages/ChangePassword/ResetPassword";
 
 import MissionMain from "./pages/Mission/MissionMain";
 import MissionSelect from "./pages/Mission/createMission/MissionSelect";
@@ -41,6 +43,8 @@ function App() {
         <Route path="/missionMain" element={<MissionMain />} />
 
         <Route path="/Signup" element={<Signup />} />
+        <Route path="/ChangePassword" element={<ChangePassword />} />
+        <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/Login" element={<Login />} />
       </Routes>
     </>
