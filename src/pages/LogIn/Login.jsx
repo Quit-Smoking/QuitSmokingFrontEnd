@@ -22,9 +22,11 @@ function Login() {
 
     // 서버로 아이디, 비번 보내기
     try {
-      const response = await axios.post(`/user/login`, {
-        email: id,
-        password: password,
+      const response = await axios.post(`http://15.164.231.201:8080/user/login`, {
+        params: {
+          email: id,
+          password: password,
+        }
       });
       if (response.status === 200) {
         console.log('로그인 성공', response.data);
@@ -57,28 +59,23 @@ function Login() {
 
   // 서버로 아이디, 비번 보내기 -> 미안 해결하지 못했어... 부탁해...
 
-  const sendData = async () => {
+  // const sendData = async () => {
 
-    const requestData = {
-      email: id,
-      password: password,
-    };
+  //   const requestData = {
+  //     email: id,
+  //     password: password,
+  //   };
 
-    try {
-      await axios.post('/user/login', requestData, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+  //   try {
+  //     await axios.post('/user/login', requestData, {
+  //       headers: { 'Content-Type': 'application/json' },
+  //     });
 
-
-
-
-    } catch (error) {
-      console.error('Error sending data:', error);
-      alert('데이터 전송에 실패했습니다.');
-    }
-  };
-
-
+  //   } catch (error) {
+  //     console.error('Error sending data:', error);
+  //     alert('데이터 전송에 실패했습니다.');
+  //   }
+  // };
 
   return (
     <div className="login-page-container">
@@ -106,7 +103,7 @@ function Login() {
               className="off-login-input"
             />
             {wrong && <p className="wrong-login">{`아이디 또는 비밀번호가 잘못 되었습니다.\n아이디와 비밀번호를 정확히 입력해 주세요`}</p>}
-            <button type="submit" className="off-login-button" onClick={sendData}>로그인</button>
+            <button type="submit" className="off-login-button">로그인</button>
           </form>
           <div className="off-login-selects">
             <button type="button" onClick={handleFindIdPw} className="option-button">

@@ -60,7 +60,7 @@ function NewMission() {
         // Page0
         <div className="create-mission-container" key="page0">
             <header>
-                <TopBar title="중강도 운동하기" onBack={() => navigate(-1)} />
+                <TopBar title="미션 생성하기" onBack={() => navigate(-1)} />
             </header>
             <main className="mission-main">
                 <div className="mission-text-container">
