@@ -16,6 +16,7 @@ import CreateMission from "./pages/Mission/createMission/CreateMission";
 import Signup from "./pages/Singup/Signup";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import ResetPassword from "./pages/ChangePassword/ResetPassword";
+import ChangeNickname from "./pages/ChangeNickname/ChangeNickname";
 
 import MissionMain from "./pages/Mission/MissionMain";
 import MissionSelect from "./pages/Mission/createMission/MissionSelect";
@@ -43,6 +44,7 @@ function App() {
         <Route path="/missionMain" element={<MissionMain />} />
 
         <Route path="/Signup" element={<Signup />} />
+        <Route path="/ChangeNickname" element={<ChangeNickname />} />
         <Route path="/ChangePassword" element={<ChangePassword />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/Login" element={<Login />} />

@@ -139,7 +139,7 @@ function ResetPassword() {
         onClick={handleSubmit} // 버튼 클릭 시 검증 및 처리
         disabled={!isPasswordValid} // 비밀번호 검증이 완료되지 않으면 버튼 비활성화
       >
-        비밀번호 변경
+        완료
       </button>
     </div>
   );
