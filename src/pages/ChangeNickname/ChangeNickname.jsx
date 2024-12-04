@@ -30,6 +30,47 @@ function ChangeNickname() {
     }
   };
 
+  // 버튼 클릭 시 검증 및 제출
+  const handleSubmit = async () => {
+    // 비밀번호와 재입력 값이 다를 경우 메시지 표시
+    if (password !== confirmPassword) {
+      setConfirmPasswordMessage("⚠️비밀번호가 일치하지 않습니다");
+      setIsConfirmPasswordValid(false);
+      return; // 검증 실패 시 함수 종료
+    }
+    const token =
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMzA3MzY0LCJleHAiOjE3MzMzNDMzNjR9.M3agOzCMGRrPsOukqEe-MGTKH_1nx8hOulHQxipIfjU"; // 로컬 스토리지에서 토큰 가져오기
+
+    // API 요청 데이터 생성
+    const requestData = {
+      //   token: localStorage.getItem("token"), // 로컬 스토리지에서 토큰 가져오기
+      token: token,
+      rawPassword: password,
+    };
+
+    try {
+      // POST 요청
+      const response = await axios.post(
+        "http://15.164.231.201:8080/user/changeNickname",
+        null,
+        {
+          params: requestData, // 쿼리 파라미터로 데이터 전송
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+
+      // 성공 시 홈 화면으로 이동
+      alert("닉네임이 성공적으로 변경되었습니다!");
+      navigate("/home");
+    } catch (error) {
+      console.error("API 요청 실패:", error.response || error.message);
+      alert("닉네임 변경 중 오류가 발생했습니다.");
+    }
+  };
+
   const handleCancelClick = () => {
     navigate("/home");
   };
