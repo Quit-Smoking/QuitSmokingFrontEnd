@@ -11,8 +11,7 @@ function ModifyDetermine() {
     const [determine, setDetermine] = useState(state.determine || "");
 
     const handleSave = async () => {
-        const token = `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDAsImV4cCI6MTczMzQxMDA0MH0.u_Q-tJu4kzZztYjK-Y3fNk3Xt2Kez3EM-Ge2l-k9UHY
-`;
+        const token = localStorage.getItem("userToken");
 
         try {
             // Axios 요청

@@ -11,10 +11,6 @@ function StopSmoking() {
     const { state } = useLocation();
     const [differenceInDays, setdifferenceInDays] = useState(state.differenceInDays || 0);
     const [resolution,setresolution] = useState(state.resolution);
-
-    console.log(resolution,differenceInDays);
-
-
     const [isConfirmed, setIsConfirmed] = useState(false);
 
     const handleConfirmChange = () => {
@@ -22,9 +18,7 @@ function StopSmoking() {
     };
 
     const handleStopSmoking = async () => {
-        const token = `
-        eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDAsImV4cCI6MTczMzQxMDA0MH0.u_Q-tJu4kzZztYjK-Y3fNk3Xt2Kez3EM-Ge2l-k9UHY
-        `;
+        const token = localStorage.getItem("userToken");
 
         try {
             const response = await axios.delete("http://15.164.231.201:8080/UserStartRecord/stop", {

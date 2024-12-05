@@ -60,10 +60,7 @@ function Diagnosis() {
     const handleSubmit = () => {
         if (isButtonEnabled) {
             const serverPayload = mapAnswersToServerFormat(answers);
-            const token = `
-eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDAsImV4cCI6MTczMzQxMDA0MH0.u_Q-tJu4kzZztYjK-Y3fNk3Xt2Kez3EM-Ge2l-k9UHY
-
-        `; // 실제 토큰 값으로 대체하세요
+            const token = localStorage.getItem('userToken');
 
             console.log('진단 결과 서버로 전송:', serverPayload);
 
