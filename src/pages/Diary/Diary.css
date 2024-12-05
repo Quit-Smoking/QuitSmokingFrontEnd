@@ -1,7 +1,29 @@
 /* 캘린더 컨테이너 */
+.full_container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.diary-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden;
+}
+
 .calendar-container {
   width: 100%;
   margin: 0 auto;
+  /* overflow-y: auto; */
+  height: auto;
+}
+
+.react-calendar {
+  height: auto;
 }
 
 .react-calendar__navigation__label {
@@ -182,6 +204,7 @@
 }
 
 .record-section {
+  flex: 1;
   padding: 20px;
   background-color: #b7e1e2;
 }
@@ -194,7 +217,7 @@
 .missions {
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: 10px;
   gap: 10px;
 }
 
