@@ -1,24 +1,21 @@
 import Login from "./pages/LogIn/Login";
 import StartPage from "./pages/Main/StartPage";
 import Survey from "./pages/Main/Survey";
-
 import Home from "./pages/Main/Home";
 import Result from "./pages/Result/Result";
 import Shop from "./pages/Shop/Shop";
-import MissionDetail from "./pages/MissionDetail/MissionDetail";
-
+import ModifyDetermine from "./pages/Main/ModifyDetermine";
 import StartMission from "./pages/Mission/StartMission";
 import Diary from "./pages/Diary/Diary";
-
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateMission from "./pages/Mission/createMission/CreateMission";
-
 import Signup from "./pages/Singup/Signup";
-
 import MissionMain from "./pages/Mission/MissionMain";
 import MissionSelect from "./pages/Mission/createMission/MissionSelect";
 import NewMission from "./pages/Mission/NewMission";
-
+import DiagnosisStart from "./pages/Diagnosis/DiagnosisStart";
+import Diagnosis from "./pages/Diagnosis/Diagnosis";
+import StopSmoking from "./pages/Main/StopSmoking";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
     <>
@@ -31,7 +28,7 @@ function App() {
         <Route path="/startpage" element={<StartPage />} />
         <Route path="/startpage/survey" element={<Survey />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/missionDetail" element={<MissionDetail />} />
+
 
         <Route path="/createmission" element={<CreateMission />} />
         <Route path="/newMission" element={<NewMission />} />
@@ -42,6 +39,12 @@ function App() {
 
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Login" element={<Login />} />
+
+        <Route path="/Home/diagnosisstart" element={<DiagnosisStart />} />
+        <Route path="/Home/diagnosisstart/diagnosis" element={<Diagnosis />} />
+
+        <Route path="/modifydetermine" element={<ModifyDetermine />} />
+        <Route path='/stopsmoking' element={<StopSmoking />} />
       </Routes>
     </>
   );

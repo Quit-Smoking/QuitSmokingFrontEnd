@@ -1,4 +1,4 @@
-import './Css/startpage.css';
+import './startpage.css';
 import logo from '../../assets/logo_letters.svg';
 import cloudimg from "../../assets/캐릭터.png";
 import circleimg from "../../assets/circleImg.png";

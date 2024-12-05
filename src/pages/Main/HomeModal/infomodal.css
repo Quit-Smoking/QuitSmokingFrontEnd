@@ -1,0 +1,51 @@
+/* 모달 오버레이 */
+.info-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* 모달 */
+.info-modal {
+    background: white;
+    border-radius: 10px;
+    width: 70vw;
+    aspect-ratio: 1 / 1;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-15vh);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 모달 내용 */
+.info-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-modal-image {
+    width: 25vw;
+    height: 25vw;
+    margin-top: 4vh;
+}
+
+.info-modal-content h2 {
+    margin-bottom: 0;
+    font-size: 1.2rem;
+}
+
+.info-modal-content p {
+    font-size: 1.1rem;
+}
