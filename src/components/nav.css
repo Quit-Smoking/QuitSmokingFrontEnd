@@ -11,6 +11,10 @@
     /* 상단 경계선 */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     /* 상단 그림자 */
+    
+    position: absolute;
+    bottom: 0;
+    z-index: 2000;
 }
 
 /* 네비게이션 아이템 개별 스타일 */

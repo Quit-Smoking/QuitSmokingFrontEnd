@@ -3,6 +3,7 @@ import ex from '../../assets/example.svg';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import Nav from '../../components/nav';
 
 function getFormattedDate() {
   const today = new Date();
@@ -209,6 +210,7 @@ function MissionMain() {
           ))}
         </div>
       </div>
+      <Nav />
     </div>
   );
 }
