@@ -3,14 +3,11 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* nav 높이 */
     height: 9vh;
     width: 100vw;
     background-color: white;
     border-top: 1px solid #ccc;
-    /* 상단 경계선 */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    /* 상단 그림자 */
 }
 
 /* 네비게이션 아이템 개별 스타일 */
@@ -26,45 +23,43 @@
 .nav-icon {
     width: 20px;
     height: 20px;
-
     margin-bottom: 5px;
 }
 
 /* 텍스트 영역 */
 .nav-text {
     font-size: 3vw;
-    color: #555;
     text-align: center;
     margin: 0;
-
 }
 
-.storeimg, .calenderimg, .homeimg, .missionimg, .boardimg{
+
+/* 배경 이미지 */
+.storeimg, .calenderimg, .homeimg, .missionimg, .boardimg {
     background-size: contain;
 }
 
-.storeimg{
+.storeimg {
     background-image: url('../assets/shopimg.png');
-    
 }
 
-.calenderimg{
+.calenderimg {
     background-image: url('../assets/calenderimg.png');
 }
 
-.homeimg{
+.homeimg {
     background-image: url('../assets/homeimg.png');
 }
 
-.missionimg{
+.missionimg {
     background-image: url('../assets/missionimg.png');
 }
 
-.boardimg{
+.boardimg {
     background-image: url('../assets/boardimg.png');
 }
 
-
-.padding{
+/* 텍스트 패딩 */
+.padding {
     padding-left: 1vw;
 }

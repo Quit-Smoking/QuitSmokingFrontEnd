@@ -92,6 +92,7 @@ const Home = () => {
                 />
             )}
             <div className="Home-Container">
+                
                 <div className="Home-Header">
                     <img src={logo} alt="숨쉴래 로고" className="Header-logo" />
                     <img
@@ -105,6 +106,7 @@ const Home = () => {
                     <div className="Start-MainMotive">
                         <div>{data.resolution || "건강한 나의 삶을 위해!"}</div>
                     </div>
+
                     <div className="Home-Mainlogo">
                         <div className="homecloud">
                             <img src={homecloud} alt="홈 클라우드" />
@@ -113,6 +115,7 @@ const Home = () => {
                             <img src={shadow} className="shadow" alt="그림자" />
                         </div>
                     </div>
+
                     <div className="Home-MainTime">
                         <div>{data.startDate ? `D+${differenceInDays}` : "날짜를 불러오는 중..."}</div>
                         <div>금연 중</div>

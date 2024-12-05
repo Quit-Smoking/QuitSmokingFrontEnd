@@ -13,10 +13,7 @@ function DiagnosisStart() {
     const [error, setError] = useState(null); // 에러 상태
 
     const fetchData = async () => {
-        const token = `
-        eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDAsImV4cCI6MTczMzQxMDA0MH0.u_Q-tJu4kzZztYjK-Y3fNk3Xt2Kez3EM-Ge2l-k9UHY
-
-        `;
+        const token = localStorage.getItem("userToken");
 
         try {
             const response = await axios.get(

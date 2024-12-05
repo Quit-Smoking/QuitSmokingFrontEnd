@@ -1,15 +1,18 @@
 import './nav.css';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Nav() {
-
+function Nav({ currentPage }) {
     const navigate = useNavigate();
 
-    const goShop = () => {navigate('/shop');};
-    const goCalendar = () => {navigate('/calendar');};
-    const goHome = () => {navigate('/home');};
-    const goMission = () => {navigate('/mission');};
-    const goBoard = () => {navigate('/board');};
+    const goShop = () => navigate('/shop');
+    const goCalendar = () => navigate('/Diary');
+    const goHome = () => {
+        if (currentPage !== "StartPage") {
+            navigate('/home');
+        }
+    };
+    const goMission = () => navigate('/missionselect');
+    const goBoard = () => navigate('/board'); //게시판 해야됨.
 
     return (
         <div className="nav-container">
@@ -21,11 +24,11 @@ function Nav() {
                 <div className="nav-icon calenderimg" onClick={goCalendar}></div>
                 <p className="nav-text">캘린더</p>
             </div>
-            <div className="nav-item ">
+            <div className={`nav-item ${currentPage === "StartPage" ? "disabled" : ""}`}>
                 <div className="nav-icon homeimg" onClick={goHome}></div>
                 <p className="nav-text">홈</p>
             </div>
-            <div className="nav-item ">
+            <div className="nav-item">
                 <div className="nav-icon missionimg" onClick={goMission}></div>
                 <p className="nav-text">미션</p>
             </div>
@@ -36,6 +39,5 @@ function Nav() {
         </div>
     );
 }
-
 
 export default Nav;

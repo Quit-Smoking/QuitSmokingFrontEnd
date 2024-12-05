@@ -36,7 +36,7 @@ function StartPage() {
             </main>
 
             <footer className="Start-Footer">
-                <Nav />
+                <Nav currentPage="StartPage" />
             </footer>
         </div>
     );
