@@ -44,7 +44,8 @@ function Diary() {
   };
 
   const fetchMissions = async (selectedDate) => {
-    const token = localStorage.getItem("userToken");
+
+    const token = localStorage.getItem("userToken"); 
 
     setIsLoading(true); // 로딩 시작
     setError(null); // 에러 초기화

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./stopsmoking.css";
 
-import cloudImg from "../../assets/캐릭터.png";
+import cloudImg from "../../assets/char.png";
 import closeIcon from "../../assets/closeicon.png";
 
 function StopSmoking() {

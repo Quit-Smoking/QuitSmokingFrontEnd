@@ -1,3 +1,4 @@
+
 import "./nav.css";
 import { useNavigate } from "react-router-dom";
 
@@ -40,6 +41,7 @@ function Nav({ currentPage }) {
       </div>
     </div>
   );
+
 }
 
 export default Nav;
