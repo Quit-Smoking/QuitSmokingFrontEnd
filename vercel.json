@@ -8,8 +8,8 @@
   ],
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "http://15.164.231.201:8080/:path*"
+      "source": "/api/(.*)",
+      "destination": "http://15.164.231.201:8080/$1"
     }
   ]
 }
