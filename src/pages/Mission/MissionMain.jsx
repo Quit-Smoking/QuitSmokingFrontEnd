@@ -26,9 +26,8 @@ function getFormattedDate() {
 
 function MissionMain() {
   //! 가져와야할 것 1. 날짜, 2. 미션, 3. 진행중인 미션 (사진, 몇주차 진행중, 몇주차 도전?)
-  // const userToken = localStorage.getItem('userToken');
-  const userToken =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMjIxOTQ2LCJleHAiOjE3MzMyNTc5NDZ9.BmDtkVCh4olVvZb7COzuum4DQWR4Je4oeDfVKC9Ewec";
+  const userToken = localStorage.getItem('userToken');
+  
   //? 예시 투두리스트
   const [todos, setTodos] = useState([
     { id: 1, text: "하루에 물 2L 마시기", completed: false },
