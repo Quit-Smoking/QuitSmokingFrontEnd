@@ -15,8 +15,7 @@ function DeleteAcc() {
   };
 
   const handleDeleteAccount = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMzA3MzY0LCJleHAiOjE3MzMzNDMzNjR9.M3agOzCMGRrPsOukqEe-MGTKH_1nx8hOulHQxipIfjU"; // 로컬 스토리지에서 토큰 가져오기
+    const token = localStorage.getItem("userToken");
 
     if (!token) {
       alert("로그인이 필요합니다.");

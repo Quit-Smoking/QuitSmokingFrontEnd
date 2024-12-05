@@ -35,11 +35,11 @@ export default defineConfig({
             sizes: "96x96",
             type: "image/png",
           },
-          {
-            src: "/icons/icon-144x144.png",
-            sizes: "144x144",
-            type: "image/png",
-          },
+          // {
+          //   src: "/icons/icon-144x144.png",
+          //   sizes: "144x144",
+          //   type: "image/png",
+          // },
           {
             src: "/icons/icon-192x192.png",
             sizes: "192x192",
