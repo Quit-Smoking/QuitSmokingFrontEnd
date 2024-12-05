@@ -1,5 +1,5 @@
 import React from "react";
-import "./menuModal.css";
+import "./menumodal.css";
 
 const MenuModal = ({
   nickname,
