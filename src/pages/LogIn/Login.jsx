@@ -20,14 +20,16 @@ function Login() {
       return;
     }
 
+    console.log("Request Data:", { email: id, password: password }, typeof id, typeof password);
+
     // 서버로 아이디, 비번 보내기
     try {
       const response = await axios.post(`http://15.164.231.201:8080/user/login`, {
-        body: {
           email: id,
           password: password,
-        }
       });
+      console.log(response.status);
+      
       if (response.status === 200) {
         console.log('로그인 성공', response.data);
         localStorage.setItem('userToken', response.data);

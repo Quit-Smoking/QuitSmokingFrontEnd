@@ -37,6 +37,11 @@ function StartMission() {
     return `${year}-${month}-${day}`; // "YYYY-MM-DD"
   };
 
+  const convertDaysToBinary = (selectedDays) => {
+    const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
+    return daysOfWeek.map(day => (selectedDays.includes(day) ? "1" : "0")).join("");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,21 +49,36 @@ function StartMission() {
       console.log('토큰이 없음');
       return;
     }
+    console.log(userToken);
+
+    const binaryWeekData = convertDaysToBinary(selectedDays);
+    console.log("binaryWeekData:", binaryWeekData, typeof binaryWeekData);
 
     try {
-      const response = await axios.post('http://15.164.231.201:8080/mission/add', {
-        params: {
-          "token": {userToken},
-          "mission": {missionName},
-          "start_date": getFormattedDate(),
-          "is_deleted": false,
-          "is_default": {defaultMission},
-          "week_data": {selectedDays},
+      const response = await axios.post(
+        "http://15.164.231.201:8080/mission/add",
+        {
+          token: userToken,
+          mission: missionName,
+          start_date: getFormattedDate(),
+          is_deleted: false,
+          is_default: defaultMission,
+          week_data: binaryWeekData,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
-      console.log('미션 성공적으로 전송:', response.data);
-      console.log('mission main 페이지로 이동')
-      navigate('/missionMain');
+      );
+
+      if (response.status !== 200) {
+        throw new Error('만든 미션 서버 전송 중 200 아님', response.status);
+      } else if (response.status === 200) {
+        console.log('미션 성공적으로 전송:', response.data);
+        console.log('mission main 페이지로 이동')
+        navigate('/missionMain');
+      }
     } catch (error) {
       console.error('미션 서버로 보내는 중 에러 발생', error);
     }
