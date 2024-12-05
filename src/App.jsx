@@ -14,6 +14,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateMission from "./pages/Mission/createMission/CreateMission";
 
 import Signup from "./pages/Singup/Signup";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import ResetPassword from "./pages/ChangePassword/ResetPassword";
+import ChangeNickname from "./pages/ChangeNickname/ChangeNickname";
 
 import MissionMain from "./pages/Mission/MissionMain";
 import MissionSelect from "./pages/Mission/createMission/MissionSelect";
@@ -22,6 +25,9 @@ import NewMission from "./pages/Mission/NewMission";
 import NewPost from "./pages/Board/NewPost";
 import EditPost from "./pages/Board/EditPost";
 import Post from "./pages/Board/Post";
+
+import DeleteAccCheck from "./pages/DeleteAccount/DeleteAccCheck";
+import DeleteAcc from "./pages/DeleteAccount/DeleteAcc";
 
 function App() {
   return (
@@ -45,6 +51,9 @@ function App() {
         <Route path="/missionMain" element={<MissionMain />} />
 
         <Route path="/Signup" element={<Signup />} />
+        <Route path="/ChangeNickname" element={<ChangeNickname />} />
+        <Route path="/ChangePassword" element={<ChangePassword />} />
+        <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="/Login" element={<Login />} />
 
         <Route path="/newPost" element={<NewPost />} />
@@ -56,6 +65,10 @@ function App() {
         <Route path="/editPost" element={<EditPost />} />
         {/* 게시글 수정 페이지 */}
         <Route path="/edit/:id" element={<EditPost />} />
+          
+        <Route path="/DeleteAccCheck" element={<DeleteAccCheck />} />
+        <Route path="/DeleteAcc" element={<DeleteAcc />} />
+
       </Routes>
     </>
   );

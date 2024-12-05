@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 function Signup() {
@@ -12,6 +13,7 @@ function Signup() {
   const [isPasswordValid, setIsPasswordValid] = useState(null);
 
   const [nickname, setNickname] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     const requestData = {
@@ -23,14 +25,19 @@ function Signup() {
     console.log("Sending data: ", requestData);
 
     try {
-      const response = await axios.post("/user/register", requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "http://15.164.231.201:8080/user/register",
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log(response.data);
       alert("회원가입이 성공적으로 완료되었습니다!");
+      navigate("/Home");
     } catch (error) {
       console.error("Error: ", error.response || error.message);
       alert("회원가입 중 오류가 발생했습니다.");
