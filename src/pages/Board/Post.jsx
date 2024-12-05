@@ -6,7 +6,7 @@ import axios from "axios";
 import profile from "../../assets/post/profile.svg";
 import comment from "../../assets/post/comment.svg";
 import heart from "../../assets/post/heart.svg";
-// import color_heart from "../../assets/post/color_heart.svg";
+import color_heart from "../../assets/post/color_heart.svg";
 // import cursor from "../../assets/post/cursor.svg";
 
 function Post() {
@@ -17,13 +17,14 @@ function Post() {
   console.log("게시글 id:", postId, typeof postId);
   const userToken = localStorage.getItem('userToken'); //! 유저토큰 가져오기
 
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false); // 키보드 올리기
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 게시글 메뉴
   const [openCommentMenuId, setOpenCommentMenuId] = useState(null); // 열려 있는 댓글 메뉴 ID
-  const [comments, setComments] = useState(null);
-  const [nickname, setNickname] = useState("");
-  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState(null); // 댓글 상태
+  const [nickname, setNickname] = useState(""); // 닉네임 상태
+  const [post, setPost] = useState(null); // 게시글 상태
   const [commentContent, setCommentContent] = useState(""); // 입력 중인 댓글 내용
+  const [isLiked, setIsLiked] = useState(false); // 좋아요 상태
 
   // 게시글 메뉴 토글
   const toggleMenu = (e) => {
@@ -40,7 +41,34 @@ function Post() {
     setOpenCommentMenuId((prevId) => (prevId === commentId ? null : commentId));
     console.log("댓글 메뉴 상태 변경:", !openCommentMenuId);
   }
-
+  
+  // 좋아요 클릭
+  const handleLikeToggle = async () => {
+    console.log(`postId: ${postId}, ${typeof postId}`);
+    try {
+      // 서버로 좋아요 상태 전송
+      const response = await axios.post("http://15.164.231.201:8080/post/like", null, {
+        params: {
+          id: postId,
+        },
+      });
+  
+      if (response.status === 200) {
+        const newLikeState = !isLiked;
+        console.log('좋아요 상태 변경:', newLikeState);
+        setIsLiked(newLikeState);
+        setPost((prevPost) => ({
+          ...prevPost,
+          numberOfLikes: prevPost.numberOfLikes + (newLikeState ? 1 : -1),
+        }));
+      } else {
+        throw new Error("좋아요 서버 전송 실패", response.status);
+      }
+    } catch (error) {
+      console.error("좋아요 상태 전송 중 에러 발생:", error);
+      alert("좋아요 상태 변경에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
   // 게시글 수정
   const handleEdit = () => {
     console.log('글 수정 페이지로 이동');
@@ -53,7 +81,6 @@ function Post() {
     navigate(`/home`); //! id 사용해서 댓글 수정 페이지이동하기
     setOpenCommentMenuId(false);
   };
-
   // 게시글 삭제
   const handleDelete = async () => {
     if (window.confirm('해당 글을 삭제하시겠습니까?')) {
@@ -114,6 +141,7 @@ function Post() {
     }
     setOpenCommentMenuId(null);
   };
+  // 댓글 추가
   const handleAddComment = async () => {
     if (!commentContent.trim()) {
       alert("댓글 내용을 입력해주세요.");
@@ -254,6 +282,10 @@ function Post() {
     fetchComments();
   }, [postId, userToken])
 
+  useEffect(() => {
+    console.log("좋아요 상태가 변경됨:", isLiked);
+  }, [isLiked]);
+
   //? 간략화버전
   // useEffect(() => {
   //   const fetchPostData = async () => {
@@ -334,9 +366,9 @@ function Post() {
                 />
                 <p className="post-comment-num">{post.numberOfComments}</p>
               </div>
-              <div className="post-heart-box">
+              <div className="post-heart-box" onClick={handleLikeToggle}>
                 <img
-                  src={heart}
+                  src={color_heart}
                   alt="heart icon"
                   className="heart-icon"
                 />
