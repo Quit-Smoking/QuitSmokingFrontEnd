@@ -59,14 +59,12 @@
     position: absolute;
     transform: scale(1.1);
     animation: float-circle 2.5s infinite ease-in-out;
-    /* 애니메이션 추가 */
 }
 
 .start-cloudimg {
     position: absolute;
     transform: scale(1.1) translate(-30%, 10%);
     animation: float-cloud 2.5s infinite ease-in-out;
-    /* 애니메이션 추가 */
 }
 
 /* Button Section */
@@ -89,7 +87,6 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-
 }
 
 .Btn1:hover {
@@ -117,7 +114,6 @@
     }
     50% {
         transform: scale(1.1) translateY(-5%);
-
     }
 }
 
@@ -126,9 +122,7 @@
     100% {
         transform: scale(1.1) translate(-30%, 10%);
     }
-
     50% {
         transform: scale(1.1) translate(-30%, -10%);
-
     }
 }

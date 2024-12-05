@@ -1,6 +1,6 @@
 import './startpage.css';
 import logo from '../../assets/logo_letters.svg';
-import cloudimg from "../../assets/캐릭터.png";
+import cloudimg from "../../assets/char.png";
 import circleimg from "../../assets/circleImg.png";
 import { useNavigate } from 'react-router-dom';
 import Nav from '../../components/nav';
@@ -36,7 +36,7 @@ function StartPage() {
             </main>
 
             <footer className="Start-Footer">
-                <Nav />
+                <Nav currentPage="StartPage" />
             </footer>
         </div>
     );

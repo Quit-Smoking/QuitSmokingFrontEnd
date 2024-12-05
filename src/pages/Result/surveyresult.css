@@ -10,7 +10,8 @@
 
   position: relative;
 
-  margin-top: 1.5vh;
+  flex: 1 1 auto;
+  margin: 3vh 0 3vh 0;
 }
 
 .survey-result-header {
@@ -51,8 +52,7 @@
   margin-top: 1vh;
 }
 
-.survey-result-text {
-}
+.survey-result-text {}
 
 .survey-result-title {
   text-align: center;

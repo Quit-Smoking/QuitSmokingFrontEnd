@@ -6,7 +6,8 @@ import lowRelyImage from '../../assets/rely/low_rely.svg';
 import SurveyResult from './SurveyResult';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Navigate , useNavigate} from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import closeIcon from '../../assets/closeWhite.png';
 
 function Result() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function Result() {
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
 
 
   const fetchData = async () => {
@@ -36,9 +37,9 @@ function Result() {
       const response = await axios.get("http://15.164.231.201:8080/nicotin_dependencies/getScore", {
         params: { token }
       })
-      console.log(response.data,'data');
+      console.log(response.data, 'data');
       settempStatNum(response.data);
-    } catch(e) {
+    } catch (e) {
       setError("API 요청에 실패했습니다.");
 
     } finally {
@@ -54,7 +55,7 @@ function Result() {
   if (isLoading) return <div></div>;
   if (error) return <div>{error}</div>;
 
-  
+
   return (
     <div className="result-container">
       <div className="result-header">
@@ -63,6 +64,12 @@ function Result() {
           alt="숨쉴래 로고"
           className="result-logo"
         />
+        <img
+          src={closeIcon}
+          alt="메뉴 아이콘"
+          className="result-close-icon"
+          onClick={()=>navigate('/home')} // 메뉴 버튼 클릭 시 모달 열기
+        />
       </div>
       <SurveyResult
         relyStat={`${relyStatText}`}
@@ -70,7 +77,7 @@ function Result() {
         title={title}
         description={description}
       />
-      <button className="result-button" onClick={() =>navigate('/home')}>금연 시작하기</button>
+
     </div>
   )
 }

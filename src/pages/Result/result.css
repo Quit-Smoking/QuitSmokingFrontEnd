@@ -27,6 +27,15 @@
   height: 8vh;
 }
 
+.result-close-icon{
+  position: absolute;
+    top: 50%;
+    right: 5%;
+    width: 8vw;
+    height: 8vw;
+    cursor: pointer;
+}
+
 .result-button {
   background-color: #008285;
   border: 1px solid white;
