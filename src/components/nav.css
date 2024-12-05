@@ -1,74 +1,68 @@
 /* 네비게이션 바 전체 컨테이너 */
 .nav-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* nav 높이 */
-    height: 9vh;
-    width: 100vw;
-    background-color: white;
-    border-top: 1px solid #ccc;
-    /* 상단 경계선 */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    /* 상단 그림자 */
-    
-    position: absolute;
-    bottom: 0;
-    z-index: 2000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 9vh;
+  width: 100vw;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* 네비게이션 아이템 개별 스타일 */
 .nav-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
 }
 
 /* 아이콘 영역 */
 .nav-icon {
-    width: 20px;
-    height: 20px;
-
-    margin-bottom: 5px;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 5px;
 }
 
 /* 텍스트 영역 */
 .nav-text {
-    font-size: 3vw;
-    color: #555;
-    text-align: center;
-    margin: 0;
-
+  font-size: 3vw;
+  text-align: center;
+  margin: 0;
 }
 
-.storeimg, .calenderimg, .homeimg, .missionimg, .boardimg{
-    background-size: contain;
+/* 배경 이미지 */
+.storeimg,
+.calenderimg,
+.homeimg,
+.missionimg,
+.boardimg {
+  background-size: contain;
 }
 
-.storeimg{
-    background-image: url('../assets/shopimg.png');
-    
+.storeimg {
+  background-image: url("../assets/shopimg.png");
 }
 
-.calenderimg{
-    background-image: url('../assets/calenderimg.png');
+.calenderimg {
+  background-image: url("../assets/calenderimg.png");
 }
 
-.homeimg{
-    background-image: url('../assets/homeimg.png');
+.homeimg {
+  background-image: url("../assets/homeimg.png");
 }
 
-.missionimg{
-    background-image: url('../assets/missionimg.png');
+.missionimg {
+  background-image: url("../assets/missionimg.png");
 }
 
-.boardimg{
-    background-image: url('../assets/boardimg.png');
+.boardimg {
+  background-image: url("../assets/boardimg.png");
 }
 
-
-.padding{
-    padding-left: 1vw;
+/* 텍스트 패딩 */
+.padding {
+  padding-left: 1vw;
 }

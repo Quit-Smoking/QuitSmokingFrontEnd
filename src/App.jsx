@@ -20,6 +20,7 @@ import ResetPassword from "./pages/ChangePassword/ResetPassword";
 import ChangeNickname from "./pages/ChangeNickname/ChangeNickname";
 
 import MissionMain from "./pages/Mission/MissionMain";
+import MissionDetail from "./pages/MissionDetail/MissionDetail";
 
 import NewPost from "./pages/Board/NewPost";
 import EditPost from "./pages/Board/EditPost";
@@ -42,13 +43,13 @@ function App() {
         <Route path="/startpage/survey" element={<Survey />} />
         <Route path="/Home" element={<Home />} />
 
-
         <Route path="/createmission" element={<CreateMission />} />
         <Route path="/newMission" element={<NewMission />} />
         <Route path="/startmission" element={<StartMission />} />
 
         <Route path="/missionSelect" element={<MissionSelect />} />
         <Route path="/missionMain" element={<MissionMain />} />
+        <Route path="/missionDetail" element={<MissionDetail />} />
 
         <Route path="/Signup" element={<Signup />} />
         <Route path="/ChangeNickname" element={<ChangeNickname />} />
@@ -62,7 +63,7 @@ function App() {
         <Route path="/Home/diagnosisstart/diagnosis" element={<Diagnosis />} />
 
         <Route path="/modifydetermine" element={<ModifyDetermine />} />
-        <Route path='/stopsmoking' element={<StopSmoking />} />
+        <Route path="/stopsmoking" element={<StopSmoking />} />
 
         <Route path="/newPost" element={<NewPost />} />
 
@@ -76,7 +77,6 @@ function App() {
 
         <Route path="/DeleteAccCheck" element={<DeleteAccCheck />} />
         <Route path="/DeleteAcc" element={<DeleteAcc />} />
-          
       </Routes>
     </>
   );

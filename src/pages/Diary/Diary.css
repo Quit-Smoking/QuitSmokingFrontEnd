@@ -4,13 +4,14 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .diary-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   overflow-y: auto;
 }
 
@@ -91,7 +92,7 @@
 }
 
 .react-calendar__month-view__days {
-  /* margin-bottom: 10px; */
+  margin-bottom: 70px;
 }
 
 /* 요일과 날짜 사이 간격 늘리기 */
