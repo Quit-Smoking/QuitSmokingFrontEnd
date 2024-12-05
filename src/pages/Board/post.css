@@ -73,7 +73,7 @@
 
 /* 글 내용, 댓글 아이콘, 하트 아이콘 */
 .post-content {
-  margin: 0 2.5vh;
+  margin: 0.5vh 2vh;
 }
 .post-text {
   margin: 0;
@@ -89,23 +89,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 7vh;
+  width: 5vh;
 }
 .post-comment-num, .post-heart-num {
   margin: 0 0 0 5px;
   font-size: 1.8vh;
-}
-
-/* 댓글 목록 */
-.post-comment {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 48vh;
-
-  font-size: 2vh;
-  color: #404B4B;
-  /* border: 1px solid green; */
 }
 
 /* 댓글 추가창 */
@@ -168,5 +156,64 @@
   cursor: pointer;
 }
 .post-menu button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 댓글 */
+.post-comment-container {
+  margin-top: 2vh;
+}
+.post-comment {
+  /* border: 1px solid blue; */
+  border-top: 2px solid #B7E1E2;
+  box-sizing: border-box;
+
+  height: 10vh;
+  padding: 1vh 2vh;
+
+  position: relative;
+}
+.post-comment-banner {
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post-comment-banner p {
+  margin: 0;
+  font-weight: 600;
+}
+.post-comment-banner button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 2.6vh;
+  padding: 0;
+}
+.post-comment-content {
+  margin: 1vh 0 0 0;
+  /* border: 1px solid red; */
+}
+
+/* 댓글 메뉴 */
+.post-comment-menu {
+  position: absolute;
+  top: 4.5vh;
+  right: 3vh;
+  background-color: transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+}
+.post-comment-menu button {
+  background-color: white;
+  cursor: pointer;
+}
+.post-comment-menu button:hover {
   background: rgba(0, 0, 0, 0.1);
 }

@@ -1,0 +1,98 @@
+/* 전체 컨테이너 */
+.DiagnosisStart-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background-color: #B7E1E2;
+}
+
+/* Header */
+.DiagnosisStart-Header {
+    height: 15%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.DiagnosisStart-close-button {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    width: 8vw;
+    height: 8vw;
+}
+
+/* Main Section */
+.DiagnosisStart-Main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5vw;
+}
+
+.DiagnosisStart-Title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 2vh;
+    color: #333;
+}
+
+.DiagnosisStart-Logo {
+    position: relative;
+    height: 35vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-img {
+    position: absolute;
+    transform: scale(1.1);
+}
+
+.cloud-img {
+    position: absolute;
+    transform: scale(1.1) translate(-30%, 10%);
+}
+
+/* Subtitle Section */
+.DiagnosisStart-Subtitle {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 4vh;
+}
+
+/* Primary Button */
+.DiagnosisStart-Btn {
+    width: 75vw;
+    height: 8vh;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #404B4B;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px grey;
+    margin-bottom: 3vh; /* 버튼 간격 추가 */
+}
+
+/* Secondary Button */
+.DiagnosisStart-Secondary-Btn {
+    width: 75vw;
+    height: 8vh;
+    color: #404B4B;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px grey;
+
+}

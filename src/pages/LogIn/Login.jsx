@@ -1,5 +1,5 @@
-import './login.css'
-import logo from '../../../public/circle_logo.svg'
+import './login.css';
+import logo from '../../../public/circle_logo.svg';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -20,26 +20,38 @@ function Login() {
       return;
     }
 
-    // 서버로 아이디, 비번 보내기
     try {
-      const response = await axios.post(`http://15.164.231.201:8080/user/login`, {
-        body: {
-          email: id,
-          password: password,
-        }
+      // 첫 번째 요청: 로그인 API 호출
+      const loginResponse = await axios.post('http://15.164.231.201:8080/user/login', {
+        email: id,
+        password: password,
       });
-      if (response.status === 200) {
-        console.log('로그인 성공', response.data);
-        localStorage.setItem('userToken', response.data);
-        navigate('/Home'); //! 홈으로 이동
-      }
-    } catch(error) {
-      console.log('로그인 실패', error);
-      setWrong(true); // 아이디 비번 틀리면 setWrong(true)
-    }
 
-    console.log('Email:', id);
-    console.log('Password:', password);
+      if (loginResponse.status === 200) {
+        console.log('로그인 성공', loginResponse.data);
+
+        // 로그인 성공 시 반환된 토큰 가져오기
+        const token = loginResponse.data;
+        localStorage.setItem('userToken', token);
+
+        // 두 번째 요청: 데이터 존재 여부 확인
+        const dataExistResponse = await axios.get('http://15.164.231.201:8080/UserStartRecord/doExist', {
+          params: { token },
+        });
+
+        // 데이터가 있으면 홈으로 이동, 없으면 알림 표시
+        if (dataExistResponse.data) {
+          navigate('/home');
+        } else {
+          navigate('/startpage');
+        }
+
+      }
+    } catch (error) {
+      // 첫 번째 요청이 실패한 경우
+      console.error('요청 실패', error);
+      setWrong(true);
+    }
   };
 
   const closeModal = () => {
@@ -58,15 +70,12 @@ function Login() {
 
   const handleNaverLogin = () => {
     alert('아직 개발 중입니다! :)');
-  }
+  };
 
   return (
     <div className="login-page-container">
       <div className="off-login-container">
-        <img
-          src={logo}
-          alt="logo"
-        />
+        <img src={logo} alt="logo" />
         <div className="off-login-inputs">
           <form onSubmit={handleSubmit} className="off-login-forms">
             <input
@@ -74,7 +83,7 @@ function Login() {
               id="id"
               value={id}
               onChange={(e) => setId(e.target.value)}
-              placeholder='이메일'
+              placeholder="이메일"
               className="off-login-input"
             />
             <input
@@ -82,7 +91,7 @@ function Login() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='비밀번호'
+              placeholder="비밀번호"
               className="off-login-input"
             />
             {wrong && <p className="wrong-login">{`아이디 또는 비밀번호가 잘못 되었습니다.\n아이디와 비밀번호를 정확히 입력해 주세요`}</p>}
@@ -113,7 +122,7 @@ function Login() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default Login;
