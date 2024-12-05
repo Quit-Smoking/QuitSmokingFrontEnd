@@ -170,11 +170,11 @@
 }
 
 .extendtimeimg {
-    background-image: url('../../../assets/extendtime.png');
+    background-image: url('../../assets/extendtime.png');
 }
 
 .savedmoneyimg {
-    background-image: url('../../../assets/savedmoney.png');
+    background-image: url('../../assets/savedmoney.png');
 }
 
 .extendtime,
@@ -297,11 +297,9 @@ p {
 }
 
 .menu-section {
-    margin-top: 4vh ;
+    margin-top: 4vh;
     padding: 0 8vw 0 8vw;
     border-radius: 8px;
-
-
 }
 
 .menu-title {
@@ -313,13 +311,6 @@ p {
     cursor: default;
 }
 
-.menu-item {
-    cursor: pointer;
-    color: #555;
-    font-size: 1rem;
-    padding: 0.5vh 0;
-
-}
 
 .menu-body hr {
     margin: 2vw 0;
@@ -344,5 +335,27 @@ p {
     }
     to {
         opacity: 1;
+    }
+}
+
+/* 추가된 애니메이션 */
+@keyframes moveUp {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-2vh);
+    }
+}
+
+@keyframes shrinkShadow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.7);
+        opacity: 0.7;
     }
 }

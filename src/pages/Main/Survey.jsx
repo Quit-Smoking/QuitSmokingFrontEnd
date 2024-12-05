@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import './Css/survey.css';
+import './survey.css';
 import { useState } from "react";
 import axios from 'axios';
 import TopBar from '../../components/TopBar';
@@ -26,9 +26,10 @@ function Survey() {
 
     const sendData = async () => {
         const requestData = {
-            token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqa2cwNjkxQG5hdmVyLmNvbSIsImlhdCI6MTczMzIyNDI5OCwiZXhwIjoxNzMzMjYwMjk4fQ.XGB4e5VQT3qnhRk0I1AK_cleclTsz_kMTRDVqwQ8f6I",
-            resolution: boxList[selectedBox],
-            motive: motive,
+            token: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDAsImV4cCI6MTczMzQxMDA0MH0.u_Q-tJu4kzZztYjK-Y3fNk3Xt2Kez3EM-Ge2l-k9UHY
+`,
+            resolution: motive,
+            motive: boxList[selectedBox],
             startDate: new Date().toISOString().split('T')[0],
             numbersSmoked: parseInt(howMany, 10) || 0,
         };
@@ -38,7 +39,7 @@ function Survey() {
             await axios.post('http://15.164.231.201:8080/UserStartRecord/add', requestData, {
                 headers: { 'Content-Type': 'application/json' },
             });
-            
+
             localStorage.removeItem("isModalShown"); // 모달 재설정을 위해 로컬스토리지 초기화
             navigate('/Home');
         } catch (error) {
@@ -120,7 +121,7 @@ function Survey() {
         </div>,
 
 
-        // Page2
+        // Page2 수정
         <div className="Survey-Container" key="page2">
             <header>
                 <TopBar title="금연 시작하기" onBack={pageMinus} />
@@ -141,9 +142,21 @@ function Survey() {
                 </div>
             </main>
             <footer className="Survey-Footer">
-                <button className="Survey-NextBtnSingle active" onClick={sendData}>
-                    완료
-                </button>
+                <div className="Survey-BtnPair">
+                    <button
+                        className="Survey-PrevBtn active"
+                        onClick={pageMinus}
+                    >
+                        이전
+                    </button>
+                    <button
+                        className={`Survey-NextBtn ${motive.trim() ? "active" : ""}`}
+                        onClick={sendData}
+                        disabled={!motive.trim()}
+                    >
+                        완료
+                    </button>
+                </div>
             </footer>
         </div>,
     ];

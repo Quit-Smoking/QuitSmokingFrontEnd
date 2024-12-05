@@ -1,0 +1,87 @@
+/* 전체 컨테이너 */
+.ModifyDetermine-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+}
+
+/* Main Section */
+.ModifyDetermine-Main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5vw;
+}
+
+.ModifyDetermine-TextContainer {
+    text-align: center;
+    margin-bottom: 8vh;
+}
+
+.ModifyDetermine-Title {
+    font-size: 8vw; /* 제목 크기 */
+    font-weight: bold;
+    color: #333;
+}
+
+.ModifyDetermine-Subtitle {
+    font-size: 5vw; /* 부제목 크기 */
+    color: #888;
+}
+
+/* Input Field */
+.ModifyDetermine-InputContainer {
+    width: 80vw; /* 입력 필드 너비 */
+    border-bottom: 0.2vh solid #ccc; /* 입력 필드 스타일 */
+}
+
+.ModifyDetermine-Input {
+    width: 100%;
+    font-size: 5vw; /* 입력 글자 크기 */
+    padding: 1vh 0;
+    border: none;
+    outline: none;
+    background: none;
+    color: #333;
+    text-align: center;
+}
+
+.ModifyDetermine-Input::placeholder {
+    color: #aaa;
+}
+
+/* Footer Section */
+.ModifyDetermine-Footer {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vw 13vh;
+}
+
+.ModifyDetermine-NextBtn {
+    width: 80vw; /* 버튼 너비 */
+    height: 7vh; /* 버튼 높이 */
+    font-size: 4.5vw;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+}
+
+.ModifyDetermine-NextBtn.active {
+    background-color: #008285;
+    color: #fff;
+    cursor: pointer;
+}
