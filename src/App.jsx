@@ -22,17 +22,12 @@ import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import ResetPassword from "./pages/ChangePassword/ResetPassword";
 import ChangeNickname from "./pages/ChangeNickname/ChangeNickname";
 
-import MissionMain from "./pages/Mission/MissionMain";
-import MissionSelect from "./pages/Mission/createMission/MissionSelect";
-import NewMission from "./pages/Mission/NewMission";
-
 import NewPost from "./pages/Board/NewPost";
 import EditPost from "./pages/Board/EditPost";
 import Post from "./pages/Board/Post";
 
 import DeleteAccCheck from "./pages/DeleteAccount/DeleteAccCheck";
 import DeleteAcc from "./pages/DeleteAccount/DeleteAcc";
-
 
 function App() {
   return (

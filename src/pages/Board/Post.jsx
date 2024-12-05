@@ -370,7 +370,7 @@ function Post() {
               </div>
               <div className="post-heart-box" onClick={handleLikeToggle}>
                 <img
-                  src={color_heart}
+                  src={isLiked ? heart : color_heart}
                   alt="heart icon"
                   className="heart-icon"
                 />
@@ -378,7 +378,7 @@ function Post() {
               </div>
             </div>
             <div className="post-comment-container">
-              {comments.length === 0 || !comments ? (
+              {!comments ? (
                 <p>첫 댓글을 달아주세요!</p>
               ) : (
                 comments.map((comment) => (
