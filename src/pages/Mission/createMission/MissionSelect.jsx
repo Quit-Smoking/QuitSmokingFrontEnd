@@ -1,5 +1,6 @@
 import './missionselect.css';
 import TopBar from "../../../components/TopBar";
+import Nav from "../../../components/nav";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import water from '../../../assets/mission/water.svg';
@@ -88,10 +89,11 @@ function MissionSelect() {
         style={{
           position: "absolute",
           padding: "10px",
-          bottom: "-20px",
+          bottom: "-30px",
           display: "flex",
           justifyContent: "center",
         }}
+        className="mission-dots"
       >
         <ul style={{ margin: "0px", padding: '0', display: 'flex' }}> {dots} </ul>
       </div>
@@ -162,6 +164,7 @@ function MissionSelect() {
           미션 직접 생성하기
         </button>
       </div>
+      <Nav />
     </div>
   );
 }

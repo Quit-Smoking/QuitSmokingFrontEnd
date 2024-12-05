@@ -18,14 +18,15 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import ResetPassword from "./pages/ChangePassword/ResetPassword";
 import ChangeNickname from "./pages/ChangeNickname/ChangeNickname";
+
 import MissionMain from "./pages/Mission/MissionMain";
+
 import NewPost from "./pages/Board/NewPost";
 import EditPost from "./pages/Board/EditPost";
 import Post from "./pages/Board/Post";
 
 import DeleteAccCheck from "./pages/DeleteAccount/DeleteAccCheck";
 import DeleteAcc from "./pages/DeleteAccount/DeleteAcc";
-
 
 function App() {
   return (

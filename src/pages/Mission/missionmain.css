@@ -14,6 +14,7 @@
 .mission-main-title {
   font-size: 2.5vh;
   font-weight: 700;
+  margin-top: -3vh;
 }
 
 .mission-todo {
@@ -99,7 +100,7 @@
 
   width: 100vw;
   height: 45vh;
-  margin-top: 2vh;
+  margin-top: -1vh;
 
   display: flex;
   flex-direction: column;
@@ -114,6 +115,7 @@
   /* border: 1px solid red; */
 
   width: 90vw;
+  height: 5vh;
 }
 
 .ongoing-title {
@@ -138,7 +140,7 @@
   display: flex;
   align-items: center;
   width: 90vw;
-  height: 40vh;
+  height: 35vh;
 }
 
 .ongoing-card {

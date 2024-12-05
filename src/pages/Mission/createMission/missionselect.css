@@ -23,11 +23,10 @@
 
 .mission-carousel-wrapper {
   width: calc(100vw * 4);
-  height: 65vh;
+  height: 56vh;
 
   display: flex;
   transition: transform 0.5s ease-in-out;
-
 
   position: relative;
 }
@@ -89,7 +88,7 @@
 }
 
 .card-container {
-  height: 60vh;
+  height: 52vh;
   width: 80vw;
 
   display: flex;
@@ -107,13 +106,18 @@
 .card-title {
   font-size: 3vh;
   font-weight: bold;
-  padding-top: 1vh;
-  margin-bottom: 0;
+  margin: 1vh;
 }
 
 .card-image {
   width: 70vw;
   margin: 1vh 0 0 0;
+}
+@media (max-height: 670px) {
+  .card-image {
+    width: 70%;
+    margin: 0;
+  }
 }
 
 .card-desc {
