@@ -3,6 +3,7 @@ import logo from "../../assets/logo_letters.svg";
 import homecloud from "../../assets/HomeChar.png";
 import shadow from "../../assets/shadowblue.png";
 import sun from "../../assets/sun.png";
+
 import menuIcon from "../../assets/menu.png";
 import axios from "axios";
 import Nav from "../../components/nav";
@@ -120,36 +121,23 @@ const Home = () => {
                         <div>{data.startDate ? `D+${differenceInDays}` : "날짜를 불러오는 중..."}</div>
                         <div>금연 중</div>
                     </div>
-                    <div className="Home-MainReport">
-                        <div className="ReportContainer">
-                            <div className="ReportBlackBg">
-                                <div className="ReportWhitebg">
-                                    <div className="ReportText">
-                                        <div>금연 리포트</div>
-                                    </div>
-                                    <div className="Report">
-                                        <div className="Reportbox">
-                                            <div>연장한 수명</div>
-                                            <div className="extendtimeimg"></div>
-                                            <div>{differenceInDays + 1 || 0}일</div>
-                                        </div>
-                                        <div className="Reportbox">
-                                            <div>아낀 돈</div>
-                                            <div className="savedmoneyimg"></div>
-                                            <div>{savedMoneyExact || 0}원</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="Reportbox">
+                      <div>아낀 돈</div>
+                      <div className="savedmoneyimg"></div>
+                      <div>{savedMoneyExact || 0}원</div>
                     </div>
+                  </div>
                 </div>
-                <div className="Home-Footer">
-                    <Nav />
-                </div>
+              </div>
             </div>
-        </>
-    );
+          </div>
+        </div>
+        <div className="Home-Footer">
+          <Nav />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Home;
