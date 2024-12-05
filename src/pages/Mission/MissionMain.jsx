@@ -1,5 +1,7 @@
 import './missionmain.css';
-import ex from '../../assets/example.svg';
+import ex from '../../assets/missionMain/example.svg';
+import de from '../../assets/missionMain/default.svg';
+import exer from '../../assets/missionMain/exercise.svg';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
@@ -77,7 +79,7 @@ function MissionMain() {
           date: item.date,
           completed: item.completed,
         }));
-
+        console.log(`formattedTodos: ${formattedTodos}`);
         setTodos(formattedTodos);
       } catch (error) {
         console.error('투두 fetch 중 에러', error);
@@ -118,7 +120,7 @@ function MissionMain() {
           description: calculateWeeksPassed(item.startDate),
           default: item.default,
         }));
-
+        console.log(`formattedMissions: ${formattedMissions}`);
         setMissions(formattedMissions);
       } catch (error) {
         console.error('미션 fetch 중 에러', error);
@@ -132,10 +134,13 @@ function MissionMain() {
   const toggleComplete = async (id, missionId) => {
     try {
       const todo = todos.find((todo) => todo.id === id);
+      if (!todo) throw new Error('투두 항목을 찾을 수 없음');
       
       const updatedTodo = { ...todo, completed: !todo.completed };
+      console.log(`id, missionId: ${id}, ${missionId}/${typeof missionId}`);
+      console.log(`userToken: ${userToken}`);
 
-      const response = await axios.get("http://15.164.231.201:8080/mission_record/completedMission",
+      const response = await axios.get("http://15.164.231.201:8080/mission_record/completeMission",
         {
           params: {
             token: userToken,
@@ -198,7 +203,7 @@ function MissionMain() {
           {missions.map((mission) => (
             <div key={mission.id} className="ongoing-card">
               <img
-                src={ex}
+                src={mission.title === '운동하기' ? exer : mission.title === '물 마시기' ? ex : de}
                 alt="example photo"
                 className="ongoing-image"
               />

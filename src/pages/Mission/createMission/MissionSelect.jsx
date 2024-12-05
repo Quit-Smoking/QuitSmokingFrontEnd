@@ -1,6 +1,6 @@
 import './missionselect.css';
 import TopBar from "../../../components/TopBar";
-import Nav from "../../../components/Nav";
+import Nav from "../../../components/nav";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import water from '../../../assets/mission/water.svg';
