@@ -9,18 +9,17 @@ import StartMission from "./pages/Mission/StartMission";
 import Diary from "./pages/Diary/Diary";
 import CreateMission from "./pages/Mission/createMission/CreateMission";
 import Signup from "./pages/Singup/Signup";
-
-import MissionMain from "./pages/Mission/MissionMain";
 import MissionSelect from "./pages/Mission/createMission/MissionSelect";
 import NewMission from "./pages/Mission/NewMission";
 import DiagnosisStart from "./pages/Diagnosis/DiagnosisStart";
 import Diagnosis from "./pages/Diagnosis/Diagnosis";
 import StopSmoking from "./pages/Main/StopSmoking";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import ResetPassword from "./pages/ChangePassword/ResetPassword";
 import ChangeNickname from "./pages/ChangeNickname/ChangeNickname";
+
+import MissionMain from "./pages/Mission/MissionMain";
 
 import NewPost from "./pages/Board/NewPost";
 import EditPost from "./pages/Board/EditPost";

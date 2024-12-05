@@ -26,8 +26,7 @@ function Survey() {
 
     const sendData = async () => {
         const requestData = {
-            token: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDAsImV4cCI6MTczMzQxMDA0MH0.u_Q-tJu4kzZztYjK-Y3fNk3Xt2Kez3EM-Ge2l-k9UHY
-`,
+            token: localStorage.getItem('userToken'),
             resolution: motive,
             motive: boxList[selectedBox],
             startDate: new Date().toISOString().split('T')[0],

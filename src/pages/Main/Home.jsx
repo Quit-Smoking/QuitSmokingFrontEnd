@@ -29,10 +29,10 @@ const Home = () => {
     const closeMenuModal = () => setIsMenuOpen(false); // 메뉴 모달 닫기
 
     const fetchData = async () => {
-        const token = `
-eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDAsImV4cCI6MTczMzQxMDA0MH0.u_Q-tJu4kzZztYjK-Y3fNk3Xt2Kez3EM-Ge2l-k9UHY
 
-        `;
+        const token = localStorage.getItem("userToken");
+
+
         try {
             const [recordResponse, nicknameResponse, emailResponse] = await Promise.all([
                 axios.get("http://15.164.231.201:8080/UserStartRecord/findUserStartRecord", { params: { token } }),
@@ -63,7 +63,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxd2VyMTIzNEBuYXZlci5jb20iLCJpYXQiOjE3MzMzNzQwNDA
     if (error) return <div>{error}</div>;
 
 
-    console.log('data',data);
+
     const nowDate = new Date();
     const startDate = new Date(data.startDate);
     const differenceInDays = Math.floor((nowDate - startDate) / (1000 * 60 * 60 * 24));
