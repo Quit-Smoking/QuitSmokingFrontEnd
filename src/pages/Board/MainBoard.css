@@ -1,0 +1,103 @@
+/* 메인 컨테이너 */
+.full_container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-board-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* 헤더와 목록 사이 공간을 채우기 */
+  overflow: hidden; /* 컨테이너 내부에서만 스크롤 제한 */
+  padding: 16px 16px 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* 헤더 스타일 */
+.main-board-header {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: space-between; /* h1은 왼쪽 정렬, img는 오른쪽 정렬 */
+  padding: 8px 16px; /* 여백 설정 */
+  border-bottom: 1px solid #ddd; /* 하단 경계선 */
+}
+
+.main-board-header h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 auto; /* 가운데 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  flex: 1; /* 남은 공간을 채우기 */
+}
+
+.main-board-header img {
+  width: 24px; /* 아이콘 크기 */
+  height: 24px;
+  cursor: pointer;
+}
+
+.notification-icon {
+  font-size: 24px;
+  color: #555;
+  cursor: pointer;
+}
+
+.board-list {
+  flex-grow: 1; /* 남은 공간을 차지 */
+  overflow-y: auto; /* 수직 스크롤 활성화 */
+  margin-top: 16px;
+  max-height: calc(100vh - 150px); /* 헤더와 기타 요소를 제외한 높이 계산 */
+  padding-right: 8px; /* 스크롤바와 내용 사이의 여백 */
+}
+
+.board-item {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.board-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 8px;
+  color: #333;
+}
+
+.board-content {
+  font-size: 14px;
+  margin: 0 0 12px;
+  color: #555;
+}
+
+.board-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.board-icons span {
+  margin-left: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 연필 아이콘 */
+.edit-icon img {
+  width: 45px;
+  height: 45px;
+  position: fixed;
+  bottom: calc(9vh + 10px);
+  right: 15px;
+  font-size: 36px;
+  color: #fff;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}

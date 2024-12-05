@@ -5,6 +5,7 @@ import ShopExplain from "../../assets/Shop.svg";
 import CloseIcon from "../../assets/close.svg";
 import CheckIcon from "../../assets/check.svg";
 import ItemExplain from "./ItemExplain";
+import Nav from "../../components/nav";
 
 function Shop() {
   const [isExplainOpen, setIsExplainOpen] = useState(false);
@@ -74,126 +75,137 @@ function Shop() {
   };
 
   return (
-    <div className="shop-container">
-      <header className="shop-header">
-        <h1>금연보조제</h1>
-        <div className="shop-explain">
-          <p>어떤 금연보조제가 도움이 될까요? </p>
-          <img
-            src={ShopExplain}
-            alt="image"
-            className="explainImg"
-            onClick={openExplainModal}
-          />
+    <div className="full_container">
+      <div className="shop-container">
+        <header className="shop-header">
+          <h1>금연보조제</h1>
+          <div className="shop-explain">
+            <p>어떤 금연보조제가 도움이 될까요? </p>
+            <img
+              src={ShopExplain}
+              alt="image"
+              className="explainImg"
+              onClick={openExplainModal}
+            />
+          </div>
+        </header>
+        <div className="bottomline"></div>
+        <div className="itemtype">
+          <p
+            className={selectedCategory === "전체" ? "selected-category" : ""}
+            onClick={() => handleCategoryClick("전체", null)}
+          >
+            전체
+          </p>
+          <p
+            className={
+              selectedCategory === "니코틴 패치" ? "selected-category" : ""
+            }
+            onClick={() => handleCategoryClick("니코틴 패치", 0)}
+          >
+            니코틴 패치
+          </p>
+          <p
+            className={
+              selectedCategory === "니코틴 껌·사탕" ? "selected-category" : ""
+            }
+            onClick={() => handleCategoryClick("니코틴 껌·사탕", 1)}
+          >
+            니코틴 껌·사탕
+          </p>
+          <p
+            className={
+              selectedCategory === "니코틴필름" ? "selected-category" : ""
+            }
+            onClick={() => handleCategoryClick("니코틴필름", 2)}
+          >
+            니코틴필름
+          </p>
         </div>
-      </header>
-      <div className="bottomline"></div>
-      <div className="itemtype">
-        <p
-          className={selectedCategory === "전체" ? "selected-category" : ""}
-          onClick={() => handleCategoryClick("전체", null)}
-        >
-          전체
-        </p>
-        <p
-          className={
-            selectedCategory === "니코틴 패치" ? "selected-category" : ""
-          }
-          onClick={() => handleCategoryClick("니코틴 패치", 0)}
-        >
-          니코틴 패치
-        </p>
-        <p
-          className={
-            selectedCategory === "니코틴 껌·사탕" ? "selected-category" : ""
-          }
-          onClick={() => handleCategoryClick("니코틴 껌·사탕", 1)}
-        >
-          니코틴 껌·사탕
-        </p>
-        <p
-          className={
-            selectedCategory === "니코틴필름" ? "selected-category" : ""
-          }
-          onClick={() => handleCategoryClick("니코틴필름", 2)}
-        >
-          니코틴필름
-        </p>
-      </div>
-      <div className="itemtotal">
-        <div>총 {products.length}개</div>
-        <div onClick={openSortModal} className="sort-option">
-          {sortOption} ▼
+        <div className="itemtotal">
+          <div>총 {products.length}개</div>
+          <div onClick={openSortModal} className="sort-option">
+            {sortOption} ▼
+          </div>
         </div>
-      </div>
-      <div className="product-grid">
-        {isLoading ? (
-          <p>로딩 중...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          products.map((product, index) => (
-            <div
-              key={index}
-              className="product-card"
-              onClick={() => window.open(product.productUrl, "_blank")}
-            >
-              <img
-                src={
-                  product.productImageUrl || "https://via.placeholder.com/150"
-                }
-                alt={product.productName}
-                className="product-image"
-              />
-              <p className="product-description">{product.productName}</p>
-              <p className="product-price">{product.productPrice}</p>
-              <div className="product-rating">{renderStars(product.rank)}</div>
+        <div className="product-grid">
+          {isLoading ? (
+            <p>로딩 중...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : (
+            products.map((product, index) => (
+              <div
+                key={index}
+                className="product-card"
+                onClick={() => window.open(product.productUrl, "_blank")}
+              >
+                <img
+                  src={
+                    product.productImageUrl || "https://via.placeholder.com/150"
+                  }
+                  alt={product.productName}
+                  className="product-image"
+                />
+                <p className="product-description">{product.productName}</p>
+                <p className="product-price">{product.productPrice}</p>
+                <div className="product-rating">
+                  {renderStars(product.rank)}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+        {isExplainOpen && <ItemExplain onClose={closeExplainModal} />}
+        {isSortModalOpen && (
+          <div className="sort-modal">
+            <div className="sortTitle">
+              <h3>정렬</h3>
+              <button onClick={closeSortModal} className="sort-modal-close">
+                <img src={CloseIcon} alt="close" />
+              </button>
             </div>
-          ))
+
+            <div className="sortlist">
+              <div
+                className={`list ${sortOption === "인기순" ? "selected" : ""}`}
+                onClick={() => handleSortOptionClick("인기순")}
+              >
+                인기순{" "}
+                {sortOption === "인기순" && <img src={CheckIcon} alt="check" />}
+              </div>
+              <div
+                className={`list ${
+                  sortOption === "판매량순" ? "selected" : ""
+                }`}
+                onClick={() => handleSortOptionClick("판매량순")}
+              >
+                판매량순{" "}
+                {sortOption === "판매량순" && (
+                  <img src={CheckIcon} alt="check" />
+                )}
+              </div>
+              <div
+                className={`list ${sortOption === "최신순" ? "selected" : ""}`}
+                onClick={() => handleSortOptionClick("최신순")}
+              >
+                최신순{" "}
+                {sortOption === "최신순" && <img src={CheckIcon} alt="check" />}
+              </div>
+              <div
+                className={`list ${sortOption === "평점순" ? "selected" : ""}`}
+                onClick={() => handleSortOptionClick("평점순")}
+              >
+                평점순{" "}
+                {sortOption === "평점순" && <img src={CheckIcon} alt="check" />}
+              </div>
+            </div>
+          </div>
         )}
       </div>
-      {isExplainOpen && <ItemExplain onClose={closeExplainModal} />}
-      {isSortModalOpen && (
-        <div className="sort-modal">
-          <div className="sortTitle">
-            <h3>정렬</h3>
-            <button onClick={closeSortModal} className="sort-modal-close">
-              <img src={CloseIcon} alt="close" />
-            </button>
-          </div>
-
-          <div className="sortlist">
-            <div
-              className={`list ${sortOption === "인기순" ? "selected" : ""}`}
-              onClick={() => handleSortOptionClick("인기순")}
-            >
-              인기순{" "}
-              {sortOption === "인기순" && <img src={CheckIcon} alt="check" />}
-            </div>
-            <div
-              className={`list ${sortOption === "판매량순" ? "selected" : ""}`}
-              onClick={() => handleSortOptionClick("판매량순")}
-            >
-              판매량순{" "}
-              {sortOption === "판매량순" && <img src={CheckIcon} alt="check" />}
-            </div>
-            <div
-              className={`list ${sortOption === "최신순" ? "selected" : ""}`}
-              onClick={() => handleSortOptionClick("최신순")}
-            >
-              최신순{" "}
-              {sortOption === "최신순" && <img src={CheckIcon} alt="check" />}
-            </div>
-            <div
-              className={`list ${sortOption === "평점순" ? "selected" : ""}`}
-              onClick={() => handleSortOptionClick("평점순")}
-            >
-              평점순{" "}
-              {sortOption === "평점순" && <img src={CheckIcon} alt="check" />}
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="nav">
+        <Nav />
+      </div>
     </div>
   );
 }

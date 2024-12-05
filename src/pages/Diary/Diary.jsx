@@ -8,6 +8,7 @@ import CheckBox from "../../assets/CheckBox.svg";
 import notCheckBox from "../../assets/notCheckBox.svg";
 import Character from "../../assets/Character.svg";
 import DiaryIcon from "../../assets/DiaryIcon.svg";
+import Nav from "../../components/nav";
 
 // const fetchMissions = async (selectedDate) => {
 //   const token = localStorage.getItem("userToken"); // 토큰 가져오기
@@ -123,81 +124,86 @@ function Diary() {
   };
 
   return (
-    <div className="diary-container">
-      <div className="calendar-container">
-        <Calendar
-          formatDay={(locale, date) => moment(date).format("D")}
-          formatMonthYear={(locale, date) => moment(date).format("M")}
-          calendarType="gregory"
-          tileContent={customTileContent}
-          onChange={handleDateChange} // handleDateChange를 사용하도록 수정
-          value={date}
-          prev2Label={null}
-          next2Label={null}
-          prevLabel={null}
-          nextLabel={null}
-          navigationLabel={({ label }) => (
-            <div className="calendar-navigation-label">
-              <div className="Diary_title_left">
-                <div className="Diary_title_1">금연</div>
-                <div className="Diary_title_2">캘린더</div>
+    <div className="full_container">
+      <div className="diary-container">
+        <div className="calendar-container">
+          <Calendar
+            formatDay={(locale, date) => moment(date).format("D")}
+            formatMonthYear={(locale, date) => moment(date).format("M")}
+            calendarType="gregory"
+            tileContent={customTileContent}
+            onChange={handleDateChange} // handleDateChange를 사용하도록 수정
+            value={date}
+            prev2Label={null}
+            next2Label={null}
+            prevLabel={null}
+            nextLabel={null}
+            navigationLabel={({ label }) => (
+              <div className="calendar-navigation-label">
+                <div className="Diary_title_left">
+                  <div className="Diary_title_1">금연</div>
+                  <div className="Diary_title_2">캘린더</div>
+                </div>
+                <div className="Diary_title_mid">
+                  <span className="calendar-label-text">{label}</span>
+                  <span className="calendar-icon">
+                    <img src={DiaryIcon} alt="" />
+                  </span>
+                </div>
+                <div className="Diary_title_right">
+                  <div className="Diary_title_1">누적금연일</div>
+                  <div className="Diary_title_2">총6일</div>
+                </div>
               </div>
-              <div className="Diary_title_mid">
-                <span className="calendar-label-text">{label}</span>
-                <span className="calendar-icon">
-                  <img src={DiaryIcon} alt="" />
-                </span>
-              </div>
-              <div className="Diary_title_right">
-                <div className="Diary_title_1">누적금연일</div>
-                <div className="Diary_title_2">총6일</div>
-              </div>
-            </div>
-          )}
-        />
-      </div>
+            )}
+          />
+        </div>
 
-      <div className="record-section">
-        <h3>
-          {moment(date).isSame(new Date(), "day")
-            ? "오늘의 기록"
-            : `${moment(date).format("M월 D일")}의 기록`}
-        </h3>
-        <div className="missions">
-          {isLoading ? (
-            <p>로딩 중...</p>
-          ) : error ? (
-            <p>{error}</p>
-          ) : missions.length > 0 ? (
-            missions.map((mission, index) => (
-              <div key={index} className="mission">
-                <div className="mission_box">
-                  <img
-                    src={mission.image || "/icons/default.svg"} // 기본 아이콘 추가
-                    alt="mission-icon"
-                    className="mission-icon"
-                  />
-                  <div className="mission_text">
-                    <div className="text_1">
-                      <p>{mission.mission}</p>
+        <div className="record-section">
+          <h3>
+            {moment(date).isSame(new Date(), "day")
+              ? "오늘의 기록"
+              : `${moment(date).format("M월 D일")}의 기록`}
+          </h3>
+          <div className="missions">
+            {isLoading ? (
+              <p>로딩 중...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : missions.length > 0 ? (
+              missions.map((mission, index) => (
+                <div key={index} className="mission">
+                  <div className="mission_box">
+                    <img
+                      src={mission.image || "/icons/default.svg"} // 기본 아이콘 추가
+                      alt="mission-icon"
+                      className="mission-icon"
+                    />
+                    <div className="mission_text">
+                      <div className="text_1">
+                        <p>{mission.mission}</p>
+                      </div>
                     </div>
                   </div>
+                  {mission.completed ? (
+                    <img src={CheckBox} alt="완료" className="icon-completed" />
+                  ) : (
+                    <img
+                      src={notCheckBox}
+                      alt="미완료"
+                      className="icon-pending"
+                    />
+                  )}
                 </div>
-                {mission.completed ? (
-                  <img src={CheckBox} alt="완료" className="icon-completed" />
-                ) : (
-                  <img
-                    src={notCheckBox}
-                    alt="미완료"
-                    className="icon-pending"
-                  />
-                )}
-              </div>
-            ))
-          ) : (
-            <p>기록이 없습니다.</p>
-          )}
+              ))
+            ) : (
+              <p>기록이 없습니다.</p>
+            )}
+          </div>
         </div>
+      </div>
+      <div>
+        <Nav />
       </div>
     </div>
   );

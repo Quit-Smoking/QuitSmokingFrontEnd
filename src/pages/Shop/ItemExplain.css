@@ -6,11 +6,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999; /* 모달이 화면 맨 위에 오도록 설정 */
 }
 
 .borderbottom {
@@ -18,12 +18,15 @@
 }
 
 .modal-content {
-  background-color: white;
+  background: white;
   padding: 20px;
   border-radius: 10px;
-  width: 80%;
-  max-width: 300px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  overflow-y: auto;
+  width: 70%;
+  height: 70%;
+  position: relative;
+  z-index: 10000; /* 모달 내용이 최상단에 보이도록 설정 */
 }
 
 .modal-content h2 {
@@ -55,7 +58,7 @@
 
 .close-button {
   background-color: #008285;
-  color: black;
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
