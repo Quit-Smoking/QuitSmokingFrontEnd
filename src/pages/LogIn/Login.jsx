@@ -45,6 +45,7 @@ function Login() {
         } else {
           navigate('/startpage');
         }
+
       }
     } catch (error) {
       // 첫 번째 요청이 실패한 경우

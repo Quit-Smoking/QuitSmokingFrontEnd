@@ -11,6 +11,7 @@ function ChangePassword() {
   const navigate = useNavigate(); // 페이지 이동용 훅
 
   const handleCheckPassword = async () => {
+
     const token = localStorage.getItem('userToken'); // 로컬 스토리지에서 토큰 가져오기
 
     if (!token) {

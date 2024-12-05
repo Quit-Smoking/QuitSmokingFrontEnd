@@ -1,5 +1,6 @@
 /* 네비게이션 바 전체 컨테이너 */
 .nav-container {
+
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -12,51 +13,58 @@
 
 /* 네비게이션 아이템 개별 스타일 */
 .nav-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
 }
 
 /* 아이콘 영역 */
 .nav-icon {
+
     width: 20px;
     height: 20px;
     margin-bottom: 5px;
+
 }
 
 /* 텍스트 영역 */
 .nav-text {
-    font-size: 3vw;
-    text-align: center;
-    margin: 0;
+
+  font-size: 3vw;
+  text-align: center;
+  margin: 0;
 }
 
-
 /* 배경 이미지 */
-.storeimg, .calenderimg, .homeimg, .missionimg, .boardimg {
-    background-size: contain;
+.storeimg,
+.calenderimg,
+.homeimg,
+.missionimg,
+.boardimg {
+  background-size: contain;
 }
 
 .storeimg {
-    background-image: url('../assets/shopimg.png');
+  background-image: url("../assets/shopimg.png");
 }
 
 .calenderimg {
-    background-image: url('../assets/calenderimg.png');
+  background-image: url("../assets/calenderimg.png");
 }
 
 .homeimg {
-    background-image: url('../assets/homeimg.png');
+  background-image: url("../assets/homeimg.png");
 }
 
 .missionimg {
-    background-image: url('../assets/missionimg.png');
+  background-image: url("../assets/missionimg.png");
 }
 
 .boardimg {
-    background-image: url('../assets/boardimg.png');
+  background-image: url("../assets/boardimg.png");
+
 }
 
 /* 텍스트 패딩 */

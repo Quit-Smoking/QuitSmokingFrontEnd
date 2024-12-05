@@ -48,8 +48,7 @@ function ResetPassword() {
       setIsConfirmPasswordValid(false);
       return; // 검증 실패 시 함수 종료
     }
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMzA3MzY0LCJleHAiOjE3MzMzNDMzNjR9.M3agOzCMGRrPsOukqEe-MGTKH_1nx8hOulHQxipIfjU"; // 로컬 스토리지에서 토큰 가져오기
+    const token = localStorage.getItem("userToken");
 
     // API 요청 데이터 생성
     const requestData = {
