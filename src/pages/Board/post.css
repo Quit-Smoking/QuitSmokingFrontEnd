@@ -168,5 +168,5 @@
   cursor: pointer;
 }
 .post-menu button:hover {
-  background: #404B4B;
+  background: rgba(0, 0, 0, 0.1);
 }

@@ -20,6 +20,7 @@ import MissionSelect from "./pages/Mission/createMission/MissionSelect";
 import NewMission from "./pages/Mission/NewMission";
 
 import NewPost from "./pages/Board/NewPost";
+import EditPost from "./pages/Board/EditPost";
 import Post from "./pages/Board/Post";
 
 function App() {
@@ -47,7 +48,14 @@ function App() {
         <Route path="/Login" element={<Login />} />
 
         <Route path="/newPost" element={<NewPost />} />
+        
         <Route path="/post" element={<Post />} />
+        {/* 게시글 아이디로 이동하기 */}
+        <Route path="/post/:id" element={<Post />} /> 
+        
+        <Route path="/editPost" element={<EditPost />} />
+        {/* 게시글 수정 페이지 */}
+        <Route path="/edit/:id" element={<EditPost />} />
       </Routes>
     </>
   );

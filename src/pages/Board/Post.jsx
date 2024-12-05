@@ -1,6 +1,6 @@
 import "./post.css";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import profile from "../../assets/post/profile.svg";
@@ -11,10 +11,18 @@ import heart from "../../assets/post/heart.svg";
 
 function Post() {
   const navigate = useNavigate();
+  const { id } = useParams(); //! 게시글 아이디 params로 가져오기
+  const userToken = localStorage.getItem('userToken'); //! 유저토큰 가져오기
+
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isComments, setComments] = useState(null);
+  const [openCommentMenuId, setOpenCommentMenuId] = useState(null); // 열려 있는 댓글 메뉴 ID
+  const [comments, setComments] = useState(null);
+  const [nickname, setNickname] = useState("");
+  const [post, setPost] = useState(null);
+  const [commentContent, setCommentContent] = useState(""); // 입력 중인 댓글 내용
 
+  // 게시글 메뉴 토글
   const toggleMenu = (e) => {
     console.log("메뉴 버튼 클릭");
     e.stopPropagation();
@@ -22,23 +30,140 @@ function Post() {
     console.log("메뉴 상태 변경:", !isMenuOpen);
   };
 
+  // 댓글 메뉴 토글
+  const toggleCommentMenu = (e, commentId) => {
+    console.log("댓글 메뉴 버튼 클릭");
+    e.stopPropagation();
+    setOpenCommentMenuId((prevId) => (prevId === commentId ? null : commentId));
+    console.log("댓글 메뉴 상태 변경:", !openCommentMenuId);
+  }
+
+  // 게시글 수정
   const handleEdit = () => {
-    alert("글 수정 기능");
+    console.log('글 수정 페이지로 이동');
+    navigate(`/editPost/${id}`); //! id 사용해서 이동하기
     setIsMenuOpen(false);
   };
-
-  const handleDelete = () => {
-    alert("글 삭제 기능");
-    setIsMenuOpen(false);
+  // 댓글 삭제
+  const handleCommentEdit = () => {
+    console.log('댓글 수정 페이지로 이동');
+    navigate(`/home`); //! id 사용해서 댓글 수정 페이지이동하기
+    setOpenCommentMenuId(false);
   };
 
-  const closeMenu = (e) => {
-    // if (e.target.closest(".menu-button")) return; // 메뉴 버튼 클릭 시 무시
-    // setIsMenuOpen(false); // 메뉴 외부 클릭 시 닫기
-    if (!e.target.closest(".post-menu")) {
-      setIsMenuOpen(false); // 메뉴 외부 클릭 시 닫기
+  // 게시글 삭제
+  const handleDelete = async () => {
+    if (window.confirm('해당 글을 삭제하시겠습니까?')) {
+      if (!userToken) {
+        console.log('토큰이 없음');
+        alert('유저를 찾을 수 없습니다.')
+        return;
+      }
+
+      try {
+        const response = await axios.delete('http://15.164.231.201:8080/post/delete', {
+          params: {
+            "token": {userToken},
+            "id": {id},
+          }
+        })
+
+        if (response.status !== 200) {
+          throw new Error('게시글 삭제 중 서버 200 아님');
+        }
+
+        console.log('게시글 성공적 삭제:', response.data);
+        console.log('게시판 페이지로 이동')
+        navigate('/missionMain'); //! 게시판페이지로 이동
+      } catch (error) {
+        console.error('게시글 삭제 중 에러 발생', error);
+      }
     }
   };
+  // 댓글 삭제
+  const handleCommentDelete = async (commentId) => {
+    if (window.confirm("해당 댓글을 삭제하시겠습니까?")) {
+      try {
+        const response = await axios.delete(
+          "http://15.164.231.201:8080/comment/delete",
+          {
+            params: { 
+              token: userToken,
+              id: commentId
+            },
+          }
+        );
+        if (response.status === 200) {
+          setComments((prevComments) =>
+            prevComments.filter((comment) => comment.id !== commentId)
+          );
+          alert("댓글이 삭제되었습니다.");
+          console.log('댓글 삭제 response', response.data);
+        } else {
+          alert("댓글 삭제 중 오류가 발생했습니다. 다시 시도해주세요.")
+        }
+      } catch (error) {
+        console.error("댓글 삭제 중 에러 발생:", error);
+      }
+    }
+    setOpenCommentMenuId(null);
+  };
+  const handleAddComment = async () => {
+    if (!commentContent.trim()) {
+      alert("댓글 내용을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://15.164.231.201:8080/comment/add",
+        {
+          token: userToken,
+          postId: id,
+          parentCommentId: null, // 대댓글이 아니라면 null
+          content: commentContent,
+        }
+      );
+
+      if (response.status === 200) {
+        alert("댓글이 성공적으로 추가되었습니다.");
+        setComments((prevComments) => [...prevComments, response.data]); // 새 댓글 추가
+        setCommentContent(""); // 입력 필드 초기화
+      } else {
+        throw new Error("댓글 추가 중 오류 발생");
+      }
+    } catch (error) {
+      console.error("댓글 추가 중 에러 발생:", error);
+      alert("댓글 추가에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  // const closeMenu = (e) => {
+  //   if (!e.target.closest(".post-menu")) {
+  //     setIsMenuOpen(false); // 메뉴 외부 클릭 시 닫기
+  //   }
+  // };
+  // const closeCommentMenu = (e) => {
+  //   if (!e.target.closest(".post-comment-menu")) {
+  //     setIsMenuOpen(false); // 댓글 메뉴 외부 클릭 시 닫기
+  //   }
+  // };
+
+  // 외부 클릭 시 메뉴 닫기
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest(".post-menu")) {
+        setIsMenuOpen(false);
+      }
+      if (!e.target.closest(".post-comment-menu")) {
+        setOpenCommentMenuId(null);
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   useEffect(() => {
     // 키보드 이벤트 감지
@@ -54,8 +179,102 @@ function Post() {
     };
   }, []);
 
+  // 게시글 내용, 댓글 가져오기
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get("http://15.164.231.201:8080/post/findByPostId", {
+          params: {
+            id: id,
+          }
+        });
+
+        if (response !== 200) {
+          throw new Error(`post ${id} fetch 중 서버 200 아님`);
+        };
+
+        setPost(response.data);
+      } catch (error) {
+        console.error(`post ${id} fetch 중 에러: ${error}`);
+      }
+    }
+    const fetchNickname = async () => {
+      try {
+        const response = await axios.get("http://15.164.231.201:8080/user/getNickname", {
+          params: {
+            token: userToken,
+          }
+        });
+
+        if (response !== 200) {
+          throw new Error(`닉네임 fetch 중 서버 200 아님`);
+        };
+
+        setNickname(response.data);
+      } catch (error) {
+        console.error(`닉네임 fetch 중 에러: ${error}`);
+      }
+    }
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get("http://15.164.231.201:8080/comment/findByPostId", {
+          params: {
+            postId: id,
+          }
+        });
+
+        if (response !== 200) {
+          throw new Error(`post ${id}에 대한 댓글 fetch 중 서버 200 아님`);
+        };
+
+        const data = response.data;
+        setComments(data);
+      } catch (error) {
+        console.error(`post ${id}에 대한 댓글fetch 중 에러: ${error}`);
+      }
+    }
+
+    fetchPost();
+    fetchNickname();
+    fetchComments();
+  }, [id, userToken])
+
+  //? 간략화버전
+  // useEffect(() => {
+  //   const fetchPostData = async () => {
+  //     try {
+  //       const postResponse = await axios.get(
+  //         "http://15.164.231.201:8080/post/findByPostId",
+  //         { params: { id } }
+  //       );
+  //       const nicknameResponse = await axios.get(
+  //         "http://15.164.231.201:8080/user/getNickname",
+  //         { params: { token: userToken } }
+  //       );
+  //       const commentsResponse = await axios.get(
+  //         "http://15.164.231.201:8080/comment/findByPostId",
+  //         { params: { postId: id } }
+  //       );
+
+  //       if (
+  //         postResponse.status === 200 &&
+  //         nicknameResponse.status === 200 &&
+  //         commentsResponse.status === 200
+  //       ) {
+  //         setPost(postResponse.data);
+  //         setNickname(nicknameResponse.data);
+  //         setComments(commentsResponse.data);
+  //       }
+  //     } catch (error) {
+  //       console.error("데이터 가져오는 중 에러 발생:", error);
+  //     }
+  //   };
+
+  //   fetchPostData();
+  // }, [id, userToken]);
+
   return (
-    <div className="post-container" onClick={closeMenu}>
+    <div className="post-container">
       <div className="post-top-bar">
         <button className="post-back-button" onClick={() => navigate(-1)}>
           ←
@@ -64,7 +283,7 @@ function Post() {
       </div>
       <div className="post-banner">
         <div className="post-banner-top">
-          <p className="post-title">글 제목</p>
+          <p className="post-title">{post?.title}</p>
           <button onClick={toggleMenu}>&#8942;</button>
           {isMenuOpen && (
             <div className="post-menu">
@@ -80,13 +299,13 @@ function Post() {
               alt="default profile image"
               className="post-profile-image"
             />
-            <p className="post-profile-name">닉네임 불러오기!!</p>
+            <p className="post-profile-name">{nickname}</p>
           </div>
-          <p className="post-profile-time">시간 불러오기</p>
+          <p className="post-profile-time">{post?.createdAt}</p>
         </div>
       </div>
       <div className="post-content">
-        <p className="post-text">위 코드를 각 댓글과 게시글에서 재사용하려면 컴포넌트화하여 PostOptions를 각각의 댓글/게시글에서 렌더링할 수 있습니다. 필요에 따라 props를 전달하여 handleEdit과 handleDelete의 동작을 조정할 수 있습니다. 😊</p>
+        <p className="post-text">{post?.content}</p>
         <div className="post-reaction">
           <div className="post-comment-box">
             <img
@@ -94,7 +313,7 @@ function Post() {
               alt="comment icon"
               className="comment-icon"
             />
-            <p className="post-comment-num">숫자</p>
+            <p className="post-comment-num">{post.numberOfComments}</p>
           </div>
           <div className="post-heart-box">
             <img
@@ -102,11 +321,33 @@ function Post() {
               alt="heart icon"
               className="heart-icon"
             />
-            <p className="post-heart-num">숫자</p>
+            <p className="post-heart-num">{post.numberOfLikes}</p>
           </div>
         </div>
         <div className="post-comment">
-          {!isComments ? '첫 댓글을 달아주세요' : <>{isComments}</>}
+          {comments.length === 0 ? (
+            <p>첫 댓글을 달아주세요!</p>
+          ) : (
+            comments.map((comment) => (
+              <div key={comment.id} className="post-comment">
+                <div className="post-comment-banner">
+                  <p>{comment.nickname}</p>
+                  <button onClick={(e) => toggleCommentMenu(e, comment.id)}>
+                    ⋮
+                  </button>
+                  {openCommentMenuId === comment.id && (
+                    <div className="post-comment-menu">
+                      <button onClick={handleCommentEdit}>수정</button>
+                      <button onClick={() => handleCommentDelete(comment.id)}>
+                        삭제
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <p>{comment.content}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
       {/* 댓글 입력창 */}
@@ -115,8 +356,10 @@ function Post() {
           type="text"
           placeholder="댓글을 입력하세요"
           className="comment-input"
+          value={commentContent}
+          onChange={(e) => setCommentContent(e.target.value)}
         />
-        <button className="comment-submit">➤</button>
+        <button className="comment-submit" onClick={handleAddComment}>➤</button>
       </div>
     </div>
   );

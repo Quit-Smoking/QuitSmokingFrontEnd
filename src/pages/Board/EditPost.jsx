@@ -1,38 +1,49 @@
 import "./newpost.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-function NewPost() {
+function EditPost() {
   const navigate = useNavigate();
+  const { id } = useParams(); //! 게시글 아이디 params로 가져오기
   const userToken = localStorage.getItem('userToken'); //! 유저토큰 가져오기
-
-  // 제목과 내용 상태 관리
+  const [post, setPost] = useState(null);
   const [postTitle, setPostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
 
   const handleCancel = () => {
-    if (window.confirm('작성된 내용이 모두 없어집니다. 계속하시겠습니까?')) {
+    if (window.confirm('수정한 내용이 모두 없어집니다. 계속하시겠습니까?')) {
       navigate(-1); // 이전 페이지로 이동
     }
   }
 
-  // YYYY-MM-DD 형식의 날짜 불러오기
-  function getFormattedDate() {
-    const today = new Date();
-  
-    // 날짜 정보 가져오기
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, "0");
-    const date = today.getDate().toString().padStart(2, "0");
-  
-    // yyyy-mm-dd 형식으로 반환
-    return `${year}-${month}-${date}`;
-  }
-  
-  // 테스트
-  console.log(getFormattedDate()); // 예: 2024-12-05
-  
+  // 게시글 내용 가져오기
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get("http://15.164.231.201:8080/post/findByPostId", {
+          params: {
+            id: id,
+          }
+        });
+
+        if (response !== 200) {
+          throw new Error(`post ${id} fetch 중 서버 200 아님`);
+        };
+
+        const postData = response.data;
+        setPost(postData); // 전체 데이터를 저장
+        setPostTitle(postData.title); // 제목 설정
+        setPostContent(postData.content); // 내용 설정
+      } catch (error) {
+        console.error(`post ${id} fetch 중 에러: ${error}`);
+      }
+    }
+
+    fetchPost();
+  }, [id])
+
+  // 수정한 게시글 서버에 전송
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,19 +53,23 @@ function NewPost() {
     }
 
     try {
-      const response = await axios.post('http://15.164.231.201:8080/post/add', {
-        body: {
+      const response = await axios.post('http://15.164.231.201:8080/post/update', {
+        params: {
           "token": {userToken},
+        },
+        body: {
+          "id": id,
           "title": postTitle,
           "content": postContent,
-          "createdAt": getFormattedDate(),
         }
       })
-      console.log('게시글 성공적으로 전송:', response.data);
+      console.log('게시글 성공적으로 수정:', response.data);
       console.log('게시판 페이지로 이동')
-      navigate('/missionMain'); //! 게시판 페이지로 이동
+      alert("게시글이 성공적으로 수정되었습니다!");
+      navigate(`/post/${id}`); //! 그 게시글로 이동
     } catch (error) {
-      console.error('게시글 서버로 보내는 중 에러 발생', error);
+      console.error('수정한 게시글 서버로 보내는 중 에러 발생', error);
+      alert("게시글 수정에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -62,7 +77,7 @@ function NewPost() {
     <form className="new-post-container" onSubmit={handleSubmit}>
       <div className="new-post-banner">
         <button type="button" className="new-post-cancel-button" onClick={handleCancel}>취소</button>
-        <p className="new-post-title">글쓰기</p>
+        <p className="new-post-title">글 수정하기</p>
         <button type="submit" className="new-post-submit-button">완료</button>
       </div>
       <div className="new-post-content">
@@ -89,4 +104,4 @@ function NewPost() {
   );
 }
 
-export default NewPost;
+export default EditPost;
