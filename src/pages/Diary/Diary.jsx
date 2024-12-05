@@ -53,9 +53,8 @@ function Diary() {
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
   const fetchMissions = async (selectedDate) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMjIxOTQ2LCJleHAiOjE3MzMyNTc5NDZ9.BmDtkVCh4olVvZb7COzuum4DQWR4Je4oeDfVKC9Ewec"; // 하드코딩된 토큰
-
+    const token = localStorage.getItem("userToken"); 
+    
     setIsLoading(true); // 로딩 시작
     setError(null); // 에러 초기화
 

@@ -34,36 +34,20 @@ function Login() {
         const token = loginResponse.data;
         localStorage.setItem('userToken', token);
 
-        // 두 번째 요청: UserStartRecord/doExist 확인
-        const userStartExistResponse = await axios.get('http://15.164.231.201:8080/UserStartRecord/doExist', {
+        // 두 번째 요청: 데이터 존재 여부 확인
+        const dataExistResponse = await axios.get('http://15.164.231.201:8080/UserStartRecord/doExist', {
           params: { token },
         });
 
-        const isUserStartExist = userStartExistResponse.data;
-
-        if (isUserStartExist) {
-          // 데이터가 존재하면 Home으로 이동
+        // 데이터가 있으면 홈으로 이동, 없으면 알림 표시
+        if (dataExistResponse.data) {
           navigate('/home');
-          return;
+        } else {
+          navigate('/startpage');
         }
-
-        // // 세 번째 요청: user_cessation_record/doExist 확인
-        // const cessationExistResponse = await axios.get('http://15.164.231.201:8080/user_cessation_record/doExist', {
-        //   params: { token },
-        // });
-
-        // const isCessationExist = cessationExistResponse.data;
-
-        // if (isCessationExist) {
-        //   // 금연 기록이 있다면 3번째 화면으로 이동
-        //   navigate('/home', { state: { isCessationView: true } });
-        // } else {
-        //   // 데이터가 없으면 StartPage로 이동
-        //   navigate('/startpage');
-        // }
       }
     } catch (error) {
-      // 요청 실패 처리
+      // 첫 번째 요청이 실패한 경우
       console.error('요청 실패', error);
       setWrong(true);
     }
