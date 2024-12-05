@@ -43,16 +43,17 @@ function NewPost() {
 
     try {
       const response = await axios.post('http://15.164.231.201:8080/post/add', {
-        body: {
-          "token": {userToken},
+          "token": userToken,
           "title": postTitle,
           "content": postContent,
           "createdAt": getFormattedDate(),
-        }
       })
-      console.log('게시글 성공적으로 전송:', response.data);
-      console.log('게시판 페이지로 이동')
-      navigate('/missionMain'); //! 게시판 페이지로 이동
+
+      if (response.status === 200) {
+        console.log('게시글 성공적으로 전송:', response.data);
+        console.log('게시판 페이지로 이동')
+        navigate('/missionMain'); //! 게시판 페이지로 이동
+      }
     } catch (error) {
       console.error('게시글 서버로 보내는 중 에러 발생', error);
     }
