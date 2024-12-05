@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./diagnosisstart.css";
 import closeIcon from "../../assets/closeicon.png";
-import cloudImg from "../../assets/캐릭터.png";
+import cloudImg from "../../assets/char.png";
 import circleImg from "../../assets/circleImg.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
