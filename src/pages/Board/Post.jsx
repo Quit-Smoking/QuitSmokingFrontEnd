@@ -163,6 +163,7 @@ function Post() {
         alert("댓글이 성공적으로 추가되었습니다.");
         setComments((prevComments) => [...prevComments, response.data]); // 새 댓글 추가
         setCommentContent(""); // 입력 필드 초기화
+        fetchComments();
       } else {
         throw new Error("댓글 추가 중 오류 발생");
       }
@@ -213,6 +214,28 @@ function Post() {
     };
   }, []);
 
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get("http://15.164.231.201:8080/comment/findByPostId", {
+        params: {
+          postId: postId,
+        }
+      });
+
+      if (response.status !== 200) {
+        throw new Error(`댓글 가져오다가 오류: ${response.status}, ${postId}`);
+      };
+      if (!response.data) {
+        throw new Error("댓글 없거나 null");
+      }
+
+      console.log("Fetched comments:", response.data);
+      setComments(response.data);
+    } catch (error) {
+      console.error(`post ${postId}에 대한 댓글fetch 중 에러: ${error}`);
+    }
+  }
+
   // 게시글 내용, 댓글 가져오기
   useEffect(() => {
     const fetchPost = async () => {
@@ -255,32 +278,11 @@ function Post() {
         console.error(`닉네임 fetch 중 에러: ${error}`);
       }
     }
-    const fetchComments = async () => {
-      try {
-        const response = await axios.get("http://15.164.231.201:8080/comment/findByPostId", {
-          params: {
-            postId: postId,
-          }
-        });
-
-        if (response.status !== 200) {
-          throw new Error(`댓글 가져오다가 오류: ${response.status}, ${postId}`);
-        };
-        if (!response.data) {
-          throw new Error("댓글 없거나 null");
-        }
-
-        console.log("Fetched comments:", response.data);
-        setComments(response.data);
-      } catch (error) {
-        console.error(`post ${postId}에 대한 댓글fetch 중 에러: ${error}`);
-      }
-    }
 
     fetchPost();
     fetchNickname();
     fetchComments();
-  }, [postId, userToken])
+  }, [])
 
   useEffect(() => {
     console.log("좋아요 상태가 변경됨:", isLiked);
@@ -376,7 +378,7 @@ function Post() {
               </div>
             </div>
             <div className="post-comment-container">
-              {comments.length === 0 ? (
+              {comments.length === 0 || !comments ? (
                 <p>첫 댓글을 달아주세요!</p>
               ) : (
                 comments.map((comment) => (
