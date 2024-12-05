@@ -22,6 +22,7 @@
 
   position: absolute;
   top: 0;
+  text-align: center;
 }
 
 .survey-result-p {
@@ -35,23 +36,26 @@
 }
 
 .survey-result-section {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-35%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+  margin-top: 7.5em;
 }
 
 .survey-result-image {
   width: 57%;
   height: 57%;
-  margin-bottom: 1vh;
+  margin-bottom: 1.5vh;
   margin-top: 1vh;
 }
 
-/* .survey-result-text {
-  border: 1px solid green;
-} */
+.survey-result-text {
+}
 
 .survey-result-title {
+  text-align: center;
   margin: 1.5vh;
   font-size: 2.5vh;
 }

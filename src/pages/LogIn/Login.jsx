@@ -22,9 +22,11 @@ function Login() {
 
     // 서버로 아이디, 비번 보내기
     try {
-      const response = await axios.post(`/user/login`, {
-        email: id,
-        password: password,
+      const response = await axios.post(`http://15.164.231.201:8080/user/login`, {
+        body: {
+          email: id,
+          password: password,
+        }
       });
       if (response.status === 200) {
         console.log('로그인 성공', response.data);
@@ -36,7 +38,7 @@ function Login() {
       setWrong(true); // 아이디 비번 틀리면 setWrong(true)
     }
 
-    console.log('Id:', id);
+    console.log('Email:', id);
     console.log('Password:', password);
   };
 
@@ -54,31 +56,9 @@ function Login() {
     navigate('/Signup'); // 회원가입으로 이동
   };
 
-
-  // 서버로 아이디, 비번 보내기 -> 미안 해결하지 못했어... 부탁해...
-
-  const sendData = async () => {
-
-    const requestData = {
-      email: id,
-      password: password,
-    };
-
-    try {
-      await axios.post('/user/login', requestData, {
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-
-
-
-    } catch (error) {
-      console.error('Error sending data:', error);
-      alert('데이터 전송에 실패했습니다.');
-    }
-  };
-
-
+  const handleNaverLogin = () => {
+    alert('아직 개발 중입니다! :)');
+  }
 
   return (
     <div className="login-page-container">
@@ -94,7 +74,7 @@ function Login() {
               id="id"
               value={id}
               onChange={(e) => setId(e.target.value)}
-              placeholder='아이디'
+              placeholder='이메일'
               className="off-login-input"
             />
             <input
@@ -106,7 +86,7 @@ function Login() {
               className="off-login-input"
             />
             {wrong && <p className="wrong-login">{`아이디 또는 비밀번호가 잘못 되었습니다.\n아이디와 비밀번호를 정확히 입력해 주세요`}</p>}
-            <button type="submit" className="off-login-button" onClick={sendData}>로그인</button>
+            <button type="submit" className="off-login-button">로그인</button>
           </form>
           <div className="off-login-selects">
             <button type="button" onClick={handleFindIdPw} className="option-button">
@@ -120,7 +100,7 @@ function Login() {
       </div>
       <div className="easy-login-container">
         <p className="easy-login-title">SNS 간편로그인</p>
-        <button type="button" className="easy-login-button naver-button">
+        <button type="button" className="easy-login-button naver-button" onClick={handleNaverLogin}>
           네이버 로그인
         </button>
       </div>

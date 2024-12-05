@@ -1,0 +1,119 @@
+.delete-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.delete-header {
+  position: relative;
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.cancel-icon {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.warning-text {
+  margin: 20px 0;
+  text-align: center;
+  color: #ff0000;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.warning-text p {
+  padding: 0 10px;
+}
+
+.warning-icon {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.confirmation-box {
+  height: 150px;
+  border: 1px solid #bcbcbc;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.box_text {
+  color: #008285;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.checkbox-container input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 12px;
+  accent-color: black; /* 체크박스 체크 색상 */
+}
+
+.checkbox_text {
+  font-size: 16px;
+  color: black;
+}
+
+.checkbox-container label {
+  font-size: 14px;
+  color: #333333;
+  cursor: pointer;
+}
+
+.delete-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 8px;
+  cursor: not-allowed;
+  transition: background-color 0.3s;
+}
+
+.delete-button.enabled {
+  background-color: #008285;
+  cursor: pointer;
+}
+
+.delete-button:disabled {
+  background-color: #d9d9d9;
+  cursor: not-allowed;
+}

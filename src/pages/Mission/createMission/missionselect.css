@@ -152,3 +152,7 @@
   text-align: center;
   margin-top: 1vh;
 }
+
+.card-container.selected-card {
+  background-color: #D1E5E5;
+}

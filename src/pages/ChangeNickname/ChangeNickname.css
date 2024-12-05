@@ -1,0 +1,110 @@
+.signup-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.text {
+  position: relative;
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.Cancel_img {
+  position: absolute;
+  right: 0;
+}
+
+.sub_text {
+  margin-top: 70px;
+  margin-bottom: 38px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.password_title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+  outline: none;
+
+  border: none;
+  border-bottom: 1px solid #85bcbd;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* input에 포커스가 생길 때 스타일 고정 */
+input:focus {
+  border-bottom: 1px solid #008285;
+  outline: none;
+}
+
+input::placeholder {
+  font-size: 20px;
+  padding: 0;
+}
+/* button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      } */
+
+button[disabled] {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.valid-message {
+  color: green;
+  font-size: 12px;
+}
+
+.invalid-message {
+  color: red;
+  font-size: 12px;
+}
+
+.signup-button {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #008285;
+  color: white;
+  border: none;
+  cursor: pointer;
+  /* margin: 10px; */
+}
+
+.signup-button:disabled {
+  background-color: #008285;
+  cursor: not-allowed;
+}

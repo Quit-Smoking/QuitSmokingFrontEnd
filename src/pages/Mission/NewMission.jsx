@@ -1,12 +1,16 @@
 import "./newmission.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import TopBar from "../../components/TopBar";
 
 function NewMission() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { missionName } = location.state || {}; //! 미션명 가져오기
+
+  console.log("받아온 미션 명: ", missionName);
+
   const [selectedDays, setSelectedDays] = useState([]);
-  const missionName = "중강도 운동하기"; //! 미션명 가져오기
   const defaultMission = true;
 
   const toggleDaySelection = (day) => {
@@ -37,7 +41,7 @@ function NewMission() {
 
   return (
     <div className="new-mission-container">
-      <TopBar title="중강도 운동하기" onBack={() => navigate(-1)} />
+      <TopBar title={missionName} onBack={() => navigate(-1)} />
       <div className="content-container">
         <p className="week-title">요일 설정</p>
         <p className="week-desc">미션을 수행할 요일을 설정해주세요</p>
