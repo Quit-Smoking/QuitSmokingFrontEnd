@@ -1,5 +1,6 @@
 /* 메인 컨테이너 */
 .full_container {
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -93,8 +94,8 @@
   width: 45px;
   height: 45px;
   position: fixed;
-  bottom: calc(9vh + 10px);
-  right: 15px;
+  bottom: calc(9vh);
+  right: 10px;
   font-size: 36px;
   color: #fff;
   padding: 12px;

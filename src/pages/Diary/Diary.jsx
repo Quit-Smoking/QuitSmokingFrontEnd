@@ -9,61 +9,48 @@ import notCheckBox from "../../assets/notCheckBox.svg";
 import Character from "../../assets/Character.svg";
 import DiaryIcon from "../../assets/DiaryIcon.svg";
 import Nav from "../../components/nav";
-
-// const fetchMissions = async (selectedDate) => {
-//   const token = localStorage.getItem("userToken"); // 토큰 가져오기
-//   if (!token) {
-//     setError("로그인이 필요합니다.");
-//     setIsLoading(false);
-//     return;
-//   }
-
-//   setIsLoading(true); // 로딩 시작
-//   setError(null); // 에러 초기화
-
-//   try {
-//     const response = await axios.get(
-//       "/mission_record/fetchByDate", // API 엔드포인트
-//       {
-//         params: {
-//           token: token,
-//           date: moment(selectedDate).format("YYYY-MM-DD"), // 선택된 날짜
-//         },
-//       }
-//     );
-
-//     if (response.status === 200 && response.data) {
-//       // 받아온 데이터가 객체인 경우 배열로 변환
-//       const data = Array.isArray(response.data) ? response.data : [response.data];
-//       setMissions(data); // 받아온 미션 데이터 설정
-//     } else {
-//       setMissions([]); // 데이터가 없을 경우 빈 배열 설정
-//     }
-//   } catch (err) {
-//     console.error("Error fetching missions:", err);
-//     setError("미션 데이터를 불러오지 못했습니다.");
-//   } finally {
-//     setIsLoading(false); // 로딩 끝
-//   }
-// };
+import water from "../../assets/mission/water.svg";
 
 function Diary() {
   const [date, setDate] = useState(new Date());
   const [missions, setMissions] = useState([]); // 미션 데이터 저장
+  const [startDate, setStartDate] = useState(null); // 금연 시작일 저장
   const [error, setError] = useState(null); // 에러 상태
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
+  // 금연 시작일 가져오기
+  const fetchStartDate = async () => {
+    const token = localStorage.getItem("userToken");
+
+    try {
+      const response = await axios.get(
+        "http://15.164.231.201:8080/UserStartRecord/findUserStartRecord",
+        {
+          params: { token },
+        }
+      );
+
+      if (response.status === 200 && response.data.startDate) {
+        setStartDate(response.data.startDate); // 시작 날짜 설정
+        console.log("금연 시작일:", response.data.startDate);
+      } else {
+        console.warn("금연 시작일 데이터를 가져오지 못했습니다.");
+        setStartDate(null);
+      }
+    } catch (err) {
+      console.error("API 요청 실패:", err);
+      setStartDate(null);
+    }
+  };
+
   const fetchMissions = async (selectedDate) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMjIxOTQ2LCJleHAiOjE3MzMyNTc5NDZ9.BmDtkVCh4olVvZb7COzuum4DQWR4Je4oeDfVKC9Ewec"; // 하드코딩된 토큰
+    const token = localStorage.getItem("userToken");
 
     setIsLoading(true); // 로딩 시작
     setError(null); // 에러 초기화
 
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
-      console.log("API 요청에 사용된 날짜:", formattedDate);
-
       const response = await axios.get(
         "http://15.164.231.201:8080/mission_record/fetchByDate",
         {
@@ -74,14 +61,9 @@ function Diary() {
         }
       );
 
-      if (
-        response.status === 200 &&
-        response.data &&
-        response.data.length > 0
-      ) {
+      if (response.status === 200 && response.data.length > 0) {
         setMissions(response.data); // 받아온 미션 데이터 설정
       } else {
-        console.warn("선택된 날짜에 데이터가 없습니다.");
         setMissions([]); // 데이터가 없을 경우 빈 배열 설정
       }
     } catch (err) {
@@ -97,27 +79,28 @@ function Diary() {
     await fetchMissions(selectedDate);
   };
 
-  // 날짜 변경 시 API 호출
   useEffect(() => {
-    fetchMissions(date);
-  }, [date]);
+    fetchStartDate(); // 금연 시작일 가져오기
+    fetchMissions(date); // 초기 미션 데이터 가져오기
+  }, []);
 
   const customTileContent = ({ date, view }) => {
-    if (view === "month") {
-      const today = new Date();
-      const isToday = date.toDateString() === today.toDateString();
-      const isPastDay = date < today;
+    if (view === "month" && startDate) {
+      const today = new Date(); // 오늘 날짜
+      const formattedStartDate = new Date(startDate); // 시작 날짜
 
-      if (isToday) {
+      if (date.toDateString() === today.toDateString()) {
+        // 오늘 날짜에 구름 아이콘 표시
         return (
           <div className="today-icon">
             <img src={Character} alt="character" />
           </div>
-        ); // 당일 구름 아이콘
+        );
       }
 
-      if (isPastDay) {
-        return <div className="past-day-bar"></div>; // 지난 날 파란 줄
+      if (date >= formattedStartDate && date < today) {
+        // 금연 시작일부터 어제까지 밑줄 표시
+        return <div className="past-day-bar"></div>;
       }
     }
     return null;
@@ -132,7 +115,7 @@ function Diary() {
             formatMonthYear={(locale, date) => moment(date).format("M")}
             calendarType="gregory"
             tileContent={customTileContent}
-            onChange={handleDateChange} // handleDateChange를 사용하도록 수정
+            onChange={handleDateChange}
             value={date}
             prev2Label={null}
             next2Label={null}
@@ -175,7 +158,7 @@ function Diary() {
                 <div key={index} className="mission">
                   <div className="mission_box">
                     <img
-                      src={mission.image || "/icons/default.svg"} // 기본 아이콘 추가
+                      src={water} // 기본 아이콘 추가
                       alt="mission-icon"
                       className="mission-icon"
                     />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./MainBoard.css";
@@ -16,7 +16,9 @@ function MainBoard() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://15.164.231.201:8080/post/all");
+        const response = await axios.get(
+          "http://15.164.231.201:8080/post/bringAllPosts"
+        );
         setPosts(response.data); // 응답 데이터를 상태에 저장
       } catch (error) {
         console.error("게시글을 불러오는 중 오류가 발생했습니다:", error);
@@ -59,7 +61,7 @@ function MainBoard() {
               onClick={() => handlePostClick(post.id)}
             >
               <h3 className="board-title">{truncateText(post.title, 24)}</h3>
-              <p className="board-content">{truncateText(post.content, 200)}</p>
+              <p className="board-content">{truncateText(post.content, 21)}</p>
               <div className="board-footer">
                 <span className="board-nickname">{`작성자: ${post.userId}`}</span>
                 <div className="board-icons">
