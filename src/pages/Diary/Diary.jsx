@@ -24,7 +24,7 @@ function Diary() {
 
     try {
       const response = await axios.get(
-        "http://15.164.231.201:8080/UserStartRecord/findUserStartRecord",
+        "https://quitsmoking.co.kr/UserStartRecord/findUserStartRecord",
         {
           params: { token },
         }
@@ -32,7 +32,7 @@ function Diary() {
 
       if (response.status === 200 && response.data.startDate) {
         setStartDate(response.data.startDate); // 시작 날짜 설정
-        console.log("금연 시작일:", response.data.startDate);
+        console.log("금연 시작일:" , response.data.startDate);
       } else {
         console.warn("금연 시작일 데이터를 가져오지 못했습니다.");
         setStartDate(null);
@@ -53,7 +53,7 @@ function Diary() {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
       const response = await axios.get(
-        "http://15.164.231.201:8080/mission_record/fetchByDate",
+        "https://quitsmoking.co.kr/mission_record/fetchByDate",
         {
           params: {
             token: token,
