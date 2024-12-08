@@ -16,10 +16,10 @@ function Login() {
     e.preventDefault();
 
     if (!id || !password) {
-      setShowModal(true);
+      alert("아이디와 비밀번호를 입력하세요");
       return;
     }
-    
+
 
 
     try {
@@ -36,8 +36,8 @@ function Login() {
 
         const token = loginResponse.data;
         localStorage.setItem('userToken', token);
-        localStorage.setItem('userPassword',password);
-        localStorage.setItem('userEmail', id); 
+        localStorage.setItem('userPassword', password);
+        localStorage.setItem('userEmail', id);
 
         // 두 개의 API 요청 보내기
         const [userStartExistResponse, cessationExistResponse] = await Promise.all([
@@ -52,7 +52,7 @@ function Login() {
         const userStartExist = userStartExistResponse.data;
         const cessationExist = cessationExistResponse.data;
 
-        console.log(userStartExist,cessationExist)
+        console.log(userStartExist, cessationExist)
         // 분기 처리
         if (userStartExist) {
           navigate('/home'); // 기존 데이터가 있으면 홈으로 이동
@@ -149,13 +149,7 @@ function Login() {
         </button>
       </div>
 
-      {showModal && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <p>아이디와 비밀번호를 입력하세요</p>
-          </div>
-        </div>
-      )}
+     
     </div>
   );
 }

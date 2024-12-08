@@ -106,7 +106,7 @@
 .StopSmoking-ConfirmText {
     font-size: 2vh;
     color: #d9534f;
-    margin-bottom: 15px;
+    margin: 1rem 0 0.5rem 0;
     line-height: 1.5;
     text-align: center;
 }

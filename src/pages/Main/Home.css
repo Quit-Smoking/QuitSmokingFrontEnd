@@ -1,3 +1,15 @@
+html,
+body {
+    overscroll-behavior: none;
+    /* 기본 스크롤 동작 비활성화 */
+    overflow: hidden;
+    /* 스크롤 자체를 막음 */
+    height: 100%;
+    /* 화면 높이를 고정 */
+    color: #000; /* 텍스트 색상 (검은색) */
+
+}
+
 /* 전체 컨테이너 */
 .Home-Container {
     height: 100vh;
@@ -55,14 +67,15 @@
 }
 
 .shadow {
-    animation: shrinkShadow 3s infinite ease-in-out; /* 애니메이션 추가 */
+    animation: shrinkShadow 3s infinite ease-in-out;
+    /* 애니메이션 추가 */
     scale: 0.8;
 }
 
 .homecloud {
     padding-left: 2.5vw;
     scale: 0.8;
-    animation: moveUp 3s infinite ease-in-out; 
+    animation: moveUp 3s infinite ease-in-out;
 }
 
 .Home-MainTime {
@@ -323,6 +336,7 @@ p {
     from {
         transform: translateX(100%);
     }
+
     to {
         transform: translateX(0);
     }
@@ -333,6 +347,7 @@ p {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -340,20 +355,26 @@ p {
 
 /* 추가된 애니메이션 */
 @keyframes moveUp {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
         opacity: 1;
     }
+
     50% {
         transform: translateY(-2vh);
     }
 }
 
 @keyframes shrinkShadow {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
         transform: scale(0.7);
         opacity: 0.7;
