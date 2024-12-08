@@ -15,7 +15,7 @@ function MissionSelect() {
   const userToken = localStorage.getItem('userToken');
 
   const [currentMission, setCurrentMission] = useState(false); // 진행 중인 미션 확인
-  const [selectedSlideIndex, setSelectedSlideIndex] = useState(null);
+  const [selectedSlideIndex, setSelectedSlideIndex] = useState(null); // 선택된 슬라이드 인덱스
 
   useEffect(() => {
     const fetchMissions = async () => {
@@ -73,7 +73,14 @@ function MissionSelect() {
     slidesToScroll: 1,
     arrows: false,
     swipe: true,
-    beforeChange: (oldIndex, newIndex) => setSelectedSlideIndex(newIndex),
+  };
+
+  const handleCardClick = (index) => {
+    if (selectedSlideIndex === index) {
+      setSelectedSlideIndex(null); // 이미 선택된 카드를 다시 클릭하면 선택 해제
+    } else {
+      setSelectedSlideIndex(index); // 새로운 카드 선택
+    }
   };
 
   return (
@@ -87,11 +94,16 @@ function MissionSelect() {
         </div>
       )}
 
-      
       <Slider {...settings} className="mission-carousel-wrapper">
         {slides.map((slide, index) => (
-          <div key={slide.key} className="mission-carousel-slide">
-            <div className="card-container">
+          <div
+            key={slide.key}
+            className={`mission-carousel-slide ${
+              selectedSlideIndex === index ? "selected-card" : ""
+            }`}
+            onClick={() => handleCardClick(index)} // 카드 클릭 핸들러
+          >
+            <div className={`card-container`}>
               <p className="card-title">{slide.title}</p>
               <img src={slide.image} alt={slide.title} className="card-image" />
               <p className="card-desc">{slide.description}</p>
@@ -99,7 +111,6 @@ function MissionSelect() {
           </div>
         ))}
       </Slider>
-
 
       <div className="mission-carousel-controls">
         <button

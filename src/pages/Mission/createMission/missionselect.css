@@ -1,9 +1,3 @@
-/* 초기화 스타일 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 /* 전체 컨테이너 */
 .mission-select-container {
@@ -35,7 +29,7 @@
 }
 
 .current-desc {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #555;
   line-height: 1.5;
 }
@@ -46,19 +40,38 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 40vh;
-  /* 슬라이더 높이 */
+
   position: relative;
+
 }
 
-.mission-carousel-slide {
-  display: flex;
+/* 슬라이더 점 스타일 */
+.mission-carousel-wrapper .slick-dots {
+  position: absolute;
+  bottom: -30px; /* 점을 흰색 카드 아래로 이동 */
+  display: flex !important;
   justify-content: center;
-  align-items: center;
   width: 100%;
-  position: relative;
+
 }
 
+.mission-carousel-wrapper .slick-dots li {
+  margin: 0 5px;
+}
+
+.mission-carousel-wrapper .slick-dots li button {
+  width: 12px; /* 점 크기 */
+  height: 12px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.mission-carousel-wrapper .slick-dots li.slick-active button {
+  background-color: #008285;
+}
 /* 카드 스타일 */
 .card-container {
   display: flex;
@@ -66,7 +79,7 @@
   justify-content: center;
   align-items: center;
   width: 70%;
-  height: 90%;
+  height: 45vh;
   /* max-width: 300px; */
   background: white;
   border-radius: 15px;
@@ -79,7 +92,7 @@
 .card-title {
   font-size: 1.5rem;
   color: #008285;
-  margin-bottom: 15px;
+
 }
 
 .card-image {
@@ -107,7 +120,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-
+  transform: translateY(4vh);
 }
 
 .new-mission-start,
@@ -143,4 +156,29 @@
   height: auto;
   background-color: white;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 슬라이더 점 스타일 */
+.slick-dots {
+  position: absolute;
+  bottom: -15px; /* 점 위치 조정 */
+  display: flex !important;
+  justify-content: center;
+  width: 100%;
+  list-style: none; /* 기본 점 스타일 제거 */
+}
+
+.slick-dots li button:before {
+  content: none !important;
+}
+
+/* 선택된 카드 강조 */
+.mission-carousel-slide.selected-card .card-container {
+  background-color: #f2f9f9; /* 선택된 카드 배경색 흐림 */
+
+}
+
+/* 선택된 카드 상태 유지 */
+.card-container {
+  transition: background-color 0.3s ease, border 0.3s ease; /* 부드러운 강조 효과 */
 }

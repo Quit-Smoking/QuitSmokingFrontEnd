@@ -10,6 +10,8 @@ import Character from "../../assets/Character.svg";
 import DiaryIcon from "../../assets/DiaryIcon.svg";
 import Nav from "../../components/nav";
 import water from "../../assets/mission/water.svg";
+import exer from "../../assets/mission/exercise.svg";
+import de from "../../assets/missionMain/default.svg";
 
 function Diary() {
   const [date, setDate] = useState(new Date());
@@ -32,7 +34,7 @@ function Diary() {
 
       if (response.status === 200 && response.data.startDate) {
         setStartDate(response.data.startDate); // 시작 날짜 설정
-        console.log("금연 시작일:" , response.data.startDate);
+        console.log("금연 시작일:", response.data.startDate);
       } else {
         console.warn("금연 시작일 데이터를 가져오지 못했습니다.");
         setStartDate(null);
@@ -44,8 +46,7 @@ function Diary() {
   };
 
   const fetchMissions = async (selectedDate) => {
-
-    const token = localStorage.getItem("userToken"); 
+    const token = localStorage.getItem("userToken");
 
     setIsLoading(true); // 로딩 시작
     setError(null); // 에러 초기화
@@ -134,10 +135,10 @@ function Diary() {
                     <img src={DiaryIcon} alt="" />
                   </span>
                 </div>
-                {/* <div className="Diary_title_right">
-                  <div className="Diary_title_1">누적금연일</div>
-                  <div className="Diary_title_2">총6일</div>
-                </div> */}
+                <div className="Diary_title_right">
+                  <div className="Diary_title_1"></div>
+                  <div className="Diary_title_2"></div>
+                </div>
               </div>
             )}
           />
@@ -159,7 +160,13 @@ function Diary() {
                 <div key={index} className="mission">
                   <div className="mission_box">
                     <img
-                      src={water} // 기본 아이콘 추가
+                      src={
+                        mission.mission === "운동하기"
+                          ? exer
+                          : mission.mission === "물 마시기"
+                          ? water
+                          : de
+                      } // 기본 아이콘 추가
                       alt="mission-icon"
                       className="mission-icon"
                     />
