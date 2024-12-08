@@ -56,13 +56,7 @@ const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, 
                         </div>
                     </div>
 
-                    {/* 금연 게시판 섹션 */}
-                    <div className="menu-section">
-                        <span className="menu-title">금연 게시판</span>
-                        <div className="menu-item">작성한 글</div>
-                        <div className="menu-item">댓글 단 글</div>
-                    </div>
-
+                 
                     {/* 기타 섹션 */}
                     <div className="menu-section">
                         <span className="menu-title">기타</span>
