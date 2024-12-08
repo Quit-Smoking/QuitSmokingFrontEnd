@@ -18,8 +18,8 @@ function ChangeNickname() {
   // 버튼 클릭 시 검증 및 제출
   const handleSubmit = async () => {
     // 비밀번호와 재입력 값이 다를 경우 메시지 표시
-    const token =
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNzMzMzA3MzY0LCJleHAiOjE3MzMzNDMzNjR9.M3agOzCMGRrPsOukqEe-MGTKH_1nx8hOulHQxipIfjU"; // 로컬 스토리지에서 토큰 가져오기
+    const token = localStorage.getItem('userToken');
+      
 
     // API 요청 데이터 생성
     const requestData = {
@@ -31,7 +31,7 @@ function ChangeNickname() {
     try {
       // POST 요청
       const response = await axios.post(
-        "http://15.164.231.201:8080/user/changeNickname",
+        "https://quitsmoking.co.kr/user/changeNickname",
         null,
         {
           params: requestData, // 쿼리 파라미터로 데이터 전송
