@@ -17,7 +17,7 @@ function MainBoard() {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          "http://15.164.231.201:8080/post/bringAllPosts"
+          "https://quitsmoking.co.kr/post/bringAllPosts"
         );
         setPosts(response.data); // 응답 데이터를 상태에 저장
       } catch (error) {

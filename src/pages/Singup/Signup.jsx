@@ -40,7 +40,6 @@ function Signup() {
       alert("회원가입이 성공적으로 완료되었습니다!");
 
       navigate("/login");
-
     } catch (error) {
       console.error("Error: ", error.response || error.message);
       alert("회원가입 중 오류가 발생했습니다.");

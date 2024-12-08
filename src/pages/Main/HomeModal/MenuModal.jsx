@@ -1,6 +1,7 @@
 import React from "react";
 import "./menumodal.css";
 
+
 const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, differenceInDays, savedMoneyExact, disableClock }) => {
     const handleModifyDetermine = () => {
         if (!disableClock) {
@@ -82,9 +83,14 @@ const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, 
 
                     </div>
                 </div>
+
             </div>
+            <div className="menu-item">로그아웃</div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default MenuModal;

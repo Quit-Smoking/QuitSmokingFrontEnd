@@ -140,7 +140,7 @@ function MissionMain() {
       console.log(`id, missionId: ${id}, ${missionId}/${typeof missionId}`);
       console.log(`userToken: ${userToken}`);
 
-      const response = await axios.get("http://15.164.231.201:8080/mission_record/completeMission",
+      const response = await axios.get("https://quitsmoking.co.kr/mission_record/completeMission",
         {
           params: {
             token: userToken,
