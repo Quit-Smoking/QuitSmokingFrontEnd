@@ -21,7 +21,7 @@ function DeleteAccCheck() {
     try {
       // GET 요청: 비밀번호와 토큰 전송
       const response = await axios.get(
-        "http://15.164.231.201:8080/user/checkPassword",
+        "https://quitsmoking.co.kr/user/checkPassword",
         {
           params: {
             token: token,

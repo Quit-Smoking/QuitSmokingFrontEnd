@@ -21,7 +21,9 @@ function DiagnosisStart() {
                 {
                     params: { token },
                 }
+
             );
+
             setIsDiagnosed(response.data); // true/false 값 설정
         } catch (e) {
             setError("API 요청에 실패했습니다.");
