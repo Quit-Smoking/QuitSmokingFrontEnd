@@ -24,7 +24,7 @@ function DeleteAcc() {
 
     try {
       const response = await axios.delete(
-        "http://15.164.231.201:8080/user/delete",
+        "https://quitsmoking.co.kr/user/delete",
         {
           params: {
             token: token,
