@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./NewMission.css"; // CSS 파일 경로 수정
+import "./newMission.css"; // CSS 파일 경로 수정
 import { useNavigate, useLocation } from "react-router-dom";
 import TopBar from "../../components/TopBar"; // TopBar 컴포넌트 가져오기
 
@@ -99,7 +99,7 @@ function NewMission() {
           >
             다음
           </button>
-        </div>  
+        </div>
       </footer>
     </div>
   );
