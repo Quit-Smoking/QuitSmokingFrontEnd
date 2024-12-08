@@ -13,7 +13,7 @@ function Nav({ currentPage }) {
         }
     };
     const goMission = () => navigate("/missionmain");
-    const goBoard = () => navigate("/board"); //게시판 해야됨.
+    const goBoard = () => navigate("/MainBoard"); //게시판 해야됨.
 
     return (
         <div className="nav-container">

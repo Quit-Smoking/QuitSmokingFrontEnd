@@ -105,7 +105,7 @@ function Post() {
         if (response.status === 200) {
           console.log('게시글 성공적 삭제:', response.data);
           console.log('게시판 페이지로 이동');
-          navigate('/missionMain'); //! 게시판페이지로 이동
+          navigate('/MainBoard'); //! 게시판페이지로 이동
         }
       } catch (error) {
         console.error('게시글 삭제 중 에러 발생', error);
