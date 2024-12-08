@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo_letters.svg";
 import cloudchar from "../../assets/cloudchar.png";
 import shadow from "../../assets/shadowblue.png";
-import menuIcon from "../../assets/menu.png";
+import menuIcon from "../../assets/Menu.png";
 import axios from "axios";
 import Nav from "../../components/nav";
 import "./cessation.css";
