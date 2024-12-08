@@ -4,7 +4,6 @@ import homecloud from "../../assets/HomeChar.png";
 import shadow from "../../assets/shadowblue.png";
 import sun from "../../assets/Sun.png";
 import menuIcon from "../../assets/menu.png";
-
 import axios from "axios";
 import Nav from "../../components/nav";
 import InfoModal from "./HomeModal/InfoModal";
@@ -19,30 +18,30 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // 메뉴 모달 상태
 
     const closeModal = () => {
         setIsModalOpen(false);
         localStorage.setItem("isModalShown", "true");
     };
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-    const closeMenuModal = () => setIsMenuOpen(false);
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen); // 메뉴 모달 토글
+    const closeMenuModal = () => setIsMenuOpen(false); // 메뉴 모달 닫기
 
     const fetchData = async () => {
         const token = localStorage.getItem("userToken");
 
         try {
-            const dataExistResponse = await axios.get(
-                "https://quitsmoking.co.kr/UserStartRecord/doExist",
-                { params: { token } }
-            );
+            // 데이터 존재 여부 확인
+            const dataExistResponse = await axios.get("https://quitsmoking.co.kr/UserStartRecord/doExist", { params: { token } });
 
             if (!dataExistResponse.data) {
+                // 데이터가 없으면 Cessation 페이지로 이동
                 navigate("/cessation");
                 return;
             }
 
+            // 데이터가 있으면 나머지 데이터를 가져옴
             const [recordResponse, nicknameResponse, emailResponse] = await Promise.all([
                 axios.get("https://quitsmoking.co.kr/UserStartRecord/findUserStartRecord", { params: { token } }),
                 axios.get("https://quitsmoking.co.kr/user/getNickname", { params: { token } }),
@@ -54,6 +53,7 @@ const Home = () => {
                 nickname: nicknameResponse.data,
                 email: emailResponse.data,
             });
+
         } catch (err) {
             setError("API 요청에 실패했습니다.");
         } finally {
@@ -73,8 +73,8 @@ const Home = () => {
 
     const nowDate = new Date();
     const startDate = new Date(data.startDate);
-    const differenceInDays = Math.floor((nowDate - startDate) / (1000 * 60 * 60 * 24));
-    const savedMoneyExact = data.numbersSmoked * differenceInDays * (4500 / 20);
+    const differenceInDays = Math.floor((nowDate - startDate) / (1000 * 60 * 60 * 24)); // 금연한 시간
+    const savedMoneyExact = data.numbersSmoked * differenceInDays * (4500 / 20); // 절약한 돈
 
     return (
         <>
@@ -91,7 +91,7 @@ const Home = () => {
                 <MenuModal
                     nickname={data.nickname}
                     email={data.email}
-                    determine={data.resolution}
+                    determine={data.resolution} // 금연 각오 전달
                     onClose={closeMenuModal}
                     navigate={navigate}
                     resolution={data.resolution}
@@ -106,7 +106,7 @@ const Home = () => {
                         src={menuIcon}
                         alt="메뉴 아이콘"
                         className="menu-icon"
-                        onClick={toggleMenu}
+                        onClick={toggleMenu} // 메뉴 버튼 클릭 시 모달 열기
                     />
                 </div>
                 <div className="Start-Main">
@@ -125,10 +125,28 @@ const Home = () => {
                         <div>{data.startDate ? `D+${differenceInDays}` : "날짜를 불러오는 중..."}</div>
                         <div>금연 중</div>
                     </div>
-                    <div className="Reportbox">
-                        <div>아낀 돈</div>
-                        <div className="savedmoneyimg"></div>
-                        <div>{savedMoneyExact || 0}원</div>
+                    <div className="Home-MainReport">
+                        <div className="ReportContainer">
+                            <div className="ReportBlackBg">
+                                <div className="ReportWhitebg">
+                                    <div className="ReportText">
+                                        <div>금연 리포트</div>
+                                    </div>
+                                    <div className="Report">
+                                        <div className="Reportbox">
+                                            <div>연장한 수명</div>
+                                            <div className="extendtimeimg"></div>
+                                            <div>{differenceInDays + 1 || 0}일</div>
+                                        </div>
+                                        <div className="Reportbox">
+                                            <div>아낀 돈</div>
+                                            <div className="savedmoneyimg"></div>
+                                            <div>{savedMoneyExact || 0}원</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="Home-Footer">
