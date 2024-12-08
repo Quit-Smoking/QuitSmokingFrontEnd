@@ -21,7 +21,7 @@ function EditPost() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get("http://15.164.231.201:8080/post/findByPostId", {
+        const response = await axios.get("https://quitsmoking.co.kr/post/findByPostId", {
           params: {
             id: id,
           }
@@ -53,7 +53,7 @@ function EditPost() {
     }
 
     try {
-      const response = await axios.post('http://15.164.231.201:8080/post/update', {
+      const response = await axios.post('https://quitsmoking.co.kr/post/update', {
         params: {
           "token": {userToken},
         },

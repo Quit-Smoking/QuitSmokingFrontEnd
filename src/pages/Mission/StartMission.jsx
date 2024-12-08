@@ -56,7 +56,7 @@ function StartMission() {
 
     try {
       const response = await axios.post(
-        "http://15.164.231.201:8080/mission/add",
+        "https://quitsmoking.co.kr/mission/add",
         {
           token: userToken,
           mission: missionName,

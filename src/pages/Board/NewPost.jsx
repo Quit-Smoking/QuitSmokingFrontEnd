@@ -42,7 +42,7 @@ function NewPost() {
     }
 
     try {
-      const response = await axios.post('http://15.164.231.201:8080/post/add', {
+      const response = await axios.post('https://quitsmoking.co.kr/post/add', {
           "token": userToken,
           "title": postTitle,
           "content": postContent,

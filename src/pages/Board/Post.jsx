@@ -47,7 +47,7 @@ function Post() {
     console.log(`postId: ${postId}, ${typeof postId}`);
     try {
       // 서버로 좋아요 상태 전송
-      const response = await axios.post("http://15.164.231.201:8080/post/like", null, {
+      const response = await axios.post("https://quitsmoking.co.kr/post/like", null, {
         params: {
           id: postId,
         },
@@ -91,7 +91,7 @@ function Post() {
       }
 
       try {
-        const response = await axios.delete('http://15.164.231.201:8080/post/delete', {
+        const response = await axios.delete('https://quitsmoking.co.kr/post/delete', {
           params: {
             "token": userToken,
             "id": postId,
@@ -118,7 +118,7 @@ function Post() {
     if (window.confirm("해당 댓글을 삭제하시겠습니까?")) {
       try {
         const response = await axios.delete(
-          "http://15.164.231.201:8080/comment/delete",
+          "https://quitsmoking.co.kr/comment/delete",
           {
             params: { 
               token: userToken,
@@ -150,7 +150,7 @@ function Post() {
 
     try {
       const response = await axios.post(
-        "http://15.164.231.201:8080/comment/add",
+        "https://quitsmoking.co.kr/comment/add",
         {
           token: userToken,
           postId: postId,
@@ -216,7 +216,7 @@ function Post() {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get("http://15.164.231.201:8080/comment/findByPostId", {
+      const response = await axios.get("https://quitsmoking.co.kr/comment/findByPostId", {
         params: {
           postId: postId,
         }
@@ -240,7 +240,7 @@ function Post() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get("http://15.164.231.201:8080/post/findByPostId", {
+        const response = await axios.get("https://quitsmoking.co.kr/post/findByPostId", {
           params: {
             id: postId,
           }
@@ -260,7 +260,7 @@ function Post() {
     }
     const fetchNickname = async () => {
       try {
-        const response = await axios.get("http://15.164.231.201:8080/user/getNickname", {
+        const response = await axios.get("https://quitsmoking.co.kr/user/getNickname", {
           params: {
             token: userToken,
           }
