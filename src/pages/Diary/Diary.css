@@ -40,6 +40,11 @@
 .Diary_title_left {
   font-size: 12px;
   text-align: left;
+  color: black !important;
+
+}
+.calendar-label-text{
+  color : black;
 }
 
 .Diary_title_right {

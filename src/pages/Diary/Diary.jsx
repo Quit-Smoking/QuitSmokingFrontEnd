@@ -134,10 +134,10 @@ function Diary() {
                     <img src={DiaryIcon} alt="" />
                   </span>
                 </div>
-                <div className="Diary_title_right">
+                {/* <div className="Diary_title_right">
                   <div className="Diary_title_1">누적금연일</div>
                   <div className="Diary_title_2">총6일</div>
-                </div>
+                </div> */}
               </div>
             )}
           />

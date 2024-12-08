@@ -9,99 +9,138 @@
 .mission-select-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  /* Nav가 아래로 이동하도록 조정 */
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: linear-gradient(#fff, #b7e1e2);
   overflow: hidden;
-  padding: 20px;
 }
 
-/* 헤더 영역 */
-.mission-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.mission-header h1 {
-  font-size: 1.8rem;
-  color: #008285;
-  margin-bottom: 10px;
-}
-
-.mission-header p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* 슬라이더 컨테이너 */
-.mission-slider-container {
-  width: 90%;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
-
-.mission-slider {
-  width: 100%;
-}
-
-.mission-card {
+/* 현재 미션 배너 */
+.current-banner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   text-align: center;
+  margin-top: 5vh;
 }
 
-.mission-title {
+.current-title {
+  font-size: 1.8rem;
+  color: #008285;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.current-desc {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* 슬라이더 컨테이너 */
+.mission-carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40vh;
+  /* 슬라이더 높이 */
+  position: relative;
+}
+
+.mission-carousel-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* 카드 스타일 */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 90%;
+  /* max-width: 300px; */
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* padding: 20px; */
+  text-align: center;
+  margin-left: 15vw;
+}
+
+.card-title {
   font-size: 1.5rem;
   color: #008285;
   margin-bottom: 15px;
 }
 
-.mission-image {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 15px;
+.card-image {
+  width: 80%;
+  max-width: 200px;
+  margin-bottom: 20px;
 }
 
-.mission-description {
-  font-size: 1rem;
+.card-desc {
+  font-size: 0.8rem;
   color: #555;
+  line-height: 1.5;
+  text-align: center;
+  padding: 10px 10px;
+  position: relative;
 }
-
-/* 버튼 컨테이너 */
-.mission-actions {
+.slick-dots{
+  position: absolute;
+  bottom : 0;
+}
+/* 버튼 영역 */
+.mission-carousel-controls {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
+
 }
 
-.mission-button {
+.new-mission-start,
+.my-mission-start {
   width: 80%;
   max-width: 300px;
   padding: 10px;
   font-size: 1rem;
   border-radius: 10px;
-  margin-bottom: 10px;
   border: none;
   cursor: pointer;
-  text-align: center;
+  margin-bottom: 10px;
 }
 
-.mission-button.start {
+.new-mission-start {
   background-color: #008285;
   color: white;
 }
 
-.mission-button.create {
+.my-mission-start {
   background-color: white;
   color: #008285;
   border: 2px solid #008285;
+}
+
+.my-mission-start:hover {
+  background-color: #f0f0f0;
+}
+
+/* Nav 스타일 */
+.nav-footer {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
