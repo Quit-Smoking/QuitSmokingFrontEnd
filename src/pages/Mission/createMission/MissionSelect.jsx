@@ -43,7 +43,7 @@ function MissionSelect() {
 
   const [currentMission, setCurrentMission] = useState(false); //! 진행중인 미션 확인
   const [selectedSlideIndex, setSelectedSlideIndex] = useState(null);
-  
+
   const slides = [
     {
       key: "slide-1",
@@ -131,9 +131,8 @@ function MissionSelect() {
             className="mission-carousel-slide"
           >
             <div
-              className={`card-container ${
-                selectedSlideIndex === index ? "selected-card" : ""
-              }`}
+              className={`card-container ${selectedSlideIndex === index ? "selected-card" : ""
+                }`}
               onClick={() =>
                 setSelectedSlideIndex(selectedSlideIndex === index ? null : index)
               }
@@ -164,7 +163,10 @@ function MissionSelect() {
           미션 직접 생성하기
         </button>
       </div>
+
+      <footer>
         <Nav />
+      </footer>
     </div>
   );
 }

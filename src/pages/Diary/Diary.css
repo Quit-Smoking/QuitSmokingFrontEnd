@@ -180,10 +180,14 @@
   padding-bottom: 15px;
 }
 
-/* 일요일 빨간색 */
-.react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
-  color: rgb(211, 26, 26);
+.react-calendar__month-view__days__day--weekend abbr {
+  color: red !important; /* 토요일과 일요일을 빨간색으로 */
 }
+
+.react-calendar__month-view__days__day {
+  color: black !important; /* 모든 날짜를 검은색으로 */
+}
+
 
 .react-calendar__tile--active {
   background-color: transparent !important; /* 배경 투명 */

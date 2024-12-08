@@ -1,17 +1,17 @@
 .mission-select-container {
   width: 100vw;
 
-
+  margin: 0;
   background: linear-gradient(#fff, #B7E1E2);
   overflow: hidden;
 }
 
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  
 }
-
 
 .mission-carousel-container {
   border: 1px solid black;
@@ -24,7 +24,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-
+  box-sizing:content-box;
   overflow: hidden;
 }
 
@@ -62,6 +62,7 @@
 .mission-carousel-slide {
   text-align: center;
   padding: 20px;
+  
 }
 
 .mission-carousel-controls {
@@ -71,7 +72,7 @@
   flex-direction: column;
   width: 100vw;
   height: 20vh;
-  margin-top: 1.5vh;
+
 }
 
 .new-mission-start,
@@ -138,8 +139,8 @@
   align-items: center;
   flex-direction: column;
 
-  height: 10vh;
-  padding: 2vh 1vh;
+
+
 
 
 }
@@ -150,8 +151,8 @@
   font-weight: 600;
   width: 90vw;
   text-align: center;
+  padding-top: 5vh;
 
-  padding-bottom: 1vh;
   border-bottom: 1px solid #85BCBD;
   margin: 0;
 }
