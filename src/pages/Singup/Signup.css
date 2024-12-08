@@ -1,8 +1,14 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 .signup-container {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  margin: 0 auto;
-  padding: 40px;
   font-family: Arial, sans-serif;
   background-color: white;
   display: flex;
@@ -10,13 +16,6 @@
   justify-content: space-between;
 }
 
-
-
- body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-} 
 
 
 .text {

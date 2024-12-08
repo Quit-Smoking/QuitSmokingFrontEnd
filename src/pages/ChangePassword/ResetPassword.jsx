@@ -60,7 +60,7 @@ function ResetPassword() {
     try {
       // POST 요청
       const response = await axios.post(
-        "http://15.164.231.201:8080/user/changePassword",
+        "https://quitsmoking.co.kr/user/changePassword",
         null,
         {
           params: requestData, // 쿼리 파라미터로 데이터 전송

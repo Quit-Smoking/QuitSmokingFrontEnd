@@ -120,7 +120,6 @@ function MissionMain() {
           description: calculateWeeksPassed(item.startDate),
           default: item.default,
         }));
-        console.log(`formattedMissions: ${formattedMissions}`);
         setMissions(formattedMissions);
       } catch (error) {
         console.error('미션 fetch 중 에러', error);
