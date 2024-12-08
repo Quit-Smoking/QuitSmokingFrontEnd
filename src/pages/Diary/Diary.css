@@ -170,12 +170,6 @@
   border-collapse: separate;
 }
 
-/* 토요일과 일요일 스타일 */
-.react-calendar__month-view__days__day--saturday,
-.react-calendar__month-view__days__day--sunday {
-  color: #1e90ff; /* 파란색 */
-}
-
 /* 요일 줄 텍스트 장식 제거 */
 .react-calendar__month-view__weekdays abbr {
   text-decoration: none;
