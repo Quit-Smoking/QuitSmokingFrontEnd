@@ -58,7 +58,7 @@ function MissionMain() {
       console.log("Formatted Date:", formattedDate);
 
       try {
-        const response = await axios.get("http://15.164.231.201:8080/mission_record/fetchByDate",
+        const response = await axios.get("https://quitsmoking.co.kr/mission_record/fetchByDate",
         {
           params: {
             token: userToken,
@@ -88,7 +88,7 @@ function MissionMain() {
 
     const fetchMissionData = async () => {
       try {
-        const response = await axios.get("http://15.164.231.201:8080/mission/getMissions", 
+        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions", 
           {
             params: {
               token: userToken,

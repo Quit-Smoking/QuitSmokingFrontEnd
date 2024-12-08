@@ -1,23 +1,30 @@
 import React from "react";
-import "./MenuModal.css";
+import "./menumodal.css";
 
-const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, differenceInDays }) => {
+const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, differenceInDays, savedMoneyExact, disableClock }) => {
     const handleModifyDetermine = () => {
-        navigate("/modifydetermine", { state: { determine } }); // 금연 각오 데이터를 state로 전달
+        if (!disableClock) {
+            navigate("/modifydetermine", { state: { determine } }); // 금연 각오 데이터를 state로 전달
+        }
+    };
 
-    };
     const handleStopSmoking = () => {
-        navigate("/stopsmoking", { state: { resolution, differenceInDays } });
+        if (!disableClock) {
+            navigate("/stopsmoking", { state: { resolution, differenceInDays, savedMoneyExact } });
+        }
     };
+
     const handleChangePassword = () => {
         navigate("/changepassword");
     };
+
     const handleChangeNickname = () => {
         navigate("/changenickname");
-    }
+    };
+
     const handleDeleteAccount = () => {
         navigate("/DeleteAccCheck");
-    }
+    };
 
     return (
         <div className="menu-modal-overlay" onClick={onClose}>
@@ -32,10 +39,18 @@ const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, 
                     </div>
                     <div className="menu-section">
                         <span className="menu-title">금연 시계</span>
-                        <div className="menu-item" onClick={handleModifyDetermine}>
+                        <div
+                            className={`menu-item ${disableClock ? "disabled" : ""}`}
+                            onClick={handleModifyDetermine}
+                        >
                             금연 각오 수정
                         </div>
-                        <div className="menu-item" onClick={handleStopSmoking}>금연 중단</div>
+                        <div
+                            className={`menu-item ${disableClock ? "disabled" : ""}`}
+                            onClick={handleStopSmoking}
+                        >
+                            금연 중단
+                        </div>
                     </div>
                     <div className="menu-section">
                         <span className="menu-title">금연 게시판</span>
@@ -44,11 +59,27 @@ const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, 
                     </div>
                     <div className="menu-section">
                         <span className="menu-title">기타</span>
-                        <div className="menu-item" onClick={() => navigate('/home/diagnosisstart')}>
+                        <div
+                            className="menu-item"
+                            onClick={() => navigate("/home/diagnosisstart")}
+                        >
                             니코틴 의존도 진단
                         </div>
-                        <div className="menu-item" onClick={handleDeleteAccount}>회원탈퇴</div>
-                        <div className="menu-item">로그아웃</div>
+                        <div className="menu-item" onClick={handleDeleteAccount}>
+                            회원탈퇴
+                        </div>
+                        <div
+                            className="menu-item"
+                            onClick={() => {
+                                const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
+                                if (confirmLogout) {
+                                    navigate("/login");
+                                }
+                            }}
+                        >
+                            로그아웃
+                        </div>
+
                     </div>
                 </div>
             </div>

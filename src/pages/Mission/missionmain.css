@@ -7,14 +7,14 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
 }
 
 .mission-main-title {
   font-size: 2.5vh;
   font-weight: 700;
-  margin-top: -3vh;
+  margin-bottom: 5vh;
 }
 
 .mission-todo {

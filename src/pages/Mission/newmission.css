@@ -1,135 +1,115 @@
+/* 전체 컨테이너 스타일 */
 .new-mission-container {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  background-color: white;
-  position: relative;
-}
-
-.new-mission-carousel {
-  box-sizing: border-box;
-
-  height: 70vh;
-  width: 100vw;
-  margin-top: 5vh;
-  position: relative;
-
-}
-
-.custom-dot-list-style {
-  /* border: 1px solid red; */
-  position: absolute;
-  top: 0;
-  z-index: 100;
-}
-
-.custom-dot-list-style li button {
-  border-color: #d9d9d9;
-}
-
-.react-multi-carousel-dot--active button {
-  background-color: #d9d9d9 !important;
-}
-
-.week-title {
-  font-size: 3vh;
-  font-size: bold;
-  margin-bottom: 0;
-}
-
-.week-desc {
-  font-size: 2vh;
-  font-size: 400;
-  margin: 0 0 6vh 0;
-}
-
-.new-mission-weeks {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin: 2vh 0;
-}
-
-.new-mission-week {
-  border: 2px solid #B7E1E2;
-  background-color: transparent;
-  height: 10vh;
-  width: 40vw;
-  font-size: 2.8vh;
-  font-weight: 400;
-  outline: none;
-}
-
-.new-mission-week:active {
-  background-color: #85bcbd;
-  color: white;
-}
-
-.new-mission-week:hover {
-  background-color: #85bcbd;
-  color: white;
-}
-
-
-.weekdays {
-  margin: 0 2vh;
-  text-align: center;
-}
-
-.weekday {
-  border: 2px solid #B7E1E2;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 2.5vh;
-  font-size: 400;
-  margin: 5px;
-}
-
-.weekday:hover, .weekday:active, .weekday.selected {
-  outline: none;
-  border: 2px solid #85BCBD;
-  background-color: #85BCBD;
-  color: white;
-}
-
-.new-mission-move {
-  position: absolute;
-  bottom: 5vh;
-  left: 50vw;
-  transform: translateX(-50%);
-}
-
-.new-mission-move button {
-  font-size: 2.5vh;
-  width: 35vw;
-  outline: none;
-}
-
-.new-mission-next {
-  background-color: #008285;
-  color: white;
-}
-
-.new-mission-prev {
-  border: 2px solid #008285;
-  background-color: white;
-  color: black;
-  margin-right: 1vh;
-}
-
-button.new-mission-next:disabled {
-  background-color: #d9d9d9;
-  color: white;
-}
-
-.content-container {
-  /* border: 1px solid red; */
-  height: 72vh;
-
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100vh; /* 전체 높이 */
+  width: 100vw; /* 전체 너비 */
+  background-color: white;
+}
+
+/* Header */
+header {
+  flex: 0 0 auto;
+  height: 15vh; /* 헤더 높이 */
+}
+
+/* Main Section */
+.mission-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5vw; /* 가로 여백 */
+}
+
+.mission-text-container {
+  text-align: center;
+  margin-bottom: 8vh; /* 텍스트 아래 여백 */
+}
+
+.mission-title {
+  font-size: 8vw; /* 텍스트 크기 */
+  font-weight: bold;
+  color: #333;
+}
+
+.mission-subtitle {
+  font-size: 5vw;
+  color: #888;
+}
+
+/* 요일 선택 전체 컨테이너 */
+.mission-days-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 월~금 컨테이너 */
+.mission-weekdays-container {
+  display: flex;
+  justify-content: center;
+  gap: 2vw; /* 버튼 간 가로 간격 */
+  width: 100%;
+}
+
+/* 토~일 컨테이너 */
+.mission-weekend-container {
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  width: 50%;
+  margin-top: 2vh; /* 위쪽 여백 */
+}
+
+/* 요일 버튼 스타일 */
+.mission-day-box {
+  display: flex;
   justify-content: center;
   align-items: center;
+  width: 12vw;
+  height: 12vw;
+  font-size: 4vw;
+  font-weight: bold;
+  color: #333;
+  border: 0.2vh solid #B7E1E2;
+  border-radius: 50%; /* 원형 버튼 */
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mission-day-box.selected {
+  background-color: #B7E1E2;
+  color: #fff;
+}
+
+/* Footer Section */
+.newmission-footer {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  padding: 0 5vw 13vh; /* 하단 여백 */
+}
+
+.newmission-next-btn {
+  width: 80vw;
+  height: 7vh;
+  font-size: 4.5vw;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+.newmission-next-btn.active {
+  background-color: #008285;
+  color: #fff;
+  cursor: pointer;
 }

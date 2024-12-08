@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../../assets/logo_letters.svg";
 import homecloud from "../../assets/HomeChar.png";
 import shadow from "../../assets/shadowblue.png";
-import sun from "../../assets/sun.png";
+import sun from "../../assets/Sun.png";
 import menuIcon from "../../assets/menu.png";
 import axios from "axios";
 import Nav from "../../components/nav";
@@ -29,16 +29,25 @@ const Home = () => {
     const closeMenuModal = () => setIsMenuOpen(false); // 메뉴 모달 닫기
 
     const fetchData = async () => {
-
         const token = localStorage.getItem("userToken");
 
-
         try {
+            // 데이터 존재 여부 확인
+            const dataExistResponse = await axios.get("https://quitsmoking.co.kr/UserStartRecord/doExist", { params: { token } });
+
+            if (!dataExistResponse.data) {
+                // 데이터가 없으면 Cessation 페이지로 이동
+                navigate("/cessation");
+                return;
+            }
+
+            // 데이터가 있으면 나머지 데이터를 가져옴
             const [recordResponse, nicknameResponse, emailResponse] = await Promise.all([
-                axios.get("http://15.164.231.201:8080/UserStartRecord/findUserStartRecord", { params: { token } }),
-                axios.get("http://15.164.231.201:8080/user/getNickname", { params: { token } }),
-                axios.get("http://15.164.231.201:8080/user/getEmail", { params: { token } }),
+                axios.get("https://quitsmoking.co.kr/UserStartRecord/findUserStartRecord", { params: { token } }),
+                axios.get("https://quitsmoking.co.kr/user/getNickname", { params: { token } }),
+                axios.get("https://quitsmoking.co.kr/user/getEmail", { params: { token } }),
             ]);
+
             setData({
                 ...recordResponse.data,
                 nickname: nicknameResponse.data,
@@ -62,12 +71,10 @@ const Home = () => {
     if (isLoading) return <div></div>;
     if (error) return <div>{error}</div>;
 
-
-
     const nowDate = new Date();
     const startDate = new Date(data.startDate);
-    const differenceInDays = Math.floor((nowDate - startDate) / (1000 * 60 * 60 * 24));
-    const savedMoneyExact = data.numbersSmoked * differenceInDays * (4500 / 20);
+    const differenceInDays = Math.floor((nowDate - startDate) / (1000 * 60 * 60 * 24)); // 금연한 시간
+    const savedMoneyExact = data.numbersSmoked * differenceInDays * (4500 / 20); // 절약한 돈
 
     return (
         <>
@@ -89,10 +96,10 @@ const Home = () => {
                     navigate={navigate}
                     resolution={data.resolution}
                     differenceInDays={differenceInDays}
+                    savedMoneyExact={savedMoneyExact}
                 />
             )}
             <div className="Home-Container">
-                
                 <div className="Home-Header">
                     <img src={logo} alt="숨쉴래 로고" className="Header-logo" />
                     <img
@@ -106,7 +113,6 @@ const Home = () => {
                     <div className="Start-MainMotive">
                         <div>{data.resolution || "건강한 나의 삶을 위해!"}</div>
                     </div>
-
                     <div className="Home-Mainlogo">
                         <div className="homecloud">
                             <img src={homecloud} alt="홈 클라우드" />
@@ -115,7 +121,6 @@ const Home = () => {
                             <img src={shadow} className="shadow" alt="그림자" />
                         </div>
                     </div>
-
                     <div className="Home-MainTime">
                         <div>{data.startDate ? `D+${differenceInDays}` : "날짜를 불러오는 중..."}</div>
                         <div>금연 중</div>

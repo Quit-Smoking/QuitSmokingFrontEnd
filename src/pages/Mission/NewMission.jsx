@@ -1,71 +1,106 @@
-import "./newmission.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import "./NewMission.css"; // CSS 파일 경로 수정
 import { useNavigate, useLocation } from "react-router-dom";
-import TopBar from "../../components/TopBar";
+import TopBar from "../../components/TopBar"; // TopBar 컴포넌트 가져오기
 
 function NewMission() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { missionName } = location.state || {}; //! 미션명 가져오기
 
-  console.log("받아온 미션 명: ", missionName);
+  // `missionName`을 전달받아 초기값 설정
+  const initialMissionName = location.state?.missionName || "";
+  const [missionName, setMissionName] = useState(initialMissionName);
+  const [selectedDays, setSelectedDays] = useState([]); // 선택된 요일
+  const weekdays = ["월", "화", "수", "목", "금"]; // 평일
+  const weekends = ["토", "일"]; // 주말
 
-  const [selectedDays, setSelectedDays] = useState([]);
-  const defaultMission = true;
-
-  const toggleDaySelection = (day) => {
-    setSelectedDays((prevSelectedDays) =>
-      prevSelectedDays.includes(day)
-        ? prevSelectedDays.filter((d) => d !== day) // Deselect if already selected
-        : [...prevSelectedDays, day] // Add if not selected
-    );
+  // 요일 선택 처리
+  const handleDaySelect = (day) => {
+    if (selectedDays.includes(day)) {
+      setSelectedDays(selectedDays.filter((d) => d !== day));
+    } else {
+      setSelectedDays([...selectedDays, day]);
+    }
   };
 
+  // 요일 정렬 함수
+  const sortDays = (days) => {
+    const dayOrder = ["월", "화", "수", "목", "금", "토", "일"];
+    return [...days].sort((a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
+  };
+
+  // 다음 버튼 핸들러
   const handleNext = () => {
-    if (selectedDays.length === 0) {
-      alert("요일을 선택해주세요.");
-      return;
-    }
-    
-    console.log("Selected Days:", selectedDays);
-    
-    try {
-      console.log('navigating to start mission')
-      navigate('/startMission', {
-        state: { missionName, selectedDays, defaultMission },
-      });
-    } catch (error) {
-      console.error(`error navigate to start mission: ${error}`)
-    }
+    const sortedDays = sortDays(selectedDays); // 요일 정렬
+    console.log("정렬된 요일:", sortedDays);
+
+    navigate("/startmission", {
+      state: { missionName, selectedDays: sortedDays },
+    });
   };
 
   return (
     <div className="new-mission-container">
-      <TopBar title={missionName} onBack={() => navigate(-1)} />
-      <div className="content-container">
-        <p className="week-title">요일 설정</p>
-        <p className="week-desc">미션을 수행할 요일을 설정해주세요</p>
-        <div className="weekdays">
-          {["월", "화", "수", "목", "금", "토", "일"].map((day) => (
-            <button
-              key={day}
-              className={`weekday ${selectedDays.includes(day) ? "selected" : ""}`}
-              onClick={() => toggleDaySelection(day)}
-            >
-              {day}
-            </button>
-          ))}
+      {/* 헤더 */}
+      <header>
+        <TopBar
+          title={missionName || "새로운 미션"}
+          onBack={() => navigate(-1)}
+        />
+      </header>
+
+      {/* 메인 콘텐츠 */}
+      <main className="mission-main">
+        <div className="mission-text-container">
+          <h1 className="mission-title">요일 설정</h1>
+          <p className="mission-subtitle">미션을 수행할 요일을 설정해주세요</p>
         </div>
-      </div>
-      <div className="new-mission-move">
-        <button
-          className="new-mission-next"
-          onClick={handleNext}
-          disabled={selectedDays === null}
-        >
-          다음
-        </button>
-      </div>
+        <div className="mission-days-container">
+          {/* 평일 */}
+          <div className="mission-weekdays-container">
+            {weekdays.map((day, index) => (
+              <div
+                key={index}
+                className={`mission-day-box ${
+                  selectedDays.includes(day) ? "selected" : ""
+                }`}
+                onClick={() => handleDaySelect(day)}
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+          {/* 주말 */}
+          <div className="mission-weekend-container">
+            {weekends.map((day, index) => (
+              <div
+                key={index}
+                className={`mission-day-box ${
+                  selectedDays.includes(day) ? "selected" : ""
+                }`}
+                onClick={() => handleDaySelect(day)}
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+
+      {/* 푸터 */}
+      <footer className="newmission-footer">
+        <div className="newmission-btn-pair">
+          <button
+            className={`newmission-next-btn ${
+              selectedDays.length > 0 ? "active" : ""
+            }`}
+            onClick={handleNext}
+            disabled={selectedDays.length === 0}
+          >
+            다음
+          </button>
+        </div>  
+      </footer>
     </div>
   );
 }

@@ -22,11 +22,9 @@ function Signup() {
       nickname: nickname,
     };
 
-    console.log("Sending data: ", requestData);
-
     try {
       const response = await axios.post(
-        "http://15.164.231.201:8080/user/register",
+        "https://quitsmoking.co.kr/user/register",
         requestData,
         {
           headers: {
@@ -34,6 +32,9 @@ function Signup() {
           },
         }
       );
+
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('Nickname', nickname);
 
       console.log(response.data);
       alert("회원가입이 성공적으로 완료되었습니다!");

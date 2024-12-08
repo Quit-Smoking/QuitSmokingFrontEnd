@@ -16,7 +16,7 @@ function ModifyDetermine() {
         try {
             // Axios 요청
             await axios.post(
-                "http://15.164.231.201:8080/UserStartRecord/changeResolution",
+                "https://quitsmoking.co.kr/UserStartRecord/changeResolution",
                 null, // body가 필요 없으므로 null로 설정
                 {
                     params: {

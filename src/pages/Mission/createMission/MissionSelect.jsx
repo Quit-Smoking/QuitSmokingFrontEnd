@@ -19,7 +19,7 @@ function MissionSelect() {
   useEffect(() => {
     const fetchMissions = async () => {
       try {
-        const response = await axios.get("http://15.164.231.201:8080/mission/getMissions",
+        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions",
           {
             params: {
               userToken,
@@ -164,7 +164,7 @@ function MissionSelect() {
           미션 직접 생성하기
         </button>
       </div>
-      <Nav />
+        <Nav />
     </div>
   );
 }
