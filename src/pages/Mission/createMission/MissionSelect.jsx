@@ -12,7 +12,6 @@ import axios from 'axios';
 
 function MissionSelect() {
   const navigate = useNavigate();
-
   const userToken = localStorage.getItem('userToken');
 
   //! 진행중인 미션이 있는지 확인하기 -> 있으면 TopBar 존재해야, 그리고 진행중인 미션 색상과 미션 뱃지 추가 필요
@@ -23,7 +22,7 @@ function MissionSelect() {
         const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions",
           {
             params: {
-              userToken : userToken
+              userToken,
             },
           }
         );
