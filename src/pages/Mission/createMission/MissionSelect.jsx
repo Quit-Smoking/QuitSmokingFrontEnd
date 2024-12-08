@@ -1,76 +1,56 @@
-import './missionselect.css';
-import TopBar from "../../../components/TopBar";
-import Nav from "../../../components/nav";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import water from '../../../assets/mission/water.svg';
-import exercise from '../../../assets/mission/exercise.svg';
-import reward from '../../../assets/mission/reward.svg';
-import report from '../../../assets/mission/report.svg';
 import Slider from "react-slick";
-import axios from 'axios';
+import axios from "axios";
+import water from "../../../assets/mission/water.svg";
+import exercise from "../../../assets/mission/exercise.svg";
+import reward from "../../../assets/mission/reward.svg";
+import report from "../../../assets/mission/report.svg";
+import "./missionselect.css";
 
 function MissionSelect() {
   const navigate = useNavigate();
-  const userToken = localStorage.getItem('userToken');
-
-  //! 진행중인 미션이 있는지 확인하기 -> 있으면 TopBar 존재해야, 그리고 진행중인 미션 색상과 미션 뱃지 추가 필요
+  const userToken = localStorage.getItem("userToken");
+  const [currentMission, setCurrentMission] = useState(false);
+  const [selectedSlide, setSelectedSlide] = useState(null);
 
   useEffect(() => {
-    const fetchMissions = async () => {
+    const checkMission = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions",
-          {
-            params: {
-              userToken,
-            },
-          }
+        const response = await axios.get(
+          "https://quitsmoking.co.kr/mission/getMissions",
+          { params: { userToken } }
         );
-
-        if (response !== 200) {
-          throw new Error('진행 중인 미션 존재하는지 확인 중 서버 200 아님');
+        if (response.status === 200) {
+          setCurrentMission(response.data !== null);
         }
-        const missionExist = response.data !== null ? true : false;
-
-        setCurrentMission(missionExist);
       } catch (error) {
-        console.error('진행 중인 미션 존재하는지 확인 중 에러', error);
+        console.error("Error fetching mission data:", error);
       }
-    }
-
-    fetchMissions();
+    };
+    checkMission();
   }, [userToken]);
-
-  const [currentMission, setCurrentMission] = useState(false); //! 진행중인 미션 확인
-  const [selectedSlideIndex, setSelectedSlideIndex] = useState(null);
 
   const slides = [
     {
-      key: "slide-1",
       title: "물 마시기",
       description:
-        "물을 마시는 것은 금연하는데 오랫동안 사용된 가장 좋은 방법 중의 하나입니다. 시원한 물은 입 속의 감각을 다르게 하여 흡연 욕구를 많이 없애줍니다. 그리고 물은 니코틴과 각종 노폐물의 배설을 촉진시켜줍니다.",
+        "물을 마시는 것은 금연 중 흡연 욕구를 줄이는 데 효과적입니다.",
       image: water,
     },
     {
-      key: "slide-2",
       title: "운동하기",
-      description:
-        "금연 후 체중 증가와 함께 나타나는 우울, 불안, 흥분, 집중력 저하 등의 금단증상에 대처하기 위한 방법으로 적절한 신체활동이 추천됩니다. 운동은 금연 실천에도 도움을 주고 체력 향상과 스트레스 관리에도 효과적입니다.",
+      description: "운동은 금연과 건강 유지에 도움을 줍니다.",
       image: exercise,
     },
     {
-      key: "slide-3",
       title: "자기보상",
-      description:
-        "금연 성공 경험을 축하하고 격려해줌으로써 금연 유지에 큰 힘이 되어 줄 수 있습니다. 또한 금연 성공을 기념한 자기 보상을 준비하여 금연에 대한 심리적 강화와 금연에서 오는 신체적 이득뿐만 아니라 경제적인 이득을 얻게 됩니다.",
+      description: "금연 성공을 축하하며 자신을 격려하세요.",
       image: reward,
     },
     {
-      key: "slide-4",
       title: "금연일지",
-      description:
-        "금연을 시작하기 전에 먼저 자신이 흡연한 시간과 장소, 함께하는 사람, 흡연량 등을 기록해 나의 흡연시간과 금연 시 발생할 흡연욕구 상황을 미리 파악합니다. 이후 금연 시작과 동시에 금연 일지를 쓰기 시작합니다.",
+      description: "흡연 습관을 기록하며 금연 계획을 세우세요.",
       image: report,
     },
   ];
@@ -78,95 +58,54 @@ function MissionSelect() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 200,
+    speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
-    swipe: true,
-    beforeChange: (oldIndex, newIndex) => setSelectedSlideIndex(newIndex),
-    appendDots: dots => (
-      <div
-        style={{
-          position: "absolute",
-          padding: "10px",
-          bottom: "-30px",
-          display: "flex",
-          justifyContent: "center",
-        }}
-        className="mission-dots"
-      >
-        <ul style={{ margin: "0px", padding: '0', display: 'flex' }}> {dots} </ul>
-      </div>
-    ),
-    customPaging: i => (
-      <div
-        style={{
-          width: "30px",
-          color: "#008285",
-          transition: "all 0.3s ease",
-          fontWeight: "bold",
-          border: "none",
-          cursor: 'pointer',
-        }}
-      >
-        {i + 1}
-      </div>
-    )
+    beforeChange: (_, next) => setSelectedSlide(next),
+  };
+
+  const startMission = () => {
+    if (selectedSlide !== null) {
+      navigate("/newMission", { state: { missionName: slides[selectedSlide].title } });
+    } else {
+      alert("미션을 선택해주세요!");
+    }
   };
 
   return (
     <div className="mission-select-container">
-      {currentMission ? (
-        <TopBar title="미션 추가" onBack={() => navigate(-1)} />
-      ) : (
-        <div className="current-banner">
-          <p className="current-title">금연 미션</p>
-          <p className="current-desc">{`숨쉴래에서\n금연에 도움이 되는 미션 4가지를 추천드려요!`}</p>
-        </div>
-      )}
-      <Slider {...settings} className="mission-carousel-wrapper">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.key}
-            className="mission-carousel-slide"
-          >
-            <div
-              className={`card-container ${selectedSlideIndex === index ? "selected-card" : ""
-                }`}
-              onClick={() =>
-                setSelectedSlideIndex(selectedSlideIndex === index ? null : index)
-              }
-            >
-              <p className="card-title">{slide.title}</p>
-              <img src={slide.image} alt={slide.title} className="card-image" />
-              <p className="card-desc">{slide.description}</p>
+      <header className="mission-header">
+        {currentMission ? (
+          <h1>미션 추가</h1>
+        ) : (
+          <>
+            <h1>금연 미션</h1>
+            <p>금연에 도움이 되는 미션 4가지를 추천드려요!</p>
+          </>
+        )}
+      </header>
+      <div className="mission-slider-container">
+        <Slider {...settings} className="mission-slider">
+          {slides.map((slide, index) => (
+            <div key={index} className="mission-card">
+              <h2 className="mission-title">{slide.title}</h2>
+              <img src={slide.image} alt={slide.title} className="mission-image" />
+              <p className="mission-description">{slide.description}</p>
             </div>
-          </div>
-        ))}
-      </Slider>
-      <div className="mission-carousel-controls">
-        <button
-          className="new-mission-start"
-          onClick={() => {
-            if (selectedSlideIndex !== null) {
-              navigate('/newMission', {
-                state: { missionName: slides[selectedSlideIndex].title },
-              });
-            } else {
-              alert("슬라이드를 선택해주세요.");
-            }
-          }}
-        >
+          ))}
+        </Slider>
+      </div>
+      <div className="mission-actions">
+        <button onClick={startMission} className="mission-button start">
           해당 미션 시작하기
         </button>
-        <button className="my-mission-start" onClick={() => navigate('/createmission')}>
+        <button
+          onClick={() => navigate("/createmission")}
+          className="mission-button create"
+        >
           미션 직접 생성하기
         </button>
       </div>
-
-      <footer>
-        <Nav />
-      </footer>
     </div>
   );
 }

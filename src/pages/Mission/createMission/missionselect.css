@@ -1,169 +1,107 @@
-.mission-select-container {
-  width: 100vw;
-
-  margin: 0;
-  background: linear-gradient(#fff, #B7E1E2);
-  overflow: hidden;
-}
-
-
+/* 초기화 스타일 */
 * {
   margin: 0;
   padding: 0;
-  
-}
-
-.mission-carousel-container {
-  border: 1px solid black;
   box-sizing: border-box;
+}
 
-  width: 100vw;
-  height: 65vh;
-
+/* 전체 컨테이너 */
+.mission-select-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  text-align: center;
-  box-sizing:content-box;
-  overflow: hidden;
-}
-
-.mission-carousel-wrapper {
-  width: calc(100vw * 4);
-  height: 56vh;
-
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-
-  position: relative;
-}
-
-.mission-carousel-wrapper .slick-dots {
-  position: absolute;
-  bottom: -20px;
-  left: -38.5%;
-  display: flex !important;
   justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(#fff, #b7e1e2);
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* 헤더 영역 */
+.mission-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mission-header h1 {
+  font-size: 1.8rem;
+  color: #008285;
+  margin-bottom: 10px;
+}
+
+.mission-header p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* 슬라이더 컨테이너 */
+.mission-slider-container {
+  width: 90%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.mission-slider {
   width: 100%;
 }
 
-.mission-carousel-wrapper .slick-dots li {
-  margin: 0 5px;
-}
-
-.mission-carousel-wrapper .slick-dots li button {
-  width: 10px;
-  height: 10px;
-  background-color: #d9d9d9;
-  border-radius: 50%;
-  border: none;
-}
-
-.mission-carousel-slide {
-  text-align: center;
-  padding: 20px;
-  
-}
-
-.mission-carousel-controls {
+.mission-card {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  width: 100vw;
-  height: 20vh;
-
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
 }
 
-.new-mission-start,
-.my-mission-start {
-  font-size: 18px;
-  box-shadow: 0 1px 4px gray;
-  margin-bottom: 1.5vh;
-  width: 80vw;
-  outline: none;
+.mission-title {
+  font-size: 1.5rem;
+  color: #008285;
+  margin-bottom: 15px;
 }
 
-.new-mission-start {
+.mission-image {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.mission-description {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* 버튼 컨테이너 */
+.mission-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.mission-button {
+  width: 80%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.mission-button.start {
   background-color: #008285;
   color: white;
 }
 
-.my-mission-start {
+.mission-button.create {
   background-color: white;
-  color: black;
+  color: #008285;
   border: 2px solid #008285;
-}
-
-.card-container {
-  height: 52vh;
-  width: 80vw;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  padding: 0 20px;
-  margin-right: 2vh;
-  border-radius: 20px;
-  background-color: white;
-  box-shadow: 0 2px 10px gray;
-}
-
-.card-title {
-  font-size: 3vh;
-  font-weight: bold;
-  margin: 1vh;
-}
-
-.card-image {
-  width: 70vw;
-  margin: 1vh 0 0 0;
-}
-@media (max-height: 670px) {
-  .card-image {
-    width: 70%;
-    margin: 0;
-  }
-}
-
-.card-desc {
-  padding: 0 10px;
-  font-size: 16.5px;
-}
-
-.current-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-
-
-
-
-}
-
-.current-title {
-  color: black;
-  font-size: 2.5vh;
-  font-weight: 600;
-  width: 90vw;
-  text-align: center;
-  padding-top: 5vh;
-
-  border-bottom: 1px solid #85BCBD;
-  margin: 0;
-}
-
-.current-desc {
-  font-size: 1.8vh;
-  white-space: pre-line;
-  text-align: center;
-  margin-top: 1vh;
-}
-
-.card-container.selected-card {
-  background-color: #D1E5E5;
 }
