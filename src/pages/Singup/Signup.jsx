@@ -26,7 +26,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "http://15.164.231.201:8080/user/register",
+        "https://quitsmoking.co.kr/user/register",
         requestData,
         {
           headers: {
@@ -39,7 +39,6 @@ function Signup() {
       alert("회원가입이 성공적으로 완료되었습니다!");
 
       navigate("/login");
-
     } catch (error) {
       console.error("Error: ", error.response || error.message);
       alert("회원가입 중 오류가 발생했습니다.");
