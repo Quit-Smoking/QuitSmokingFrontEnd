@@ -3,7 +3,7 @@ import logo from "../../assets/logo_letters.svg";
 import homecloud from "../../assets/HomeChar.png";
 import shadow from "../../assets/shadowblue.png";
 import sun from "../../assets/Sun.png";
-import menuIcon from "../../assets/menu.png";
+import menuIcon from "../../assets/Menu.png";
 import axios from "axios";
 import Nav from "../../components/nav";
 import InfoModal from "./HomeModal/InfoModal";

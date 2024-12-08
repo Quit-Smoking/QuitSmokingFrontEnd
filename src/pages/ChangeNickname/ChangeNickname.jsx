@@ -73,8 +73,8 @@ function ChangeNickname() {
             닉네임
           </div>
           <input
-            type="password"
-            id="password"
+            type="text"
+            id="text"
             placeholder="닉네임"
             value={nickname}
             onChange={handlePasswordChange}
