@@ -37,7 +37,7 @@ function Result() {
       const response = await axios.get("https://quitsmoking.co.kr/nicotin_dependencies/getScore", {
         params: { token }
       })
-      console.log(response.data, 'data');
+
       settempStatNum(response.data);
     } catch (e) {
       setError("API 요청에 실패했습니다.");
@@ -68,7 +68,7 @@ function Result() {
           src={closeIcon}
           alt="메뉴 아이콘"
           className="result-close-icon"
-          onClick={()=>navigate('/home')} // 메뉴 버튼 클릭 시 모달 열기
+          onClick={()=>navigate(-2)} // 메뉴 버튼 클릭 시 모달 열기
         />
       </div>
       <SurveyResult

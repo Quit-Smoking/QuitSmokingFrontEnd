@@ -17,7 +17,7 @@ function DiagnosisStart() {
 
         try {
             const response = await axios.get(
-                "http://15.164.231.201:8080/nicotin_dependencies/isTested",
+                "https://quitsmoking.co.kr/nicotin_dependencies/isTested",
                 {
                     params: { token },
                 }

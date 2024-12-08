@@ -164,7 +164,7 @@ function MissionSelect() {
           미션 직접 생성하기
         </button>
       </div>
-      <Nav />
+        <Nav />
     </div>
   );
 }
