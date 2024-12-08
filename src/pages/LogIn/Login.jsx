@@ -22,7 +22,7 @@ function Login() {
 
     try {
       // 첫 번째 요청: 로그인 API 호출
-      const loginResponse = await axios.post('http://15.164.231.201:8080/user/login', {
+      const loginResponse = await axios.post('https://quitsmoking.co.kr/user/login', {
         email: id,
         password: password,
       });

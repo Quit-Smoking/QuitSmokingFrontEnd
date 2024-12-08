@@ -34,7 +34,7 @@ function Result() {
     const token = localStorage.getItem('userToken');
 
     try {
-      const response = await axios.get("http://15.164.231.201:8080/nicotin_dependencies/getScore", {
+      const response = await axios.get("https://quitsmoking.co.kr/nicotin_dependencies/getScore", {
         params: { token }
       })
       console.log(response.data, 'data');
