@@ -1,10 +1,17 @@
 .mission-select-container {
   width: 100vw;
 
-  margin: 0;
+
   background: linear-gradient(#fff, #B7E1E2);
   overflow: hidden;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 
 .mission-carousel-container {
   border: 1px solid black;
@@ -143,7 +150,7 @@
   font-weight: 600;
   width: 90vw;
   text-align: center;
-  padding-top: 5vh;
+
   padding-bottom: 1vh;
   border-bottom: 1px solid #85BCBD;
   margin: 0;
