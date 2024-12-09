@@ -29,6 +29,7 @@ function MissionMain() {
   const userToken = localStorage.getItem('userToken');
   const [todos, setTodos] = useState([]);
   const [missions, setMissions] = useState([]);
+  const [refresh, setRefresh] = useState(false); // 화면 새로고침 상태
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -92,39 +93,25 @@ function MissionMain() {
 
     fetchMissionData();
     fetchTodoData();
-  }, [userToken]);
+  }, [userToken, refresh]); // refresh 상태가 변경되면 데이터를 다시 불러옴
 
-  const toggleComplete = async (id, missionId) => {
+  const deleteMission = async (missionId) => {
     try {
-      const todo = todos.find((todo) => todo.id === id);
-      if (!todo) throw new Error('투두 항목을 찾을 수 없음');
+      if (window.confirm("삭제하시겠습니까?")) {
+        const response = await axios.post("https://quitsmoking.co.kr/mission/deleteMission", null, {
+          params: { missionId },
+        });
 
-      const formattedDate = getFormattedDate();
+        if (response.status !== 200) {
+          throw new Error('미션 삭제 실패');
+        }
 
-      // /mission/complete API 호출
-      const response = await axios.post("https://quitsmoking.co.kr/mission/complete", null, {
-        params: {
-          token: userToken,
-          id: missionId,
-          date: formattedDate,
-        },
-      });
-
-      if (response.status !== 200) {
-        throw new Error('미션 완료 서버 요청 실패');
+        alert("미션이 삭제되었습니다.");
+        setRefresh((prev) => !prev); // refresh 상태를 변경하여 전체 렌더링 트리거
       }
-
-      // UI에서 상태 업데이트
-      setTodos((prevTodos) =>
-        prevTodos.map((todo) =>
-          todo.id === id ? { ...todo, completed: true } : todo
-        )
-      );
-
-      alert('미션을 완료했습니다!');
     } catch (error) {
-      console.error('미션 완료 처리 중 에러:', error);
-      alert('미션 완료 처리 중 문제가 발생했습니다.');
+      console.error('미션 삭제 중 에러:', error);
+      alert('미션 삭제 처리 중 문제가 발생했습니다.');
     }
   };
 
@@ -143,7 +130,6 @@ function MissionMain() {
               <div
                 key={todo.id}
                 className={`todo-item ${todo.completed ? "completed" : ""}`}
-                onClick={() => toggleComplete(todo.id, todo.missionId)}
               >
                 <input
                   type="checkbox"
@@ -171,7 +157,11 @@ function MissionMain() {
         </div>
         <div className="ongoing-content">
           {missions.map((mission) => (
-            <div key={mission.id} className="ongoing-card">
+            <div
+              key={mission.id}
+              className="ongoing-card"
+              onClick={() => deleteMission(mission.id)} // 카드 클릭 시 삭제 로직 실행
+            >
               <img
                 src={mission.title === '운동하기' ? exer : mission.title === '물 마시기' ? ex : de}
                 alt="example photo"
