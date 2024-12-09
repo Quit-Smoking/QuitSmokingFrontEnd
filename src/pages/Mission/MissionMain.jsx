@@ -95,6 +95,51 @@ function MissionMain() {
     fetchTodoData();
   }, [userToken, refresh]); // refresh 상태가 변경되면 데이터를 다시 불러옴
 
+  const toggleComplete = async (id, missionId) => {
+    try {
+      const todo = todos.find((todo) => todo.id === id);
+      if (!todo) throw new Error("투두 항목을 찾을 수 없음");
+  
+      // 이미 완료된 미션은 다시 완료 처리하지 않음
+      if (todo.completed) {
+        alert("이미 완료된 미션입니다!");
+        return;
+      }
+  
+      if (!window.confirm("미션을 완료하셨습니까?")) {
+        return; // 사용자가 취소를 누른 경우 아무 작업도 하지 않음
+      }
+  
+      const response = await axios.post("https://quitsmoking.co.kr/mission/complete", null, {
+        params: {
+          token: userToken,
+          id: missionId,
+          date: getFormattedDate(),
+        },
+      });
+  
+      if (response.status !== 200) {
+        throw new Error("투두 완료 처리 실패");
+      }
+  
+      // 상태를 무조건 true로 업데이트
+      const updatedTodo = { ...todo, completed: true };
+  
+      // 상태 업데이트
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === id ? updatedTodo : todo
+        )
+      );
+  
+      alert("미션이 완료되었습니다!");
+    } catch (error) {
+      console.error("투두 완료 처리 중 에러:", error);
+      alert("미션 완료 처리 중 문제가 발생했습니다.");
+    }
+  };
+  
+
   const deleteMission = async (missionId) => {
     try {
       if (window.confirm("삭제하시겠습니까?")) {
@@ -130,6 +175,7 @@ function MissionMain() {
               <div
                 key={todo.id}
                 className={`todo-item ${todo.completed ? "completed" : ""}`}
+                onClick={() => toggleComplete(todo.id, todo.missionId)} // 투두 클릭 시 완료 처리
               >
                 <input
                   type="checkbox"
