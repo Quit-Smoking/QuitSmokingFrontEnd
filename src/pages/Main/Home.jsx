@@ -76,6 +76,10 @@ const Home = () => {
     const differenceInDays = Math.floor((nowDate - startDate) / (1000 * 60 * 60 * 24)); // 금연한 시간
     const savedMoneyExact = data.numbersSmoked * differenceInDays * (4500 / 20); // 절약한 돈
 
+    // 한 개비당 12분 = 0.2시간 (12 / 60)
+    const extendedLifeTime = data.numbersSmoked * differenceInDays * 0.2; // 연장한 수명 (시간 단위)
+    const extendedLifeDays = Math.floor(extendedLifeTime / 24); // 일 단위로 변환
+
     return (
         <>
             {isModalOpen && (
@@ -97,6 +101,7 @@ const Home = () => {
                     resolution={data.resolution}
                     differenceInDays={differenceInDays}
                     savedMoneyExact={savedMoneyExact}
+                    extendedLifeTime={extendedLifeTime}
                 />
             )}
             <div className="Home-Container">
@@ -136,7 +141,9 @@ const Home = () => {
                                         <div className="Reportbox">
                                             <div>연장한 수명</div>
                                             <div className="extendtimeimg"></div>
-                                            <div>{differenceInDays + 1 || 0}일</div>
+                                            <div>
+                                                {extendedLifeDays >= 0 ? `${extendedLifeDays}일 ` : ""}
+                                            </div>
                                         </div>
                                         <div className="Reportbox">
                                             <div>아낀 돈</div>

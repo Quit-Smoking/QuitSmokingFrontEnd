@@ -1,7 +1,7 @@
 import React from "react";
 import "./menumodal.css";
 
-const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, differenceInDays, savedMoneyExact, disableClock }) => {
+const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, differenceInDays, savedMoneyExact, disableClock ,extendedLifeTime}) => {
     const handleModifyDetermine = () => {
         if (!disableClock) {
             navigate("/modifydetermine", { state: { determine } }); // 금연 각오 데이터를 state로 전달
@@ -10,7 +10,7 @@ const MenuModal = ({ nickname, email, determine, navigate, onClose, resolution, 
 
     const handleStopSmoking = () => {
         if (!disableClock) {
-            navigate("/stopsmoking", { state: { resolution, differenceInDays, savedMoneyExact } });
+            navigate("/stopsmoking", { state: { resolution, differenceInDays, savedMoneyExact ,extendedLifeTime} });
         }
     };
 

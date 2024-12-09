@@ -107,18 +107,18 @@ const Cessation = () => {
                             <div className="cessation-report-black">
                                 <div className="cessation-report-white">
                                     <div className="cessation-report-title">
-                                        <div>금연 기록</div>
+                                        <div>지난 금연 리포트</div>
                                     </div>
                                     <div className="cessation-report-details">
                                         <div className="cessation-report-box">
                                             <div>연장한 수명</div>
                                             <div className="cessation-report-time-img"></div>
-                                            <div>{data?.savedTime + 1 || 0}일</div>
+                                            <div>{data?.savedTime}일</div>
                                         </div>
                                         <div className="cessation-report-box">
                                             <div>아낀 돈</div>
                                             <div className="cessation-report-money-img"></div>
-                                            <div>{data?.savedMoney || 0}원</div>
+                                            <div>{data?.savedMoney}원</div>
                                         </div>
                                     </div>
                                 </div>
