@@ -48,6 +48,8 @@
   flex-direction: column;
 }
 
+
+
 /* .email_input input {
   width: 100%;
   border: none;
@@ -93,13 +95,15 @@ input {
   border: none;
   border-bottom: 1px solid #85bcbd;
   box-sizing: border-box;
-  padding: 0;
+  padding: 1rem;
 }
 
 /* input에 포커스가 생길 때 스타일 고정 */
 input:focus {
-  border-bottom: 1px solid #008285;
+  border-bottom: 3px solid #008285;
   outline: none;
+
+  padding: 0.3rem;
 }
 
 input::placeholder {
