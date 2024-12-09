@@ -68,7 +68,7 @@ function Result() {
           src={closeIcon}
           alt="메뉴 아이콘"
           className="result-close-icon"
-          onClick={()=>navigate(-2)} // 메뉴 버튼 클릭 시 모달 열기
+          onClick={()=>navigate('/home')} // 메뉴 버튼 클릭 시 모달 열기
         />
       </div>
       <SurveyResult

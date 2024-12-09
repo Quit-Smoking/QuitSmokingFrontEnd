@@ -36,7 +36,7 @@ function Diagnosis() {
     };
 
     const handleModalConfirm = () => {
-        navigate(-2); // 이전 페이지로 이동
+        navigate('/home'); // 이전 페이지로 이동
     };
 
 
