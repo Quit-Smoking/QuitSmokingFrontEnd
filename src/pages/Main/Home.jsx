@@ -78,7 +78,8 @@ const Home = () => {
 
     // 한 개비당 12분 = 0.2시간 (12 / 60)
     const extendedLifeTime = data.numbersSmoked * differenceInDays * 0.2; // 연장한 수명 (시간 단위)
-    const extendedLifeDays = Math.floor(extendedLifeTime / 24); // 일 단위로 변환
+    const extendedLifeDays = (extendedLifeTime / 24).toFixed(1); // 일 단위로 변환, 소수점 한 자리까지
+
 
     return (
         <>
@@ -101,7 +102,7 @@ const Home = () => {
                     resolution={data.resolution}
                     differenceInDays={differenceInDays}
                     savedMoneyExact={savedMoneyExact}
-                    extendedLifeTime={extendedLifeTime}
+                    extendedLifeDays={extendedLifeDays}
                 />
             )}
             <div className="Home-Container">
@@ -142,7 +143,7 @@ const Home = () => {
                                             <div>연장한 수명</div>
                                             <div className="extendtimeimg"></div>
                                             <div>
-                                                {extendedLifeDays >= 0 ? `${extendedLifeDays}일 ` : ""}
+                                                {extendedLifeDays != 0 ? `${extendedLifeDays}일 ` : '0일'}
                                             </div>
                                         </div>
                                         <div className="Reportbox">

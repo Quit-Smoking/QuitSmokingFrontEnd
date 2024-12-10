@@ -10,7 +10,7 @@ function StopSmoking() {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [differenceInDays, setdifferenceInDays] = useState(state.differenceInDays || 0);
-    const [extendedLifeTime, setextendedLifeTime] = useState(state.extendedLifeTime);
+    const [extendedLifeDays, setextendedLifeDays] = useState(state.extendedLifeDays);
     const [resolution, setresolution] = useState(state.resolution);
     const [isConfirmed, setIsConfirmed] = useState(false);
     const savedMoneyExact = state.savedMoneyExact;
@@ -30,7 +30,7 @@ function StopSmoking() {
                 },
                 params: {
                     token: token,
-                    savedTime:extendedLifeTime,
+                    savedTime:extendedLifeDays,
                     savedMoney:savedMoneyExact
                 },
             });

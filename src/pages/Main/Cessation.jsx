@@ -113,7 +113,7 @@ const Cessation = () => {
                                         <div className="cessation-report-box">
                                             <div>연장한 수명</div>
                                             <div className="cessation-report-time-img"></div>
-                                            <div>{data?.savedTime}일</div>
+                                            <div>{data.savedTime != 0 ? data.savedTime  : 0}일</div>
                                         </div>
                                         <div className="cessation-report-box">
                                             <div>아낀 돈</div>
