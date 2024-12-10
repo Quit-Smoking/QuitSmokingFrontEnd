@@ -160,7 +160,6 @@ function Post() {
       );
 
       if (response.status === 200) {
-        alert("댓글이 성공적으로 추가되었습니다.");
         setComments((prevComments) => [...prevComments, response.data]); // 새 댓글 추가
         setCommentContent(""); // 입력 필드 초기화
         fetchComments();
