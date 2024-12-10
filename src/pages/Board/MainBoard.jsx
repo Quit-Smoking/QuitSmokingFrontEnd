@@ -63,7 +63,7 @@ function MainBoard() {
               <h3 className="board-title">{truncateText(post.title, 24)}</h3>
               <p className="board-content">{truncateText(post.content, 21)}</p>
               <div className="board-footer">
-                <span className="board-nickname">{`작성자: ${post.userId}`}</span>
+                <span className="board-nickname">{`작성자: ${post.nickname}`}</span>
                 <div className="board-icons">
                   <span>
                     <img src={comment} alt="comment" /> {post.numberOfComments}

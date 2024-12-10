@@ -10,6 +10,7 @@
 
 
 /* Header */
+
 .Diagnosis-Header {
     height: 10vh;
     display: flex;
@@ -159,6 +160,7 @@
     text-align: center;
     border-bottom: 1px solid #85BCBD;
     height: 70%;
+    margin-top: 3vh;
 }
 
 .Detail-modal-title {

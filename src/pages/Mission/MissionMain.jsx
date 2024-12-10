@@ -9,69 +9,44 @@ import Nav from '../../components/nav';
 
 function getFormattedDate() {
   const today = new Date();
-
-  // 날짜 정보 가져오기
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const date = today.getDate();
-
-  // 형식화
-  const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${date
-    .toString()
-    .padStart(2, "0")}`;
-
-  return formattedDate;
+  return `${year}-${month.toString().padStart(2, "0")}-${date.toString().padStart(2, "0")}`;
 }
+
 function getFormattedDate2() {
   const today = new Date();
-
-  // 날짜 정보 가져오기
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const date = today.getDate();
-
-  // 요일 배열
   const days = ["일", "월", "화", "수", "목", "금", "토"];
   const dayOfWeek = days[today.getDay()];
-
-  // 형식화 + 요일
-  const formattedDate2 = `${year}-${month.toString().padStart(2, "0")}-${date
-  .toString()
-  .padStart(2, "0")} (${dayOfWeek})`;
-
-  return formattedDate2;
+  return `${year}-${month.toString().padStart(2, "0")}-${date.toString().padStart(2, "0")} (${dayOfWeek})`;
 }
 
 function MissionMain() {
-  //! 가져와야할 것 1. 날짜, 2. 미션, 3. 진행중인 미션 (사진, 몇주차 진행중, 몇주차 도전?)
   const userToken = localStorage.getItem('userToken');
-  
-  //? 예시 투두리스트
   const [todos, setTodos] = useState([]);
-   //? 예시 진행 중 미션들
   const [missions, setMissions] = useState([]);
+  const [refresh, setRefresh] = useState(false); // 화면 새로고침 상태
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTodoData = async () => {
       const formattedDate = getFormattedDate();
-      console.log("Formatted Date:", formattedDate);
-
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/mission_record/fetchByDate",
-        {
+        const response = await axios.get("https://quitsmoking.co.kr/mission_record/fetchByDate", {
           params: {
             token: userToken,
             date: formattedDate,
           },
-        }
-      );
+        });
 
         if (response.status !== 200) {
           throw new Error('투두리스트 fetch 서버 200 아님', response.status);
         }
 
-        // Map API data to todos format
         const formattedTodos = response.data.map((item) => ({
           id: item.id,
           missionId: item.missionId,
@@ -79,7 +54,7 @@ function MissionMain() {
           date: item.date,
           completed: item.completed,
         }));
-        console.log(`formattedTodos: ${formattedTodos}`);
+
         setTodos(formattedTodos);
       } catch (error) {
         console.error('투두 fetch 중 에러', error);
@@ -88,78 +63,101 @@ function MissionMain() {
 
     const fetchMissionData = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions", 
-          {
-            params: {
-              token: userToken,
-            },
-          }
-        );
+        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions", {
+          params: { token: userToken },
+        });
 
         if (response.status !== 200) {
           throw new Error('미션 fetch 서버 200 아님', response.status);
         }
 
         function calculateWeeksPassed(startDate) {
-          // 서버: (YYYY-MM-DD)
-          const start = new Date(startDate); 
-          const today = new Date(); // 오늘 날짜
-        
-          const differenceInMilliseconds = today - start; // 밀리초 차이 계산
-        
-          // 밀리초 -> 일주일 단위
+          const start = new Date(startDate);
+          const today = new Date();
           const millisecondsInAWeek = 7 * 24 * 60 * 60 * 1000;
-          const weeksPassed = Math.floor(differenceInMilliseconds / millisecondsInAWeek);
-        
-          return weeksPassed; // 경과된 주 반환
+          return Math.floor((today - start) / millisecondsInAWeek);
         }
-        
+
         const formattedMissions = response.data.map((item) => ({
           id: item.id,
           title: item.mission,
           description: calculateWeeksPassed(item.startDate),
           default: item.default,
         }));
-        console.log(`formattedMissions: ${formattedMissions}`);
+
+        console.log( formattedMissions);
         setMissions(formattedMissions);
       } catch (error) {
         console.error('미션 fetch 중 에러', error);
       }
-    }
+    };
 
     fetchMissionData();
     fetchTodoData();
-  }, [userToken]);
+  }, [userToken, refresh]); // refresh 상태가 변경되면 데이터를 다시 불러옴
 
   const toggleComplete = async (id, missionId) => {
     try {
       const todo = todos.find((todo) => todo.id === id);
-      if (!todo) throw new Error('투두 항목을 찾을 수 없음');
-      
-      const updatedTodo = { ...todo, completed: !todo.completed };
-      console.log(`id, missionId: ${id}, ${missionId}/${typeof missionId}`);
-      console.log(`userToken: ${userToken}`);
-
-      const response = await axios.get("https://quitsmoking.co.kr/mission_record/completeMission",
-        {
-          params: {
-            token: userToken,
-            missionRecordId: missionId,
-          }
-        }
-      );
-
-      if (response.status !== 200) {
-        throw new Error('투두리스트 완료 서버 전송 200 아님');
+      if (!todo) throw new Error("투두 항목을 찾을 수 없음");
+  
+      // 이미 완료된 미션은 다시 완료 처리하지 않음
+      if (todo.completed) {
+        alert("이미 완료된 미션입니다!");
+        return;
       }
-
+  
+      if (!window.confirm("미션을 완료하셨습니까?")) {
+        return; // 사용자가 취소를 누른 경우 아무 작업도 하지 않음
+      }
+  
+      const response = await axios.post("https://quitsmoking.co.kr/mission/complete", null, {
+        params: {
+          token: userToken,
+          id: missionId,
+          date: getFormattedDate(),
+        },
+      });
+  
+      if (response.status !== 200) {
+        throw new Error("투두 완료 처리 실패");
+      }
+  
+      // 상태를 무조건 true로 업데이트
+      const updatedTodo = { ...todo, completed: true };
+  
+      // 상태 업데이트
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
           todo.id === id ? updatedTodo : todo
         )
       );
+  
+      alert("미션이 완료되었습니다!");
     } catch (error) {
-      console.log('투두리스트 완료 상태 업데이트 중 에러', error);
+      console.error("투두 완료 처리 중 에러:", error);
+      alert("미션 완료 처리 중 문제가 발생했습니다.");
+    }
+  };
+  
+
+  const deleteMission = async (missionId) => {
+    try {
+      if (window.confirm("삭제하시겠습니까?")) {
+        const response = await axios.post("https://quitsmoking.co.kr/mission/deleteMission", null, {
+          params: { missionId },
+        });
+
+        if (response.status !== 200) {
+          throw new Error('미션 삭제 실패');
+        }
+
+        alert("미션이 삭제되었습니다.");
+        setRefresh((prev) => !prev); // refresh 상태를 변경하여 전체 렌더링 트리거
+      }
+    } catch (error) {
+      console.error('미션 삭제 중 에러:', error);
+      alert('미션 삭제 처리 중 문제가 발생했습니다.');
     }
   };
 
@@ -171,23 +169,28 @@ function MissionMain() {
           <p className="todo-title">Todo</p>
           <p className="todo-date">{getFormattedDate2()}</p>
         </div>
+
         <div className="todo-list">
-          {todos ? todos.map((todo) => (
-            <div
-              key={todo.id}
-              className={`todo-item ${todo.completed ? "completed" : ""}`}
-              onClick={() => toggleComplete(todo.id, todo.missionId)}
-            >
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                readOnly
-                className="todo-checkbox"
-              />
-              <span>{todo.text}</span>
-            </div>
-          )) : <p>미션을 시작해보세요!</p>}
-      </div>
+          {todos.length > 0 ? (
+            todos.map((todo) => (
+              <div
+                key={todo.id}
+                className={`todo-item ${todo.completed ? "completed" : ""}`}
+                onClick={() => toggleComplete(todo.id, todo.missionId)} // 투두 클릭 시 완료 처리
+              >
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  readOnly
+                  className="todo-checkbox"
+                />
+                <span>{todo.text}</span>
+              </div>
+            ))
+          ) : (
+            <p>미션을 시작해보세요!</p>
+          )}
+        </div>
       </div>
       <div className="main-ongoing">
         <div className="ongoing-banner">
@@ -201,7 +204,11 @@ function MissionMain() {
         </div>
         <div className="ongoing-content">
           {missions.map((mission) => (
-            <div key={mission.id} className="ongoing-card">
+            <div
+              key={mission.id}
+              className="ongoing-card"
+              onClick={() => deleteMission(mission.id)} // 카드 클릭 시 삭제 로직 실행
+            >
               <img
                 src={mission.title === '운동하기' ? exer : mission.title === '물 마시기' ? ex : de}
                 alt="example photo"
@@ -210,7 +217,7 @@ function MissionMain() {
               <div className="ongoing-card-banner">
                 <p className="ongoing-card-title">{mission.title}</p>
               </div>
-              <p className="ongoing-card-desc">{mission.description}주째 진행 중</p>
+              <p className="ongoing-card-desc">{mission.description +2}주째 진행 중</p>
             </div>
           ))}
         </div>

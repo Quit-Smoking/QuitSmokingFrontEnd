@@ -91,8 +91,8 @@
 
 /* 연필 아이콘 */
 .edit-icon img {
-  width: 45px;
-  height: 45px;
+  width: 4.5rem;
+  height: 4.5rem;
   position: fixed;
   bottom: calc(9vh);
   right: 10px;

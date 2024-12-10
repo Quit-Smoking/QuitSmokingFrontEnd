@@ -10,6 +10,8 @@ import Character from "../../assets/Character.svg";
 import DiaryIcon from "../../assets/DiaryIcon.svg";
 import Nav from "../../components/nav";
 import water from "../../assets/mission/water.svg";
+import exer from "../../assets/mission/exercise.svg";
+import de from "../../assets/missionMain/default.svg";
 
 function Diary() {
   const [date, setDate] = useState(new Date());
@@ -24,7 +26,7 @@ function Diary() {
 
     try {
       const response = await axios.get(
-        "http://15.164.231.201:8080/UserStartRecord/findUserStartRecord",
+        "https://quitsmoking.co.kr/UserStartRecord/findUserStartRecord",
         {
           params: { token },
         }
@@ -44,8 +46,7 @@ function Diary() {
   };
 
   const fetchMissions = async (selectedDate) => {
-
-    const token = localStorage.getItem("userToken"); 
+    const token = localStorage.getItem("userToken");
 
     setIsLoading(true); // 로딩 시작
     setError(null); // 에러 초기화
@@ -53,7 +54,7 @@ function Diary() {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
       const response = await axios.get(
-        "http://15.164.231.201:8080/mission_record/fetchByDate",
+        "https://quitsmoking.co.kr/mission_record/fetchByDate",
         {
           params: {
             token: token,
@@ -135,8 +136,8 @@ function Diary() {
                   </span>
                 </div>
                 <div className="Diary_title_right">
-                  <div className="Diary_title_1">누적금연일</div>
-                  <div className="Diary_title_2">총6일</div>
+                  <div className="Diary_title_1"></div>
+                  <div className="Diary_title_2"></div>
                 </div>
               </div>
             )}
@@ -159,7 +160,13 @@ function Diary() {
                 <div key={index} className="mission">
                   <div className="mission_box">
                     <img
-                      src={water} // 기본 아이콘 추가
+                      src={
+                        mission.mission === "운동하기"
+                          ? exer
+                          : mission.mission === "물 마시기"
+                          ? water
+                          : de
+                      } // 기본 아이콘 추가
                       alt="mission-icon"
                       className="mission-icon"
                     />

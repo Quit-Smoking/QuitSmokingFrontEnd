@@ -1,43 +1,58 @@
+
+/* 전체 컨테이너 */
 .mission-select-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Nav가 아래로 이동하도록 조정 */
+  align-items: center;
   width: 100vw;
   height: 100vh;
-  margin: 0;
-  background: linear-gradient(#fff, #B7E1E2);
+  background: linear-gradient(#fff, #b7e1e2);
   overflow: hidden;
 }
 
-.mission-carousel-container {
-  border: 1px solid black;
-  box-sizing: border-box;
+/* 현재 미션 배너 */
+.current-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 5vh;
+}
 
-  width: 100vw;
-  height: 65vh;
+.current-title {
+  font-size: 1.8rem;
+  color: #008285;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
+.current-desc {
+  font-size: 0.8rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* 슬라이더 컨테이너 */
+.mission-carousel-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-
-  overflow: hidden;
-}
-
-.mission-carousel-wrapper {
-  width: calc(100vw * 4);
-  height: 56vh;
-
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+  width: 100%;
 
   position: relative;
+
 }
 
+/* 슬라이더 점 스타일 */
 .mission-carousel-wrapper .slick-dots {
   position: absolute;
-  bottom: -20px;
-  left: -38.5%;
+  bottom: -30px; /* 점을 흰색 카드 아래로 이동 */
   display: flex !important;
   justify-content: center;
   width: 100%;
+
 }
 
 .mission-carousel-wrapper .slick-dots li {
@@ -45,35 +60,80 @@
 }
 
 .mission-carousel-wrapper .slick-dots li button {
-  width: 10px;
-  height: 10px;
+  width: 12px; /* 점 크기 */
+  height: 12px;
   background-color: #d9d9d9;
   border-radius: 50%;
   border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-.mission-carousel-slide {
+.mission-carousel-wrapper .slick-dots li.slick-active button {
+  background-color: #008285;
+}
+/* 카드 스타일 */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 70%;
+  height: 45vh;
+  /* max-width: 300px; */
+  background: white;
+  border-radius: 15px;
+
+  /* padding: 20px; */
   text-align: center;
-  padding: 20px;
+  margin-left: 15vw;
 }
 
+.card-title {
+  font-size: 1.5rem;
+  color: #008285;
+
+
+}
+
+.card-image {
+  width: 80%;
+  max-width: 200px;
+
+}
+
+.card-desc {
+  font-size: 0.8rem;
+  color: #555;
+  line-height: 1.5;
+  text-align: center;
+  padding: 10px 10px;
+  position: relative;
+}
+.slick-dots{
+  position: absolute;
+  bottom : 0;
+}
+/* 버튼 영역 */
 .mission-carousel-controls {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  width: 100vw;
-  height: 20vh;
-  margin-top: 1.5vh;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  transform: translateY(4vh);
 }
 
 .new-mission-start,
 .my-mission-start {
-  font-size: 18px;
-  box-shadow: 0 1px 4px gray;
-  margin-bottom: 1.5vh;
-  width: 80vw;
-  outline: none;
+  width: 80%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .new-mission-start {
@@ -83,80 +143,43 @@
 
 .my-mission-start {
   background-color: white;
-  color: black;
+  color: #008285;
   border: 2px solid #008285;
 }
 
-.card-container {
-  height: 52vh;
-  width: 80vw;
+.my-mission-start:hover {
+  background-color: #f0f0f0;
+}
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  padding: 0 20px;
-  margin-right: 2vh;
-  border-radius: 20px;
+/* Nav 스타일 */
+.nav-footer {
+  width: 100%;
+  height: auto;
   background-color: white;
-  box-shadow: 0 2px 10px gray;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card-title {
-  font-size: 3vh;
-  font-weight: bold;
-  margin: 1vh;
-}
-
-.card-image {
-  width: 70vw;
-  margin: 1vh 0 0 0;
-}
-@media (max-height: 670px) {
-  .card-image {
-    width: 70%;
-    margin: 0;
-  }
-}
-
-.card-desc {
-  padding: 0 10px;
-  font-size: 16.5px;
-}
-
-.current-banner {
-  display: flex;
+/* 슬라이더 점 스타일 */
+.slick-dots {
+  position: absolute;
+  bottom: -15px; /* 점 위치 조정 */
+  display: flex !important;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  height: 10vh;
-  padding: 2vh 1vh;
-  padding-top: 3.5vh;
-
-  /* border: 1px solid blue; */
+  width: 100%;
+  list-style: none; /* 기본 점 스타일 제거 */
 }
 
-.current-title {
-  color: black;
-  font-size: 2.5vh;
-  font-weight: 600;
-  width: 90vw;
-  text-align: center;
-  padding-top: 5vh;
-  padding-bottom: 1vh;
-  border-bottom: 1px solid #85BCBD;
-  margin: 0;
+.slick-dots li button:before {
+  content: none !important;
 }
 
-.current-desc {
-  font-size: 1.8vh;
-  white-space: pre-line;
-  text-align: center;
-  margin-top: 1vh;
+/* 선택된 카드 강조 */
+.mission-carousel-slide.selected-card .card-container {
+  background-color: #eee; /* 선택된 카드 배경색 흐림 */
+
 }
 
-.card-container.selected-card {
-  background-color: #D1E5E5;
+/* 선택된 카드 상태 유지 */
+.card-container {
+  transition: background-color 0.3s ease, border 0.3s ease; /* 부드러운 강조 효과 */
 }

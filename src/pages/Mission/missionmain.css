@@ -7,14 +7,14 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
 }
 
 .mission-main-title {
   font-size: 2.5vh;
   font-weight: 700;
-  margin-top: -3vh;
+  margin-bottom: 5vh;
 }
 
 .mission-todo {
@@ -53,10 +53,10 @@
   width: 90vw;
   height: 22vh;
 
-  gap: 10px;
+  gap: 20px;
   overflow-x: auto;
   overflow-y: auto;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 .todo-item {
@@ -140,7 +140,7 @@
   display: flex;
   align-items: center;
   width: 90vw;
-  height: 35vh;
+  height: 36vh;
 }
 
 .ongoing-card {
@@ -151,10 +151,14 @@
   box-shadow: 0 2px 4px gray;
 
   margin-right: 1vh;
-  padding: 2vh;
+  padding: 1vh;
   text-align: left;
 
-  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .ongoing-card-banner {
@@ -167,11 +171,12 @@
 
 .ongoing-image {
   height: 60%;
+  margin-bottom: 1vh;
 }
 
 .ongoing-card-title {
   margin: 1vh 0;
-  font-size: 2.2vh;
+  font-size: 2vh;
 }
 
 .ongoing-button {

@@ -29,6 +29,7 @@ import MainBoard from "./pages/Board/MainBoard";
 
 import DeleteAccCheck from "./pages/DeleteAccount/DeleteAccCheck";
 import DeleteAcc from "./pages/DeleteAccount/DeleteAcc";
+import Cessation from "./pages/Main/Cessation";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
 
         <Route path="/modifydetermine" element={<ModifyDetermine />} />
         <Route path="/stopsmoking" element={<StopSmoking />} />
+        <Route path="/cessation" element={<Cessation/>}/>
 
         <Route path="/newPost" element={<NewPost />} />
 

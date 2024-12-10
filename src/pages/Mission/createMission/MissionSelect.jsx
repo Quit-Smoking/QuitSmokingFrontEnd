@@ -14,63 +14,53 @@ function MissionSelect() {
   const navigate = useNavigate();
   const userToken = localStorage.getItem('userToken');
 
-  //! 진행중인 미션이 있는지 확인하기 -> 있으면 TopBar 존재해야, 그리고 진행중인 미션 색상과 미션 뱃지 추가 필요
+  const [currentMission, setCurrentMission] = useState(false); // 진행 중인 미션 확인
+  const [selectedSlideIndex, setSelectedSlideIndex] = useState(null); // 선택된 슬라이드 인덱스
 
   useEffect(() => {
     const fetchMissions = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions",
-          {
-            params: {
-              userToken,
-            },
-          }
-        );
+        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions", {
+          params: { userToken },
+        });
 
-        if (response !== 200) {
-          throw new Error('진행 중인 미션 존재하는지 확인 중 서버 200 아님');
+        if (response.status !== 200) {
+          throw new Error('진행 중인 미션 확인 중 서버 응답 오류');
         }
-        const missionExist = response.data !== null ? true : false;
 
+        const missionExist = response.data !== null;
         setCurrentMission(missionExist);
       } catch (error) {
-        console.error('진행 중인 미션 존재하는지 확인 중 에러', error);
+        console.error('미션 데이터 확인 중 에러:', error);
       }
-    }
+    };
 
     fetchMissions();
   }, [userToken]);
 
-  const [currentMission, setCurrentMission] = useState(false); //! 진행중인 미션 확인
-  const [selectedSlideIndex, setSelectedSlideIndex] = useState(null);
-  
   const slides = [
     {
       key: "slide-1",
       title: "물 마시기",
-      description:
-        "물을 마시는 것은 금연하는데 오랫동안 사용된 가장 좋은 방법 중의 하나입니다. 시원한 물은 입 속의 감각을 다르게 하여 흡연 욕구를 많이 없애줍니다. 그리고 물은 니코틴과 각종 노폐물의 배설을 촉진시켜줍니다.",
+      description: "물을 마시는 것은 금연하는 데 가장 좋은 방법 중 하나입니다. 시원한 물은 흡연 욕구를 줄여주고, 니코틴과 노폐물 배출을 돕습니다.",
       image: water,
     },
     {
       key: "slide-2",
       title: "운동하기",
-      description:
-        "금연 후 체중 증가와 함께 나타나는 우울, 불안, 흥분, 집중력 저하 등의 금단증상에 대처하기 위한 방법으로 적절한 신체활동이 추천됩니다. 운동은 금연 실천에도 도움을 주고 체력 향상과 스트레스 관리에도 효과적입니다.",
+      description: "운동은 금연 실천뿐만 아니라 체력 향상과 스트레스 관리에도 효과적입니다. 적절한 신체활동은 금단 증상 완화에 도움을 줍니다.",
       image: exercise,
     },
     {
       key: "slide-3",
       title: "자기보상",
-      description:
-        "금연 성공 경험을 축하하고 격려해줌으로써 금연 유지에 큰 힘이 되어 줄 수 있습니다. 또한 금연 성공을 기념한 자기 보상을 준비하여 금연에 대한 심리적 강화와 금연에서 오는 신체적 이득뿐만 아니라 경제적인 이득을 얻게 됩니다.",
+      description: "금연 성공 경험을 축하하며 자신을 격려하세요. 금연 성공의 심리적 강화와 경제적 이득을 동시에 느낄 수 있습니다.",
       image: reward,
     },
     {
       key: "slide-4",
       title: "금연일지",
-      description:
-        "금연을 시작하기 전에 먼저 자신이 흡연한 시간과 장소, 함께하는 사람, 흡연량 등을 기록해 나의 흡연시간과 금연 시 발생할 흡연욕구 상황을 미리 파악합니다. 이후 금연 시작과 동시에 금연 일지를 쓰기 시작합니다.",
+      description: "흡연 습관을 기록하며 금연 계획을 세우세요. 금연 시작과 함께 금연 일지를 작성하면 효과적입니다.",
       image: report,
     },
   ];
@@ -83,35 +73,14 @@ function MissionSelect() {
     slidesToScroll: 1,
     arrows: false,
     swipe: true,
-    beforeChange: (oldIndex, newIndex) => setSelectedSlideIndex(newIndex),
-    appendDots: dots => (
-      <div
-        style={{
-          position: "absolute",
-          padding: "10px",
-          bottom: "-30px",
-          display: "flex",
-          justifyContent: "center",
-        }}
-        className="mission-dots"
-      >
-        <ul style={{ margin: "0px", padding: '0', display: 'flex' }}> {dots} </ul>
-      </div>
-    ),
-    customPaging: i => (
-      <div
-        style={{
-          width: "30px",
-          color: "#008285",
-          transition: "all 0.3s ease",
-          fontWeight: "bold",
-          border: "none",
-          cursor: 'pointer',
-        }}
-      >
-        {i + 1}
-      </div>
-    )
+  };
+
+  const handleCardClick = (index) => {
+    if (selectedSlideIndex === index) {
+      setSelectedSlideIndex(null); // 이미 선택된 카드를 다시 클릭하면 선택 해제
+    } else {
+      setSelectedSlideIndex(index); // 새로운 카드 선택
+    }
   };
 
   return (
@@ -121,23 +90,20 @@ function MissionSelect() {
       ) : (
         <div className="current-banner">
           <p className="current-title">금연 미션</p>
-          <p className="current-desc">{`숨쉴래에서\n금연에 도움이 되는 미션 4가지를 추천드려요!`}</p>
+          <p className="current-desc">숨쉴래에서 금연에 도움이 되는 미션 4가지를 추천드려요!</p>
         </div>
       )}
+
       <Slider {...settings} className="mission-carousel-wrapper">
         {slides.map((slide, index) => (
           <div
             key={slide.key}
-            className="mission-carousel-slide"
+            className={`mission-carousel-slide ${
+              selectedSlideIndex === index ? "selected-card" : ""
+            }`}
+            onClick={() => handleCardClick(index)} // 카드 클릭 핸들러
           >
-            <div
-              className={`card-container ${
-                selectedSlideIndex === index ? "selected-card" : ""
-              }`}
-              onClick={() =>
-                setSelectedSlideIndex(selectedSlideIndex === index ? null : index)
-              }
-            >
+            <div className={`card-container`}>
               <p className="card-title">{slide.title}</p>
               <img src={slide.image} alt={slide.title} className="card-image" />
               <p className="card-desc">{slide.description}</p>
@@ -145,14 +111,13 @@ function MissionSelect() {
           </div>
         ))}
       </Slider>
+
       <div className="mission-carousel-controls">
         <button
           className="new-mission-start"
           onClick={() => {
             if (selectedSlideIndex !== null) {
-              navigate('/newMission', {
-                state: { missionName: slides[selectedSlideIndex].title },
-              });
+              navigate('/newMission', { state: { missionName: slides[selectedSlideIndex].title } });
             } else {
               alert("슬라이드를 선택해주세요.");
             }
@@ -164,7 +129,9 @@ function MissionSelect() {
           미션 직접 생성하기
         </button>
       </div>
-      <Nav />
+      <footer className="nav-footer">
+        <Nav />
+      </footer>
     </div>
   );
 }

@@ -17,11 +17,13 @@ function DiagnosisStart() {
 
         try {
             const response = await axios.get(
-                "http://15.164.231.201:8080/nicotin_dependencies/isTested",
+                "https://quitsmoking.co.kr/nicotin_dependencies/isTested",
                 {
                     params: { token },
                 }
+
             );
+
             setIsDiagnosed(response.data); // true/false 값 설정
         } catch (e) {
             setError("API 요청에 실패했습니다.");

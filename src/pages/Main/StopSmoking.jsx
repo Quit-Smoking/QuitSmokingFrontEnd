@@ -10,8 +10,10 @@ function StopSmoking() {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [differenceInDays, setdifferenceInDays] = useState(state.differenceInDays || 0);
-    const [resolution,setresolution] = useState(state.resolution);
+    const [extendedLifeDays, setextendedLifeDays] = useState(state.extendedLifeDays);
+    const [resolution, setresolution] = useState(state.resolution);
     const [isConfirmed, setIsConfirmed] = useState(false);
+    const savedMoneyExact = state.savedMoneyExact;
 
     const handleConfirmChange = () => {
         setIsConfirmed((prev) => !prev);
@@ -21,18 +23,21 @@ function StopSmoking() {
         const token = localStorage.getItem("userToken");
 
         try {
-            const response = await axios.delete("http://15.164.231.201:8080/UserStartRecord/stop", {
+            
+            const response = await axios.delete("https://quitsmoking.co.kr/UserStartRecord/stop", {
                 headers: {
                     "Content-Type": "application/json",
                 },
                 params: {
-                    token: token, // 토큰 전달
+                    token: token,
+                    savedTime:extendedLifeDays,
+                    savedMoney:savedMoneyExact
                 },
             });
 
             if (response.status === 200) {
                 alert("금연 데이터가 성공적으로 삭제되었습니다.");
-                navigate("/home");
+                navigate("/cessation");
             } else {
                 throw new Error("Unexpected response status");
             }

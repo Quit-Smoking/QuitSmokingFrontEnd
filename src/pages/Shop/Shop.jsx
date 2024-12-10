@@ -25,8 +25,8 @@ function Shop() {
     try {
       const endpoint =
         keywordId === null
-          ? "http://15.164.231.201:8080/store/show_all_products" // 전체 상품 API
-          : "http://15.164.231.201:8080/store/show_products_by_keyword"; // 키워드별 상품 API
+          ? "https://quitsmoking.co.kr/store/show_all_products" // 전체 상품 API
+          : "https://quitsmoking.co.kr/store/show_products_by_keyword"; // 키워드별 상품 API
 
       const params = keywordId !== null ? { keyWordId: keywordId } : {};
 

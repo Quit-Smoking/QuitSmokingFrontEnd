@@ -1,5 +1,7 @@
-import "./topbar.css";
-import PropTypes from "prop-types";
+
+import './topbar.css';
+import PropTypes from 'prop-types';
+
 
 const TopBar = ({ title, onBack }) => {
   return (

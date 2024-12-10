@@ -64,7 +64,7 @@ function Diagnosis() {
 
             console.log('진단 결과 서버로 전송:', serverPayload);
 
-            axios.post("http://15.164.231.201:8080/nicotin_dependencies/add", serverPayload, {
+            axios.post("https://quitsmoking.co.kr/nicotin_dependencies/add", serverPayload, {
                 params: { token },
             })
                 .then((response) => {

@@ -37,7 +37,7 @@ function Result() {
       const response = await axios.get("https://quitsmoking.co.kr/nicotin_dependencies/getScore", {
         params: { token }
       })
-      console.log(response.data, 'data');
+
       settempStatNum(response.data);
     } catch (e) {
       setError("API 요청에 실패했습니다.");

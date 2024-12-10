@@ -35,8 +35,9 @@ function Survey() {
 
         console.log(requestData);
         try {
-            await axios.post('http://15.164.231.201:8080/UserStartRecord/add', requestData,
-            );
+            await axios.post('https://quitsmoking.co.kr/UserStartRecord/add', requestData, {
+                headers: { 'Content-Type': 'application/json' },
+            });
 
             localStorage.removeItem("isModalShown"); // 모달 재설정을 위해 로컬스토리지 초기화
             navigate('/Home');

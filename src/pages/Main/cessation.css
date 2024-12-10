@@ -1,17 +1,5 @@
-html,
-body {
-    overscroll-behavior: none;
-    /* 기본 스크롤 동작 비활성화 */
-    overflow: hidden;
-    /* 스크롤 자체를 막음 */
-    height: 100%;
-    /* 화면 높이를 고정 */
-    color: #000; /* 텍스트 색상 (검은색) */
-
-}
-
 /* 전체 컨테이너 */
-.Home-Container {
+.cessation-container {
     height: 100vh;
     width: 100vw;
     background-color: #B7E1E2;
@@ -20,35 +8,38 @@ body {
     flex-direction: column;
 }
 
-.Home-Header {
+.cessation-header {
     background-color: #85BCBD;
     position: relative;
     height: 15vh;
     width: 100%;
+    
 }
 
 /* header logo */
-.Header-logo {
+.cessation-header-logo {
     position: absolute;
     left: 5%;
     bottom: 15%;
-    height: 8vh;
+    height: 6vh;
+    
 }
 
 /* ------------------------------------- */
 
 /* 메인 컨텐츠 */
-.Start-Main {
+.cessation-main {
     flex: 1 1 auto;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.Start-MainMotive {
+.cessation-record {
     width: 100vw;
     flex-grow: 2;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -57,28 +48,28 @@ body {
     font-weight: 500;
 }
 
-.Home-Mainlogo {
-    flex-grow: 3;
+.cessation-logo {
+    flex-grow: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
+    margin : 0;
 }
 
-.shadow {
-    animation: shrinkShadow 3s infinite ease-in-out;
-    /* 애니메이션 추가 */
+.cessation-shadow {
+    animation: shrinkShadow 3s infinite ease-in-out; /* 애니메이션 추가 */
     scale: 0.8;
 }
 
-.homecloud {
+.cessation-cloud {
     padding-left: 2.5vw;
     scale: 0.8;
     animation: moveUp 3s infinite ease-in-out;
 }
 
-.Home-MainTime {
+.cessation-time {
     width: 100vw;
     flex-grow: 1;
     display: flex;
@@ -90,23 +81,23 @@ body {
     font-weight: 500;
 }
 
-.Home-MainTime div:nth-child(2) {
+.cessation-time div:nth-child(2) {
     margin-top: 1vh;
     font-size: 60%;
 }
 
-.Home-MainReport {
+.cessation-report {
     flex-grow: 3;
 }
 
-.ReportContainer {
+.cessation-report-container {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: end;
 }
 
-.ReportBlackBg {
+.cessation-report-black {
     background-color: #404B4B;
     height: 23vh;
     width: 100vw;
@@ -114,7 +105,7 @@ body {
     justify-content: center;
 }
 
-.ReportWhitebg {
+.cessation-report-white {
     width: 80vw;
     background-color: white;
     height: 100%;
@@ -125,17 +116,17 @@ body {
     flex-direction: column;
 }
 
-.ReportText {
+.cessation-report-title {
     display: flex;
     justify-content: center;
 }
 
-.ReportText>div {
+.cessation-report-title > div {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 5vw;
+    font-size: 4vw;
     transform: translateY(-50%);
     border-radius: 30px;
     background-color: #73A7A8;
@@ -143,14 +134,14 @@ body {
     height: 5vh;
 }
 
-.Report {
+.cessation-report-details {
     flex-grow: 1;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.Report>div {
+.cessation-report-details > div {
     width: 15vh;
     transform: translateY(-10%);
     aspect-ratio: 1 / 1;
@@ -158,45 +149,39 @@ body {
     box-shadow: 1px 1px 1px 1.5px grey;
 }
 
-.Reportbox {
+.cessation-report-box {
     display: flex;
     flex-direction: column;
 }
 
-.Reportbox>div {
+.cessation-report-box > div {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
 }
 
-.Reportbox>div:not(:nth-child(2)) {
+.cessation-report-box > div:not(:nth-child(2)) {
     flex-grow: 1;
 }
 
-.extendtimeimg,
-.savedmoneyimg {
+.cessation-report-time-img,
+.cessation-report-money-img {
     flex-grow: 2;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.extendtimeimg {
+.cessation-report-time-img {
     background-image: url('../../assets/extendtime.png');
 }
 
-.savedmoneyimg {
+.cessation-report-money-img {
     background-image: url('../../assets/savedmoney.png');
 }
 
-.extendtime,
-.savedmoney {
-    width: 100%;
-    height: 100%;
-}
-
-.Home-Footer {
+.cessation-footer {
     width: 100%;
     background-color: white;
 }
@@ -204,7 +189,7 @@ body {
 /* ------------ Modal ------------- */
 
 /* 모달 오버레이 */
-.overlay {
+.cessation-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -218,7 +203,7 @@ body {
 }
 
 /* 모달 */
-.modal {
+.cessation-modal {
     background: white;
     border-radius: 10px;
     width: 70vw;
@@ -233,29 +218,19 @@ body {
     flex-direction: column;
 }
 
-.modal-content {
+.cessation-modal-content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.modal-image {
+.cessation-modal-image {
     width: 25vw;
     height: 25vw;
     margin-top: 4vh;
 }
 
-h2 {
-    margin-bottom: 0;
-    font-size: 1.2rem;
-}
-
-p {
-    font-size: 1.1rem;
-}
-
-/* 기존 menu-icon 스타일 유지 */
-.menu-icon {
+.cessation-menu-icon {
     position: absolute;
     top: 50%;
     right: 5%;
@@ -265,7 +240,7 @@ p {
 }
 
 /* ------------ Menu Modal Overlay ------------- */
-.menu-modal-overlay {
+.cessation-menu-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -279,7 +254,7 @@ p {
     animation: fadeIn 0.3s forwards;
 }
 
-.menu-modal {
+.cessation-menu-modal {
     background-color: white;
     width: 70vw;
     height: 100%;
@@ -293,7 +268,7 @@ p {
     overflow-y: auto;
 }
 
-.menu-header {
+.cessation-menu-header {
     background-color: #85BCBD;
     height: 15%;
     display: flex;
@@ -304,18 +279,18 @@ p {
     font-weight: bold;
 }
 
-.menu-body {
+.cessation-menu-body {
     display: flex;
     flex-direction: column;
 }
 
-.menu-section {
+.cessation-menu-section {
     margin-top: 4vh;
     padding: 0 8vw 0 8vw;
     border-radius: 8px;
 }
 
-.menu-title {
+.cessation-menu-title {
     font-weight: bold;
     font-size: 1.5rem;
     display: block;
@@ -324,59 +299,38 @@ p {
     cursor: default;
 }
 
-
-.menu-body hr {
+.cessation-menu-body hr {
     margin: 2vw 0;
     border: none;
     border-top: 1px solid #ccc;
 }
 
-/* 애니메이션: 모달 등장 */
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-    }
 
-    to {
-        transform: translateX(0);
-    }
+
+.cessation-message {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 5vw;
+    font-weight: 500;
 }
 
-/* 페이드 인 애니메이션 */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+.retry-button {
+    margin-top: 1vh;
+    padding: 0.5rem 1rem;
+    background-color: #008285;
+    color: white;
+    border: none;
+    border-radius: 8px;
 
-    to {
-        opacity: 1;
-    }
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    color: white;
+    font-size: 1.4rem;
+    width: 75vw;
+    height: 8vh;
 }
 
-/* 추가된 애니메이션 */
-@keyframes moveUp {
-
-    0%,
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    50% {
-        transform: translateY(-2vh);
-    }
-}
-
-@keyframes shrinkShadow {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(0.7);
-        opacity: 0.7;
-    }
+.retry-button:hover {
+    background-color: #5d8f90;
 }
