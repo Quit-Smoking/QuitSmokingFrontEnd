@@ -61,11 +61,13 @@
     animation: float-circle 2.5s infinite ease-in-out;
 }
 
+/* 기존 스타일에 우선순위 높이기 */
 .start-cloudimg {
-    position: absolute;
-    transform: scale(1.1) translate(-30%, 10%);
-    animation: float-cloud 2.5s infinite ease-in-out;
+    position: absolute !important;
+    transform: scale(1.1) translate(-30%, 10%) !important;
+    animation: float-cloud 2.5s infinite ease-in-out !important;
 }
+
 
 /* Button Section */
 .Mainbutton {
