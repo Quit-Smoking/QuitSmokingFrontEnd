@@ -12,9 +12,9 @@ import color_heart from "../../assets/post/color_heart.svg";
 function Post() {
   const navigate = useNavigate();
   const { id } = useParams(); //! 게시글 아이디 params로 가져오기
-  console.log("useParams:", useParams());
+  console.log("1: useParams:", useParams());
   const postId = parseInt(id, 10); // id를 정수로 변환
-  console.log("게시글 id:", postId, typeof postId);
+  console.log("2: 게시글 id:", postId, typeof postId);
   const userToken = localStorage.getItem('userToken'); //! 유저토큰 가져오기
 
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false); // 키보드 올리기
@@ -25,6 +25,14 @@ function Post() {
   const [post, setPost] = useState(null); // 게시글 상태
   const [commentContent, setCommentContent] = useState(""); // 입력 중인 댓글 내용
   const [isLiked, setIsLiked] = useState(false); // 좋아요 상태
+
+  // 좋아요 상태 확인
+  useEffect(() => {
+    const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
+    if (likedPosts.includes(postId)) {
+      setIsLiked(true);
+    }
+  }, [postId]);
 
   // 게시글 메뉴 토글
   const toggleMenu = (e) => {
@@ -44,7 +52,13 @@ function Post() {
   
   // 좋아요 클릭
   const handleLikeToggle = async () => {
-    console.log(`postId: ${postId}, ${typeof postId}`);
+    console.log(`for like -> postId: ${postId}, ${typeof postId}`);
+
+    if (isLiked) {
+      alert("이미 이 게시글에 좋아요를 눌렀습니다.");
+      return;
+    }
+
     try {
       // 서버로 좋아요 상태 전송
       const response = await axios.post("https://quitsmoking.co.kr/post/like", null, {
@@ -54,12 +68,18 @@ function Post() {
       });
   
       if (response.status === 200) {
-        const newLikeState = !isLiked;
-        console.log('좋아요 상태 변경:', newLikeState);
-        setIsLiked(newLikeState);
+        console.log('좋아요 상태 변경:', isLiked);
+
+        // 로컬 스토리지에 좋아요 기록 추가
+        const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
+        likedPosts.push(postId);
+        localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
+
+        // setIsLiked(newLikeState);
+        setIsLiked(true);
         setPost((prevPost) => ({
           ...prevPost,
-          numberOfLikes: prevPost.numberOfLikes + (newLikeState ? 1 : -1),
+          numberOfLikes: prevPost.numberOfLikes,
         }));
       } else {
         throw new Error("좋아요 서버 전송 실패", response.status);
@@ -75,7 +95,7 @@ function Post() {
     navigate(`/editPost/${postId}`); //! id 사용해서 이동하기
     setIsMenuOpen(false);
   };
-  // 댓글 삭제
+  // 댓글 수정
   const handleCommentEdit = () => {
     console.log('댓글 수정 페이지로 이동');
     navigate(`/home`); //! id 사용해서 댓글 수정 페이지이동하기
@@ -172,17 +192,6 @@ function Post() {
       alert("댓글 추가에 실패했습니다. 다시 시도해주세요.");
     }
   };
-
-  // const closeMenu = (e) => {
-  //   if (!e.target.closest(".post-menu")) {
-  //     setIsMenuOpen(false); // 메뉴 외부 클릭 시 닫기
-  //   }
-  // };
-  // const closeCommentMenu = (e) => {
-  //   if (!e.target.closest(".post-comment-menu")) {
-  //     setIsMenuOpen(false); // 댓글 메뉴 외부 클릭 시 닫기
-  //   }
-  // };
 
   // 외부 클릭 시 메뉴 닫기
   useEffect(() => {
@@ -370,7 +379,7 @@ function Post() {
               </div>
               <div className="post-heart-box" onClick={handleLikeToggle}>
                 <img
-                  src={isLiked ? heart : color_heart}
+                  src={isLiked ? color_heart : heart}
                   alt="heart icon"
                   className="heart-icon"
                 />

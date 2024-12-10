@@ -162,6 +162,9 @@
 /* 댓글 */
 .post-comment-container {
   margin-top: 2vh;
+  /* border: 1px solid red; */
+  height: 60vh;
+  overflow-y: auto;
 }
 .post-comment {
   /* border: 1px solid blue; */
@@ -184,6 +187,7 @@
 .post-comment-banner p {
   margin: 0;
   font-weight: 600;
+  font-size: 2vh;
 }
 .post-comment-banner button {
   outline: none;
