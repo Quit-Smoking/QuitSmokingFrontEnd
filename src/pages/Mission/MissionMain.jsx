@@ -85,6 +85,7 @@ function MissionMain() {
           default: item.default,
         }));
 
+        console.log( formattedMissions);
         setMissions(formattedMissions);
       } catch (error) {
         console.error('미션 fetch 중 에러', error);
@@ -216,7 +217,7 @@ function MissionMain() {
               <div className="ongoing-card-banner">
                 <p className="ongoing-card-title">{mission.title}</p>
               </div>
-              <p className="ongoing-card-desc">{mission.description}주째 진행 중</p>
+              <p className="ongoing-card-desc">{mission.description +2}주째 진행 중</p>
             </div>
           ))}
         </div>
