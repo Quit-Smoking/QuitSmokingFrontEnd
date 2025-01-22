@@ -4,6 +4,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+
 function Login() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +28,7 @@ function Login() {
     try {
 
       // 로그인 요청
-      const loginResponse = await axios.post('https://quitsmoking.co.kr/user/login', {
+      const loginResponse = await axios.post(`${backendUrl}/user/login`, {
         email: id,
         password: password,
       });
@@ -41,10 +44,10 @@ function Login() {
 
         // 두 개의 API 요청 보내기
         const [userStartExistResponse, cessationExistResponse] = await Promise.all([
-          axios.get('https://quitsmoking.co.kr/UserStartRecord/doExist', {
+          axios.get(`${backendUrl}/UserStartRecord/doExist`, {
             params: { token },
           }),
-          axios.get('https://quitsmoking.co.kr/user_cessation_record/doExist', {
+          axios.get(`${backendUrl}/user_cessation_record/doExist`, {
             params: { token },
           }),
         ]);

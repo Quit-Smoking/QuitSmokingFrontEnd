@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Signup() {
   const [email, setEmail] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
@@ -24,7 +26,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "https://quitsmoking.co.kr/user/register",
+        `${backendUrl}/user/register`,
         requestData,
         {
           headers: {
