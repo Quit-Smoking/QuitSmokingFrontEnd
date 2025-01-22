@@ -7,8 +7,9 @@ import axios from "axios";
 import Nav from "../../components/nav";
 import "./cessation.css";
 import MenuModal from "./HomeModal/MenuModal";
-
 import { useNavigate, useLocation } from "react-router-dom";
+
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Cessation = () => {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Cessation = () => {
         const token = localStorage.getItem("userToken");
 
         try {
-            const response = await axios.get("https://quitsmoking.co.kr/user_cessation_record/findByUser", {
+            const response = await axios.get(`${backendUrl}/user_cessation_record/findByUser`, {
                 params: { token },
             });
             console.log(response.data);

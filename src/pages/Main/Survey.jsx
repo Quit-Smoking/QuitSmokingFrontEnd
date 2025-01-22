@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from 'axios';
 import TopBar from '../../components/TopBar';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Survey() {
     const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ function Survey() {
 
         console.log(requestData);
         try {
-            await axios.post('https://quitsmoking.co.kr/UserStartRecord/add', requestData, {
+            await axios.post(`${backendUrl}/UserStartRecord/add`, requestData, {
                 headers: { 'Content-Type': 'application/json' },
             });
 

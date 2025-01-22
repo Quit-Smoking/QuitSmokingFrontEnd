@@ -4,6 +4,8 @@ import TopBar from "../../components/TopBar";
 import "./modifydetermine.css";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function ModifyDetermine() {
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -16,7 +18,7 @@ function ModifyDetermine() {
         try {
             // Axios 요청
             await axios.post(
-                "https://quitsmoking.co.kr/UserStartRecord/changeResolution",
+                `${backendUrl}/UserStartRecord/changeResolution`,
                 null, // body가 필요 없으므로 null로 설정
                 {
                     params: {
