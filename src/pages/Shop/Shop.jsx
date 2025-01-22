@@ -7,6 +7,8 @@ import CheckIcon from "../../assets/check.svg";
 import ItemExplain from "./ItemExplain";
 import Nav from "../../components/nav";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Shop() {
   const [isExplainOpen, setIsExplainOpen] = useState(false);
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
@@ -25,8 +27,8 @@ function Shop() {
     try {
       const endpoint =
         keywordId === null
-          ? "https://quitsmoking.co.kr/store/show_all_products" // 전체 상품 API
-          : "https://quitsmoking.co.kr/store/show_products_by_keyword"; // 키워드별 상품 API
+          ? `${backendUrl}/store/show_all_products` // 전체 상품 API
+          : `${backendUrl}/store/show_products_by_keyword`; // 키워드별 상품 API
 
       const params = keywordId !== null ? { keyWordId: keywordId } : {};
 

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import './MissionDetail.css';
 import Nav from "../../components/nav";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function MissionDetail() {
     
 

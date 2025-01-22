@@ -6,6 +6,8 @@ import bubble from "../../assets/talk.svg";
 import char from "../../assets/char.svg";
 import axios from 'axios';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function StartMission() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,7 +58,7 @@ function StartMission() {
 
     try {
       const response = await axios.post(
-        "https://quitsmoking.co.kr/mission/add",
+        `${backendUrl}/mission/add`,
         {
           token: userToken,
           mission: missionName,
