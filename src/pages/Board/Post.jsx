@@ -9,6 +9,8 @@ import heart from "../../assets/post/heart.svg";
 import color_heart from "../../assets/post/color_heart.svg";
 // import cursor from "../../assets/post/cursor.svg";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Post() {
   const navigate = useNavigate();
   const { id } = useParams(); //! 게시글 아이디 params로 가져오기
@@ -61,7 +63,7 @@ function Post() {
 
     try {
       // 서버로 좋아요 상태 전송
-      const response = await axios.post("https://quitsmoking.co.kr/post/like", null, {
+      const response = await axios.post(`${backendUrl}/post/like`, null, {
         params: {
           id: postId,
         },
@@ -111,7 +113,7 @@ function Post() {
       }
 
       try {
-        const response = await axios.delete('https://quitsmoking.co.kr/post/delete', {
+        const response = await axios.delete(`${backendUrl}/post/delete`, {
           params: {
             "token": userToken,
             "id": postId,
@@ -138,7 +140,7 @@ function Post() {
     if (window.confirm("해당 댓글을 삭제하시겠습니까?")) {
       try {
         const response = await axios.delete(
-          "https://quitsmoking.co.kr/comment/delete",
+          `${backendUrl}/comment/delete`,
           {
             params: { 
               token: userToken,
@@ -170,7 +172,7 @@ function Post() {
 
     try {
       const response = await axios.post(
-        "https://quitsmoking.co.kr/comment/add",
+        `${backendUrl}/comment/add`,
         {
           token: userToken,
           postId: postId,
@@ -224,7 +226,7 @@ function Post() {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get("https://quitsmoking.co.kr/comment/findByPostId", {
+      const response = await axios.get(`${backenUrl}/comment/findByPostId`, {
         params: {
           postId: postId,
         }
@@ -248,7 +250,7 @@ function Post() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/post/findByPostId", {
+        const response = await axios.get(`${backendUrl}/post/findByPostId`, {
           params: {
             id: postId,
           }
@@ -268,7 +270,7 @@ function Post() {
     }
     const fetchNickname = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/user/getNickname", {
+        const response = await axios.get(`${backendUrl}/user/getNickname`, {
           params: {
             token: userToken,
           }

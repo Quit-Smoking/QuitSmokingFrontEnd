@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./DeleteAcc.css";
 import CancelIcon from "../../assets/cancel.svg";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function DeleteAcc() {
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function DeleteAcc() {
 
     try {
       const response = await axios.delete(
-        "https://quitsmoking.co.kr/user/delete",
+        `${backendUrl}/user/delete`,
         {
           params: {
             token: token,

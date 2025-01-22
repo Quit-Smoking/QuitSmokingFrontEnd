@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./ResetPassword.css";
 import Cancel from "../../assets/cancel.svg";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function ResetPassword() {
   const [password, setPassword] = useState(""); // 비밀번호 필드
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 재입력 필드
@@ -60,7 +62,7 @@ function ResetPassword() {
     try {
       // POST 요청
       const response = await axios.post(
-        "https://quitsmoking.co.kr/user/changePassword",
+        `${backendUrl}/user/changePassword`,
         null,
         {
           params: requestData, // 쿼리 파라미터로 데이터 전송

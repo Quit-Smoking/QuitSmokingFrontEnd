@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function EditPost() {
   const navigate = useNavigate();
   const { id } = useParams(); //! 게시글 아이디 params로 가져오기
@@ -21,7 +23,7 @@ function EditPost() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/post/findByPostId", {
+        const response = await axios.get(`${backendUrl}/post/findByPostId`, {
           params: {
             id: id,
           }
@@ -53,7 +55,7 @@ function EditPost() {
     }
 
     try {
-      const response = await axios.post('https://quitsmoking.co.kr/post/update', {
+      const response = await axios.post(`${backendUrl}/post/update`, {
         params: {
           "token": {userToken},
         },

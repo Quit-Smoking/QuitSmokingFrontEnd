@@ -6,6 +6,8 @@ import circleImg from "../../assets/circleImg.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function DiagnosisStart() {
     const navigate = useNavigate();
     const [isDiagnosed, setIsDiagnosed] = useState(null); // 진단 여부 상태
@@ -17,13 +19,11 @@ function DiagnosisStart() {
 
         try {
             const response = await axios.get(
-                "https://quitsmoking.co.kr/nicotin_dependencies/isTested",
+                `${backendUrl}/nicotin_dependencies/isTested`,
                 {
                     params: { token },
                 }
-
             );
-
             setIsDiagnosed(response.data); // true/false 값 설정
         } catch (e) {
             setError("API 요청에 실패했습니다.");

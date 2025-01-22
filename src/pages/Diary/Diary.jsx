@@ -13,6 +13,8 @@ import water from "../../assets/mission/water.svg";
 import exer from "../../assets/mission/exercise.svg";
 import de from "../../assets/missionMain/default.svg";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Diary() {
   const [date, setDate] = useState(new Date());
   const [missions, setMissions] = useState([]); // 미션 데이터 저장
@@ -26,7 +28,7 @@ function Diary() {
 
     try {
       const response = await axios.get(
-        "https://quitsmoking.co.kr/UserStartRecord/findUserStartRecord",
+        `${backendUrl}/UserStartRecord/findUserStartRecord`,
         {
           params: { token },
         }
@@ -54,7 +56,7 @@ function Diary() {
     try {
       const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
       const response = await axios.get(
-        "https://quitsmoking.co.kr/mission_record/fetchByDate",
+        `${backendUrl}/mission_record/fetchByDate`,
         {
           params: {
             token: token,

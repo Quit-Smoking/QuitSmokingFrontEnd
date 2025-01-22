@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./ChangeNickname.css";
 import Cancel from "../../assets/cancel.svg";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function ChangeNickname() {
   const [nickname, setNickname] = useState(""); // 비밀번호 필드
 
@@ -31,7 +33,7 @@ function ChangeNickname() {
     try {
       // POST 요청
       const response = await axios.post(
-        "https://quitsmoking.co.kr/user/changeNickname",
+        `${backendUrl}/user/changeNickname`,
         null,
         {
           params: requestData, // 쿼리 파라미터로 데이터 전송

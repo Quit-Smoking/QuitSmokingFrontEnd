@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import closeIcon from '../../assets/closeWhite.png'; // 닫기 버튼 이미지 경로
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Diagnosis() {
     const navigate = useNavigate();
     const [answers, setAnswers] = useState({});
@@ -64,7 +66,7 @@ function Diagnosis() {
 
             console.log('진단 결과 서버로 전송:', serverPayload);
 
-            axios.post("https://quitsmoking.co.kr/nicotin_dependencies/add", serverPayload, {
+            axios.post(`${backendUrl}/nicotin_dependencies/add`, serverPayload, {
                 params: { token },
             })
                 .then((response) => {

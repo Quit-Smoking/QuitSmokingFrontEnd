@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function NewPost() {
   const navigate = useNavigate();
   const userToken = localStorage.getItem('userToken'); //! 유저토큰 가져오기
@@ -42,7 +44,7 @@ function NewPost() {
     }
 
     try {
-      const response = await axios.post('https://quitsmoking.co.kr/post/add', {
+      const response = await axios.post(`${backendUrl}/post/add`, {
           "token": userToken,
           "title": postTitle,
           "content": postContent,

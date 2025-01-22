@@ -8,6 +8,8 @@ import heart from "../../assets/post/heart.svg";
 import write from "../../assets/write.svg";
 import bell from "../../assets/bell.svg";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function MainBoard() {
   const [posts, setPosts] = useState([]); // 게시글 데이터를 저장할 상태
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ function MainBoard() {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          "https://quitsmoking.co.kr/post/bringAllPosts"
+          `${backendUrl}/post/bringAllPosts`
         );
         setPosts(response.data); // 응답 데이터를 상태에 저장
       } catch (error) {

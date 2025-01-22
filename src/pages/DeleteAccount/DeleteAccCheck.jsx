@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 us
 import "./DeleteAccCheck.css";
 import Cancel from "../../assets/cancel.svg";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function DeleteAccCheck() {
   const [password, setPassword] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
@@ -21,7 +23,7 @@ function DeleteAccCheck() {
     try {
       // GET 요청: 비밀번호와 토큰 전송
       const response = await axios.get(
-        "https://quitsmoking.co.kr/user/checkPassword",
+        `${backendUrl}/user/checkPassword`,
         {
           params: {
             token: token,
