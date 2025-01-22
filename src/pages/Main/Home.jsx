@@ -11,6 +11,8 @@ import MenuModal from "./HomeModal/MenuModal";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const Home = () => {
     const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ const Home = () => {
 
         try {
             // 데이터 존재 여부 확인
-            const dataExistResponse = await axios.get("https://quitsmoking.co.kr/UserStartRecord/doExist", { params: { token } });
+            const dataExistResponse = await axios.get(`${backendUrl}/UserStartRecord/doExist`, { params: { token } });
 
             if (!dataExistResponse.data) {
                 // 데이터가 없으면 Cessation 페이지로 이동
@@ -43,9 +45,9 @@ const Home = () => {
 
             // 데이터가 있으면 나머지 데이터를 가져옴
             const [recordResponse, nicknameResponse, emailResponse] = await Promise.all([
-                axios.get("https://quitsmoking.co.kr/UserStartRecord/findUserStartRecord", { params: { token } }),
-                axios.get("https://quitsmoking.co.kr/user/getNickname", { params: { token } }),
-                axios.get("https://quitsmoking.co.kr/user/getEmail", { params: { token } }),
+                axios.get(`${backendUrl}/UserStartRecord/findUserStartRecord`, { params: { token } }),
+                axios.get(`${backendUrl}/user/getNickname`, { params: { token } }),
+                axios.get(`${backendUrl}/user/getEmail`, { params: { token } }),
             ]);
 
             setData({

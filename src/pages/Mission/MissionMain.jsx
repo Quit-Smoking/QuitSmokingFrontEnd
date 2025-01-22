@@ -7,6 +7,8 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Nav from '../../components/nav';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function getFormattedDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -36,7 +38,7 @@ function MissionMain() {
     const fetchTodoData = async () => {
       const formattedDate = getFormattedDate();
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/mission_record/fetchByDate", {
+        const response = await axios.get(`${backendUrl}/mission_record/fetchByDate`, {
           params: {
             token: userToken,
             date: formattedDate,
@@ -63,7 +65,7 @@ function MissionMain() {
 
     const fetchMissionData = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions", {
+        const response = await axios.get(`${backendUrl}/mission/getMissions`, {
           params: { token: userToken },
         });
 
@@ -111,7 +113,7 @@ function MissionMain() {
         return; // 사용자가 취소를 누른 경우 아무 작업도 하지 않음
       }
   
-      const response = await axios.post("https://quitsmoking.co.kr/mission/complete", null, {
+      const response = await axios.post(`${backendUrl}/mission/complete`, null, {
         params: {
           token: userToken,
           id: missionId,
@@ -144,7 +146,7 @@ function MissionMain() {
   const deleteMission = async (missionId) => {
     try {
       if (window.confirm("삭제하시겠습니까?")) {
-        const response = await axios.post("https://quitsmoking.co.kr/mission/deleteMission", null, {
+        const response = await axios.post(`${backend}/mission/deleteMission`, null, {
           params: { missionId },
         });
 

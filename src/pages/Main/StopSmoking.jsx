@@ -6,6 +6,8 @@ import "./stopsmoking.css";
 import cloudImg from "../../assets/char.png";
 import closeIcon from "../../assets/closeicon.png";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function StopSmoking() {
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -24,7 +26,7 @@ function StopSmoking() {
 
         try {
             
-            const response = await axios.delete("https://quitsmoking.co.kr/UserStartRecord/stop", {
+            const response = await axios.delete(`${backendUrl}/UserStartRecord/stop`, {
                 headers: {
                     "Content-Type": "application/json",
                 },

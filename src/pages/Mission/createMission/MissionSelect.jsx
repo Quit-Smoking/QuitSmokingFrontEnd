@@ -10,6 +10,8 @@ import report from '../../../assets/mission/report.svg';
 import Slider from "react-slick";
 import axios from 'axios';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function MissionSelect() {
   const navigate = useNavigate();
   const userToken = localStorage.getItem('userToken');
@@ -20,7 +22,7 @@ function MissionSelect() {
   useEffect(() => {
     const fetchMissions = async () => {
       try {
-        const response = await axios.get("https://quitsmoking.co.kr/mission/getMissions", {
+        const response = await axios.get(`${backendUrl}/mission/getMissions`, {
           params: { userToken },
         });
 

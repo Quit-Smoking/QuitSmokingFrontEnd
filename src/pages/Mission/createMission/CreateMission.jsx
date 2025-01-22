@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopBar from "../../../components/TopBar";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function NewMission() {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 상태 (0: page0, 1: page1, 2: page2)

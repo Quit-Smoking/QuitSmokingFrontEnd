@@ -9,6 +9,8 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import closeIcon from '../../assets/closeWhite.png';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Result() {
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ function Result() {
     const token = localStorage.getItem('userToken');
 
     try {
-      const response = await axios.get("https://quitsmoking.co.kr/nicotin_dependencies/getScore", {
+      const response = await axios.get(`${backendUrl}/nicotin_dependencies/getScore`, {
         params: { token }
       })
 
