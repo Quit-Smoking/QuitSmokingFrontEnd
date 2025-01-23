@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function Nav({ currentPage }) {
     const navigate = useNavigate();
     const [canAccessHome, setCanAccessHome] = useState(false);
@@ -13,7 +15,7 @@ function Nav({ currentPage }) {
             const token = localStorage.getItem("userToken");
             try {
                 // 첫 번째 API 호출
-                const userStartRecordResponse = await axios.get("https://quitsmoking.co.kr/UserStartRecord/doExist", {
+                const userStartRecordResponse = await axios.get(`${backendUrl}/UserStartRecord/doExist`, {
                     params: { token },
                 });
 
@@ -23,7 +25,7 @@ function Nav({ currentPage }) {
                 } else {
                     // UserStartRecord/doExist가 false일 때 두 번째 API 호출
                     const cessationRecordResponse = await axios.get(
-                        "https://quitsmoking.co.kr/user_cessation_record/doExist",
+                        `${backendUrl}/user_cessation_record/doExist`,
                         {
                             params: { token },
                         }
@@ -55,7 +57,7 @@ function Nav({ currentPage }) {
 
         const token = localStorage.getItem("userToken");
         try {
-            const userStartRecordResponse = await axios.get("https://quitsmoking.co.kr/UserStartRecord/doExist", {
+            const userStartRecordResponse = await axios.get(`${backendUrl}/UserStartRecord/doExist`, {
                 params: { token },
             });
 
@@ -63,7 +65,7 @@ function Nav({ currentPage }) {
                 navigate("/home"); // 홈 페이지로 이동
             } else {
                 const cessationRecordResponse = await axios.get(
-                    "https://quitsmoking.co.kr/user_cessation_record/doExist",
+                    `${backendUrl}/user_cessation_record/doExist`,
                     { params: { token } }
                 );
 

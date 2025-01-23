@@ -2,7 +2,6 @@
 import './topbar.css';
 import PropTypes from 'prop-types';
 
-
 const TopBar = ({ title, onBack }) => {
   return (
     <div className="top-bar">
