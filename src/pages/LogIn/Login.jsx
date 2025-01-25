@@ -22,8 +22,6 @@ function Login() {
       return;
     }
 
-
-
     try {
 
       // 로그인 요청
@@ -77,6 +75,7 @@ function Login() {
 
   const handleFindIdPw = () => {
     console.log("Find ID clicked");
+    alert('아이디 찾기 페이지.');
     // 아이디 찾기로 이동
   };
 
