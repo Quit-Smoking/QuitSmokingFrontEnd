@@ -12,10 +12,15 @@ function StopSmoking() {
     const navigate = useNavigate();
     const { state } = useLocation();
     const [differenceInDays, setdifferenceInDays] = useState(state.differenceInDays || 0);
+    const [differenceInHours, setDifferenceInHours] = useState(state.differenceInHours || 0);
+    const [differenceInMinutes, setDifferenceInMinutes] = useState(state.differenceInMinutes || 0);
+    const [differenceInSeconds, setDifferenceInSeconds] = useState(state.differenceInSeconds || 0);        
     const [extendedLifeDays, setextendedLifeDays] = useState(state.extendedLifeDays);
     const [resolution, setresolution] = useState(state.resolution);
     const [isConfirmed, setIsConfirmed] = useState(false);
     const savedMoneyExact = state.savedMoneyExact;
+    //"YYYY-MM-DD HH:mm:ss"
+    const endDate = new Date().toISOString().split(".")[0]
 
     const handleConfirmChange = () => {
         setIsConfirmed((prev) => !prev);
@@ -33,9 +38,11 @@ function StopSmoking() {
                 params: {
                     token: token,
                     savedTime:extendedLifeDays,
-                    savedMoney:savedMoneyExact
+                    savedMoney:savedMoneyExact,
+                    endDate: endDate
                 },
             });
+            console.log(endDate);
 
             if (response.status === 200) {
                 alert("금연 데이터가 성공적으로 삭제되었습니다.");
@@ -63,7 +70,7 @@ function StopSmoking() {
             <main className="StopSmoking-Main">
                 <div className="StopSmoking-Timer">
                     <h2>금연한지</h2>
-                    <div className="StopSmoking-Time">D+{differenceInDays}</div>
+                    <div className="StopSmoking-Time">D+{differenceInDays} H+{differenceInHours} M+{differenceInMinutes} S+{differenceInSeconds}</div>
                 </div>
                 <div className="StopSmoking-Cloud">
                     <img src={cloudImg} alt="클라우드 이미지" />

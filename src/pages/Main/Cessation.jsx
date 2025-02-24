@@ -58,7 +58,10 @@ const Cessation = () => {
     const calculateDaysDifference = (startDate, endDate) => {
         if (!startDate || !endDate) return "기록이 없습니다.";
         const diffInMilliseconds = new Date(endDate) - new Date(startDate);
-        return `${Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24))}일`;
+        return `${Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24))}일 
+        ${Math.floor((diffInMilliseconds % (1000*60*60*24))/(1000*60*60))}시 
+        ${Math.floor((diffInMilliseconds % (1000*60*60)/(1000*60)))}분 
+        ${Math.floor((diffInMilliseconds % (1000*60)))/1000}초`;
     };
 
     return (

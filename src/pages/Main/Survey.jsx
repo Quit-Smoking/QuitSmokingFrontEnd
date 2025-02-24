@@ -31,7 +31,8 @@ function Survey() {
             token: localStorage.getItem('userToken'),
             resolution: motive,
             motive: boxList[selectedBox],
-            startDate: new Date().toISOString().split('T')[0],
+            //"YYYY-MM-DD HH:mm:ss"
+            startDate: new Date().toISOString().split(".")[0],
             numbersSmoked: parseInt(howMany, 10) || 0,
         };
 

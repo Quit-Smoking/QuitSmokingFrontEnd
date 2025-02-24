@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import logo from "../../assets/logo_letters.svg";
 import homecloud from "../../assets/HomeChar.png";
 import shadow from "../../assets/shadowblue.png";
@@ -21,6 +21,7 @@ const Home = () => {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false); // 메뉴 모달 상태
+    const [nowDate, setNowDate] = useState(new Date());
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -70,18 +71,40 @@ const Home = () => {
         if (!modalShown) setIsModalOpen(true);
     }, []);
 
+    
+    //날짜 형식 : ISO 8106 (UTC format)
+    const startDate = useMemo(() => {
+        if (!data?.startDate) return null;
+        return new Date(`${data.startDate}Z`);
+    }, [data?.startDate]);
+    
+    //날, 시, 분, 초 계산
+    let differenceInDays = 0,
+        differenceInHours = 0,
+        differenceInMinutes = 0,
+        differenceInSeconds = 0;
+
+    if (startDate) {
+        const differenceInMilis = nowDate - startDate;
+        differenceInDays = Math.max(0, Math.floor(differenceInMilis / (1000 * 60 * 60 * 24)));
+        differenceInHours = Math.max(0, Math.floor((differenceInMilis / (1000 * 60 * 60)) % 24));
+        differenceInMinutes = Math.max(0, Math.floor((differenceInMilis / (1000 * 60)) % 60));
+        differenceInSeconds = Math.max(0, Math.floor((differenceInMilis / 1000) % 60));
+    }
+    //현재 시간 실시간 업데이트
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setNowDate(new Date());
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+    
     if (isLoading) return <div></div>;
     if (error) return <div>{error}</div>;
 
-    const nowDate = new Date();
-    const startDate = new Date(data.startDate);
-    const differenceInDays = Math.floor((nowDate - startDate) / (1000 * 60 * 60 * 24)); // 금연한 시간
-    const savedMoneyExact = data.numbersSmoked * differenceInDays * (4500 / 20); // 절약한 돈
-
-    // 한 개비당 12분 = 0.2시간 (12 / 60)
-    const extendedLifeTime = data.numbersSmoked * differenceInDays * 0.2; // 연장한 수명 (시간 단위)
+    const savedMoneyExact = data?.numbersSmoked ? data.numbersSmoked * differenceInDays * (4500 / 20) : 0; // 한 개비당 12분 = 0.2시간 (12 / 60)
+    const extendedLifeTime = data?.numbersSmoked ? data.numbersSmoked * differenceInDays * 0.2 : 0; // 연장한 수명 (시간 단위)
     const extendedLifeDays = (extendedLifeTime / 24).toFixed(1); // 일 단위로 변환, 소수점 한 자리까지
-
 
     return (
         <>
@@ -103,6 +126,9 @@ const Home = () => {
                     navigate={navigate}
                     resolution={data.resolution}
                     differenceInDays={differenceInDays}
+                    differenceInHours={differenceInHours}
+                    differenceInMinutes={differenceInMinutes}
+                    differenceInSeconds={differenceInSeconds}
                     savedMoneyExact={savedMoneyExact}
                     extendedLifeDays={extendedLifeDays}
                 />
@@ -130,7 +156,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="Home-MainTime">
-                        <div>{data.startDate ? `D+${differenceInDays}` : "날짜를 불러오는 중..."}</div>
+                        <div>{startDate ? `${differenceInDays}D ${differenceInHours}H ${differenceInMinutes}M ${differenceInSeconds}S` : "날짜를 불러오는 중..."}</div>
                         <div>금연 중</div>
                     </div>
                     <div className="Home-MainReport">
