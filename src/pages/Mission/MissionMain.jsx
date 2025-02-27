@@ -9,6 +9,7 @@ import Nav from '../../components/nav';
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+// 오늘 날짜를 String 형태로 변환해 불러온다.
 function getFormattedDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -27,6 +28,7 @@ function getFormattedDate2() {
   return `${year}-${month.toString().padStart(2, "0")}-${date.toString().padStart(2, "0")} (${dayOfWeek})`;
 }
 
+
 function MissionMain() {
   const userToken = localStorage.getItem('userToken');
   const [todos, setTodos] = useState([]);
@@ -34,73 +36,82 @@ function MissionMain() {
   const [refresh, setRefresh] = useState(false); // 화면 새로고침 상태
   const navigate = useNavigate();
 
+  // Todos를 업데이트 해 준다.
+  const fetchTodoData = async () => {
+    const formattedDate = getFormattedDate();
+    try {
+      // 백앤드에 fetchByDate 요청. 현재 날짜로 지정해 오늘의 Todo만 가지고 온다.
+      const response = await axios.get(`${backendUrl}/mission_record/fetchByDate`, {
+        params: {
+          token: userToken,
+          date: formattedDate,
+        },
+      });
+
+      if (response.status !== 200) {
+        throw new Error('투두리스트 fetch 서버 200 아님', response.status);
+      }
+      
+      // 하나씩 다시 매핑해준다.
+      const formattedTodos = response.data.map((item) => ({
+        id: item.id,
+        missionId: item.missionId,
+        text: item.mission,
+        date: item.date,
+        completed: item.completed,
+      }));
+      
+      // Todos 저장.
+      setTodos(formattedTodos);
+    } catch (error) {
+      console.error('투두 fetch 중 에러', error);
+    }
+  };
+
+  // 미션을 업데이트 해준다.
+  const fetchMissionData = async () => {
+    try {
+      const response = await axios.get(`${backendUrl}/mission/getMissions`, {
+        params: { token: userToken },
+      });
+
+      if (response.status !== 200) {
+        throw new Error('미션 fetch 서버 200 아님', response.status);
+      }
+      
+      // 몇 주가 지났는지 계산.
+      function calculateWeeksPassed(startDate) {
+        const start = new Date(startDate);
+        const today = new Date();
+        const millisecondsInAWeek = 7 * 24 * 60 * 60 * 1000;
+        return Math.floor((today - start) / millisecondsInAWeek);
+      }
+
+      const formattedMissions = response.data.map((item) => ({
+        id: item.id,
+        title: item.mission,
+        description: calculateWeeksPassed(item.startDate),
+        default: item.default,
+      }));
+
+      console.log( formattedMissions);
+      setMissions(formattedMissions);
+    } catch (error) {
+      console.error('미션 fetch 중 에러', error);
+    }
+  };
+
+  // 렌더링 시마다 실행.
   useEffect(() => {
-    const fetchTodoData = async () => {
-      const formattedDate = getFormattedDate();
-      try {
-        const response = await axios.get(`${backendUrl}/mission_record/fetchByDate`, {
-          params: {
-            token: userToken,
-            date: formattedDate,
-          },
-        });
-
-        if (response.status !== 200) {
-          throw new Error('투두리스트 fetch 서버 200 아님', response.status);
-        }
-
-        const formattedTodos = response.data.map((item) => ({
-          id: item.id,
-          missionId: item.missionId,
-          text: item.mission,
-          date: item.date,
-          completed: item.completed,
-        }));
-
-        setTodos(formattedTodos);
-      } catch (error) {
-        console.error('투두 fetch 중 에러', error);
-      }
-    };
-
-    const fetchMissionData = async () => {
-      try {
-        const response = await axios.get(`${backendUrl}/mission/getMissions`, {
-          params: { token: userToken },
-        });
-
-        if (response.status !== 200) {
-          throw new Error('미션 fetch 서버 200 아님', response.status);
-        }
-
-        function calculateWeeksPassed(startDate) {
-          const start = new Date(startDate);
-          const today = new Date();
-          const millisecondsInAWeek = 7 * 24 * 60 * 60 * 1000;
-          return Math.floor((today - start) / millisecondsInAWeek);
-        }
-
-        const formattedMissions = response.data.map((item) => ({
-          id: item.id,
-          title: item.mission,
-          description: calculateWeeksPassed(item.startDate),
-          default: item.default,
-        }));
-
-        console.log( formattedMissions);
-        setMissions(formattedMissions);
-      } catch (error) {
-        console.error('미션 fetch 중 에러', error);
-      }
-    };
-
     fetchMissionData();
     fetchTodoData();
   }, [userToken, refresh]); // refresh 상태가 변경되면 데이터를 다시 불러옴
 
+
+  // Todo complete
   const toggleComplete = async (id, missionId) => {
     try {
-      const todo = todos.find((todo) => todo.id === id);
+      const todo = todos.find((todo) => todo.id == id);
       if (!todo) throw new Error("투두 항목을 찾을 수 없음");
   
       // 이미 완료된 미션은 다시 완료 처리하지 않음
@@ -113,6 +124,7 @@ function MissionMain() {
         return; // 사용자가 취소를 누른 경우 아무 작업도 하지 않음
       }
   
+
       const response = await axios.post(`${backendUrl}/mission/complete`, null, {
         params: {
           token: userToken,
@@ -128,7 +140,7 @@ function MissionMain() {
       // 상태를 무조건 true로 업데이트
       const updatedTodo = { ...todo, completed: true };
   
-      // 상태 업데이트
+      // 상태 업데이트.
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
           todo.id === id ? updatedTodo : todo
@@ -143,6 +155,7 @@ function MissionMain() {
   };
   
 
+  // 미션 삭제
   const deleteMission = async (missionId) => {
     try {
       if (window.confirm("삭제하시겠습니까?")) {
