@@ -16,8 +16,7 @@ function MissionSelect() {
   const navigate = useNavigate();
   const userToken = localStorage.getItem('userToken');
 
-  const [currentMission, setCurrentMission] = useState(false); // 진행 중인 미션 확인
-  const [selectedSlideIndex, setSelectedSlideIndex] = useState(null); // 선택된 슬라이드 인덱스
+  const [selectedSlideIndex, setSelectedSlideIndex] = useState(0); // 선택된 슬라이드 인덱스
 
   const slides = [
     {
@@ -54,14 +53,10 @@ function MissionSelect() {
     slidesToScroll: 1,
     arrows: false,
     swipe: true,
-  };
-
-  const handleCardClick = (index) => {
-    if (selectedSlideIndex === index) {
-      setSelectedSlideIndex(null); // 이미 선택된 카드를 다시 클릭하면 선택 해제
-    } else {
-      setSelectedSlideIndex(index); // 새로운 카드 선택
-    }
+    // 슬라이드가 변경되면 바로 인덱스 업데이트.
+    beforeChange: (_, newIndex) => {
+      setSelectedSlideIndex(newIndex);
+    },
   };
 
   return (
@@ -78,7 +73,6 @@ function MissionSelect() {
             className={`mission-carousel-slide ${
               selectedSlideIndex === index ? "selected-card" : ""
             }`}
-            onClick={() => handleCardClick(index)} // 카드 클릭 핸들러
           >
             <div className={`card-container`}>
               <p className="card-title">{slide.title}</p>
