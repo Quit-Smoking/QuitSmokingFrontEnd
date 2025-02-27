@@ -19,28 +19,6 @@ function MissionSelect() {
   const [currentMission, setCurrentMission] = useState(false); // 진행 중인 미션 확인
   const [selectedSlideIndex, setSelectedSlideIndex] = useState(null); // 선택된 슬라이드 인덱스
 
-
-  const fetchMissions = async () => {
-    try {
-      const response = await axios.get(`${backendUrl}/mission/getMissions`, {
-        params: { token: userToken },
-      });
-
-      if (response.status !== 200) {
-        throw new Error('진행 중인 미션 확인 중 서버 응답 오류');
-      }
-
-      const missionExist = response.data !== null;
-      setCurrentMission(missionExist);
-    } catch (error) {
-      console.error('미션 데이터 확인 중 에러:', error);
-    }
-  };
-  
-  useEffect(() => {
-    fetchMissions();
-  }, [userToken]);
-
   const slides = [
     {
       key: "slide-1",
@@ -88,14 +66,10 @@ function MissionSelect() {
 
   return (
     <div className="mission-select-container">
-      {currentMission ? (
-        <TopBar title="미션 추가" onBack={() => navigate(-1)} />
-      ) : (
-        <div className="current-banner">
-          <p className="current-title">금연 미션</p>
-          <p className="current-desc">숨쉴래에서 금연에 도움이 되는 미션 4가지를 추천드려요!</p>
-        </div>
-      )}
+      <div className="current-banner">
+        <p className="current-title">금연 미션</p>
+        <p className="current-desc">숨쉴래에서 금연에 도움이 되는 미션 4가지를 추천드려요!</p>
+      </div>
 
       <Slider {...settings} className="mission-carousel-wrapper">
         {slides.map((slide, index) => (
