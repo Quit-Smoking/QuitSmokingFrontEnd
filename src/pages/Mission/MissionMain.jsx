@@ -146,7 +146,7 @@ function MissionMain() {
   const deleteMission = async (missionId) => {
     try {
       if (window.confirm("삭제하시겠습니까?")) {
-        const response = await axios.post(`${backend}/mission/deleteMission`, null, {
+        const response = await axios.post(`${backendUrl}/mission/deleteMission`, null, {
           params: { missionId },
         });
 
