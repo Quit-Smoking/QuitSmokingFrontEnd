@@ -19,24 +19,25 @@ function MissionSelect() {
   const [currentMission, setCurrentMission] = useState(false); // 진행 중인 미션 확인
   const [selectedSlideIndex, setSelectedSlideIndex] = useState(null); // 선택된 슬라이드 인덱스
 
-  useEffect(() => {
-    const fetchMissions = async () => {
-      try {
-        const response = await axios.get(`${backendUrl}/mission/getMissions`, {
-          params: { userToken },
-        });
 
-        if (response.status !== 200) {
-          throw new Error('진행 중인 미션 확인 중 서버 응답 오류');
-        }
+  const fetchMissions = async () => {
+    try {
+      const response = await axios.get(`${backendUrl}/mission/getMissions`, {
+        params: { token: userToken },
+      });
 
-        const missionExist = response.data !== null;
-        setCurrentMission(missionExist);
-      } catch (error) {
-        console.error('미션 데이터 확인 중 에러:', error);
+      if (response.status !== 200) {
+        throw new Error('진행 중인 미션 확인 중 서버 응답 오류');
       }
-    };
 
+      const missionExist = response.data !== null;
+      setCurrentMission(missionExist);
+    } catch (error) {
+      console.error('미션 데이터 확인 중 에러:', error);
+    }
+  };
+  
+  useEffect(() => {
     fetchMissions();
   }, [userToken]);
 
